@@ -25,6 +25,7 @@ public class ACBrECF {
         estNaoInicializada, estDesconhecido, estLivre, estVenda, estPagamento, estRelatorio, estBloqueada, estRequerZ, estRequerX;
     }
     private Variaveis variaveis;
+    private Relatorios relatorios;
     private CupomFiscal cupomFiscal;
 
     /**
@@ -51,8 +52,22 @@ public class ACBrECF {
      *
      * @throws ACBrECFException
      */
-    public void Desativar() throws ACBrECFException {
+    public void desativar() throws ACBrECFException {
         comandoECF("Desativar");
+    }
+
+    /**
+     * Realiza o corte parcial do papel no ECF para equipamentos com guilhotina.
+     */
+    public void cortaPapelParcial() throws ACBrECFException {
+        comandoECF("CortaPapel(true)");
+    }
+
+    /**
+     * Realiza o corte do papel no ECF para equipamentos com guilhotina.
+     */
+    public void cortaPapel() throws ACBrECFException {
+        comandoECF("CortaPapel");
     }
 
     private String comandoECF(String s) throws ACBrECFException {
@@ -2097,7 +2112,7 @@ public class ACBrECF {
         /**
          * Cancela o Desconto ou Acréscimo atribuido no subtotal do cupom.
          *
-         * @param tipo Tipo A -> Acrescimo D -> Desconto
+         * @param tipo Tipo 'A' para Acrescimo 'D' para Desconto
          *
          * @throws ACBrECFException
          */
@@ -2318,6 +2333,140 @@ public class ACBrECF {
             }
         }
 
+    }
+
+    public class Relatorios {
+
+        private CupomVinculadoOuCCD cupomVinculadoOuCCD;
+
+        public CupomVinculadoOuCCD getCupomVinculadoOuCCD() {
+            return cupomVinculadoOuCCD == null ? cupomVinculadoOuCCD = new CupomVinculadoOuCCD() : cupomVinculadoOuCCD;
+        }
+
+        /**
+         * Emite o relatório de Leitura X.
+         * <b>Nota:</b> em alguns estados, é necessário imprimir uma Leitura X
+         * todo inicio de dia e cada inicio de Bobina
+         *
+         * @throws ACBrECFException
+         */
+        public void leituraX() throws ACBrECFException {
+
+        }
+
+        /**
+         * Emite o relatório de Redução Z. Nota: Se emitido no mesmo dia fiscal,
+         * bloqueia o ECF até as 24:00hs.
+         * <br>
+         * Se não for emitida no mesmo dia fiscal o ECF ficará bloqueado, e o
+         * ACBr retornará o Estado como estRequerZ. Nesse caso será necessário
+         * emitir a Redução Z pendente (do dia anterior) para liberar o ECF
+         * <br>
+         * Cuidado: Apenas comande a Redução Z se o estado do ECF for estRequerZ
+         * ou se você deseja realmente bloquear o ECF até a meia-noite (fim de
+         * dia).
+         *
+         * @throws ACBrECFException
+         */
+        public void reducaoZ() throws ACBrECFException {
+            reducaoZ(false);
+        }
+
+        /**
+         * Emite o relatório de Redução Z. Nota: Se emitido no mesmo dia fiscal,
+         * bloqueia o ECF até as 24:00hs.
+         * <br>
+         * Se não for emitida no mesmo dia fiscal o ECF ficará bloqueado, e o
+         * ACBr retornará o Estado como estRequerZ. Nesse caso será necessário
+         * emitir a Redução Z pendente (do dia anterior) para liberar o ECF
+         * <br>
+         * Cuidado: Apenas comande a Redução Z se o estado do ECF for estRequerZ
+         * ou se você deseja realmente bloquear o ECF até a meia-noite (fim de
+         * dia).
+         *
+         * @param enviarDataHoraDoPC Data / Hora atual do micro. Se dDataHora
+         * for informado, o ACBrECF tentará acertar o relógio do ECF (disponível
+         * apenas em alguns ECFs), aumentando ou diminuindo o horário no máximo
+         * de 5 minutos por dia.
+         *
+         * @throws ACBrECFException
+         */
+        public void reducaoZ(boolean enviarDataHoraDoPC) throws ACBrECFException {
+
+        }
+
+        private void pulaLinhas(int qtdLinhas) throws ACBrECFException {
+            comandoECF("PulaLinhas()");
+        }
+
+        /**
+         * Encerra a emissão de Cupom vinculado (CCD) e Relatório Gerencial
+         * (RG).
+         *
+         * @throws ACBrECFException
+         */
+        private void fechaRelatorio() throws ACBrECFException {
+            comandoECF("FechaRelatorio");
+        }
+
+        public class CupomVinculadoOuCCD {
+
+            /**
+             * - Verifica se existe algum relatório Gerencial ou Vinculado
+             * aberto, se for o caso, fecha-o.
+             * <br>
+             * - Carrega as tabelas de Formas de Pagamento e Comprovantes não
+             * Fiscais na memória.
+             * <br>
+             * - Deve ser chamado apenas no inicio da aplicação
+             */
+            public void preparaTEF() {
+
+            }
+
+            /**
+             * Emite o Cupom vinculado conforme os dados que foram informados
+             * nos parâmetros. A emissão é automaticamente encerrada 2 minutos
+             * após abertura (Tempo máximo de emissão).<br>
+             **<b>Nota:</b> Para imprimir um Cupom Vinculado você deve ter
+             * informaçoes dos Pagamentos Efetuados no último Cupom Fiscal.
+             *
+             * @param COO Número de COO do cupom anterior. (Necessário documento
+             * anterior seja cupom fiscal)
+             *
+             * @param codFormaPagto Código da forma de pagamento utilizada no
+             * cupom anterior.(Permite Vinculado)
+             *
+             * @param valor Valor a vincular no cupom anterior.
+             *
+             */
+            public void abreCupomVinculado(String COO, String codFormaPagto, BigDecimal valor) {
+
+            }
+
+            /**
+             * Emite o Cupom vinculado conforme os dados que foram informados
+             * nos parâmetros. A emissão é automaticamente encerrada 2 minutos
+             * após abertura (Tempo máximo de emissão).<br>
+             * <b>Nota:</b> Para imprimir um Cupom Vinculado você deve ter
+             * informaçoes dos Pagamentos Efetuados no último Cupom Fiscal.
+             *
+             * @param COO Número de COO do cupom anterior. (Necessário documento
+             * anterior seja cupom fiscal)
+             *
+             * @param codFormaPagto Código da forma de pagamento utilizada no
+             * cupom anterior.(Permite Vinculado)
+             *
+             * @param codComprovanteNaoFiscal Se necessário, informe o Código do
+             * Comprovante Não Fiscal.
+             *
+             * @param valor Valor a vincular no cupom anterior.
+             *
+             */
+            public void abreCupomVinculado(String COO, String codFormaPagto, String codComprovanteNaoFiscal, BigDecimal valor) {
+
+            }
+        }
     }
 
 }

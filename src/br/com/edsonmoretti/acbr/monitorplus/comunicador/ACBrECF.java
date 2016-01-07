@@ -1776,7 +1776,7 @@ public class ACBrECF {
          * @throws ACBrECFException
          */
         public void vendeItem(String codigo, String descricao, String aliquotaICMS, String qtd, String valorUnitario) throws ACBrECFException {
-            comandoECF("VendeItem(" + codigo + ", " + descricao + ", " + aliquotaICMS + ", " + qtd + ", " + valorUnitario + ")");
+            comandoECF("VendeItem(" + codigo + ", " + descricao + ", " + aliquotaICMS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ")");
         }
 
         /**

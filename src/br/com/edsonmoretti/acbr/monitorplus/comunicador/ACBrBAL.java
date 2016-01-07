@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 
 /**
  *
- * @author Edson
+ * @author Edson Moretti - www.edsonmoretti.com.br
  */
 public class ACBrBAL {
 

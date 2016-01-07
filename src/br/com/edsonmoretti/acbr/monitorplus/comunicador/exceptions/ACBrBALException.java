@@ -7,7 +7,7 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions;
 
 /**
  *
- * @author Edson
+ * @author Edson Moretti - www.edsonmoretti.com.br
  */
 public class ACBrBALException extends Exception {
 

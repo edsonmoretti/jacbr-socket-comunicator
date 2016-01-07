@@ -13,7 +13,7 @@ import javax.swing.JTextField;
 
 /**
  *
- * @author Edson
+ * @author Edson Moretti - www.edsonmoretti.com.br
  */
 public class Numeros {
 

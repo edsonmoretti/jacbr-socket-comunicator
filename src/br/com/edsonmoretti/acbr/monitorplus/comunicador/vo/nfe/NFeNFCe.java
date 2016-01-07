@@ -7,7 +7,7 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.vo.nfe;
 
 /**
  *
- * @author Edson
+ * @author Edson Moretti - www.edsonmoretti.com.br
  */
 public class NFeNFCe {
 

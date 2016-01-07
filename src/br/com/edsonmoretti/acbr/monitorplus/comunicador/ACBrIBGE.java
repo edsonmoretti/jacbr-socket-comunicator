@@ -1,8 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
@@ -15,8 +11,22 @@ import java.util.List;
 import java.util.Properties;
 
 /**
+ * Faz consulta HTTP na página do IBGE, capturando informações sobre a Cidade na
+ * página retornada. <br>
+ * http://www.ibge.gov.br/home/geociencias/areaterritorial/area.shtm<br>
  *
- * @author Edson
+ * Se necessário ajuste o Proxy de http <br>
+ * A resposta será no formato .INI e poderá conter várias Cidades<br>
+ * Exemplo de Resposta: <br>
+ * OK: [Endereco1] <br>
+ * CEP=18270-170 <br>
+ * Tipo_Logradouro=Rua <br>
+ * Logradouro=Coronel Aureliano de Camargo <br>
+ * Bairro=Centro <br>
+ * Municipio=Tatuí­ <br>
+ * UF=SP <br>
+ * IBGE_Municipio=3554003 <br>
+ * IBGE_UF=35 <br>
  */
 public class ACBrIBGE {
 

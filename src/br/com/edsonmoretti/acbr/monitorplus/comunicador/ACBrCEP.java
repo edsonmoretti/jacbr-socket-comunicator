@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Edson
+ * @author Edson Moretti - www.edsonmoretti.com.br
  */
 public class ACBrCEP {
 

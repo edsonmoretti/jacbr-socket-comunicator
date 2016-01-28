@@ -1,6 +1,6 @@
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.math.BigDecimal;
 import java.util.logging.Level;
@@ -18,10 +18,11 @@ import javax.swing.JOptionPane;
  */
 public class TesteECF {
 
-    private static ACBrECF e = new ACBrECF();
+    private static ACBrECF e;
 
     public static void main(String[] args) {
         try {
+             e = new ACBrECF(false);
             e.ativar();
             {//Variaveis
 //                variaveis();

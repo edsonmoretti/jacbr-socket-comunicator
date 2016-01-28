@@ -1,4 +1,3 @@
-
 package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;

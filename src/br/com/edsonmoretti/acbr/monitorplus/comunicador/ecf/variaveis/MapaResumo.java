@@ -6,11 +6,13 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis;
 
 import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrUtils;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis.maparesumo.Flags;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis.maparesumo.TotaisICMS;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis.maparesumo.TotaisISSQN;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis.maparesumo.TotalNaoFiscal;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -85,11 +87,10 @@ public class MapaResumo {
         } catch (IOException ex) {
             throw new ACBrECFException(ex.getMessage());
         }
-        SimpleDateFormat s = new SimpleDateFormat("dd/MM/YY");
         try {
             ReducaoZ r = new ReducaoZ();
             //dados ecf
-            r.setDataMovimento(s.parse(p.getProperty("DataMovimento")));
+            r.setDataMovimento(ACBrUtils.strDataRedToDateBR(p.getProperty("DataMovimento")));
             r.setNumSerie(p.getProperty("NumSerie"));
             r.setNumECF(p.getProperty("NumECF"));
             r.setNumLoja(p.getProperty("NumLoja"));
@@ -97,13 +98,34 @@ public class MapaResumo {
             r.setNumCOO(p.getProperty("NumCOO"));
             r.setNumCRZ(p.getProperty("NumCRZ"));
             r.setNumCRO(p.getProperty("NumCRO"));
+
+            r.setNumGNF(p.getProperty("NumGNF"));
+            r.setNumCCF(p.getProperty("NumCCF"));
+            r.setNumCFD(p.getProperty("NumCFD"));
+            r.setNumCDC(p.getProperty("NumCDC"));
+            r.setNumGRG(p.getProperty("NumGRG"));
+            r.setNumNFC(p.getProperty("NumNFC"));
+            r.setNumGNFC(p.getProperty("NumGNFC"));
+            r.setNumCFC(p.getProperty("NumCFC"));
+            r.setNumNCN(p.getProperty("NumNCN"));
+            r.setNumCCDC(p.getProperty("NumCCDC"));
+
             //totalizadores
             r.setVendaBruta(Numeros.parseToBig(p.getProperty("VendaBruta")));
+            r.setVendaLiquida(Numeros.parseToBig(p.getProperty("VendaLiquida")));
             r.setGrandeTotal(Numeros.parseToBig(p.getProperty("GrandeTotal")));
             r.setTotalDescontos(Numeros.parseToBig(p.getProperty("TotalDescontos")));
             r.setTotalCancelamentos(Numeros.parseToBig(p.getProperty("TotalCancelamentos")));
             r.setTotalAcrescimos(Numeros.parseToBig(p.getProperty("TotalAcrescimos")));
             r.setTotalNaoFiscal(Numeros.parseToBig(p.getProperty("TotalNaoFiscal")));
+            r.setTotalDescontosISSQN(Numeros.parseToBig(p.getProperty("TotalDescontosISSQN")));
+            r.setTotalCancelamentosISSQN(Numeros.parseToBig(p.getProperty("TotalCancelamentosISSQN")));
+            r.setTotalAcrescimosISSQN(Numeros.parseToBig(p.getProperty("TotalAcrescimosISSQN")));
+            r.setTotalDescontosOPNF(Numeros.parseToBig(p.getProperty("TotalDescontosOPNF")));
+            r.setTotalCancelamentosOPNF(Numeros.parseToBig(p.getProperty("TotalCancelamentosOPNF")));
+            r.setTotalAcrescimosOPNF(Numeros.parseToBig(p.getProperty("TotalAcrescimosOPNF")));
+            r.setTotalTroco(Numeros.parseToBig(p.getProperty("TotalTroco")));
+
             //Outras ICMS
             r.setTotalSubstituicaoTributaria(Numeros.parseToBig(p.getProperty("TotalSubstituicaoTributaria")));
             r.setTotalNaoTributado(Numeros.parseToBig(p.getProperty("TotalNaoTributado")));
@@ -115,12 +137,13 @@ public class MapaResumo {
             retorno = retorno.substring(retorno.indexOf("[Aliquotas]") + "[Aliquotas]".length(), retorno.indexOf("[OutrasICMS]")).trim().replace("\n", "=");
             String ret[] = retorno.split("=");
             HashMap<String, BigDecimal> h = new HashMap<>();
-            for (int i = 0; i < ret.length;) {
+            for (int i = 0;
+                    i < ret.length;) {
                 h.put(ret[i++].trim(), Numeros.parseToBig(ret[i++]));
             }
             r.setTotaisAliquotas(h);
             return r;
-        } catch (ParseException ex) {
+        } catch (ACBrException ex) {
             throw new ACBrECFException(ex.getMessage());
         }
     }

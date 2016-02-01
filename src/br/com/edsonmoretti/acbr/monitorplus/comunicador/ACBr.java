@@ -33,7 +33,6 @@ public class ACBr {
     private static Socket acbrSocket;
     private static final String NAMEHOST = getConfig().getNameHost();
     private static final int PORTA = getConfig().getPorta();
-    private static SimpleDateFormat dateFormatBR;
 
     private ACBr() {
     }
@@ -375,10 +374,6 @@ public class ACBr {
             }
             return config;
         }
-    }
-
-    public static String formatDataBR(Date d) {
-        return (dateFormatBR == null ? dateFormatBR = new SimpleDateFormat("dd/MM/yyyy") : dateFormatBR).format(d);
     }
 
     public static ACBr getInstance() {

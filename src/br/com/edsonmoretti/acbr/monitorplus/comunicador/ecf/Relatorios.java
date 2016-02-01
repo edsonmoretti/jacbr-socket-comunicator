@@ -18,6 +18,11 @@ import java.util.Date;
 public class Relatorios {
 
     private CupomVinculadoOuCCD cupomVinculadoOuCCD;
+    private br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.relatorios.RelatorioGerencial relatorioGerencial;
+
+    public br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.relatorios.RelatorioGerencial getRelatorioGerencial() {
+        return relatorioGerencial == null ? relatorioGerencial = new br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.relatorios.RelatorioGerencial() : relatorioGerencial;
+    }
 
     public CupomVinculadoOuCCD getCupomVinculadoOuCCD() {
         return cupomVinculadoOuCCD == null ? cupomVinculadoOuCCD = new CupomVinculadoOuCCD() : cupomVinculadoOuCCD;
@@ -31,7 +36,7 @@ public class Relatorios {
      * @throws ACBrECFException
      */
     public void leituraX() throws ACBrECFException {
-
+        comandoECF("LeituraX");
     }
 
     /**
@@ -70,7 +75,7 @@ public class Relatorios {
      * @throws ACBrECFException
      */
     public void reducaoZ(boolean enviarDataHoraDoPC) throws ACBrECFException {
-        comandoECF("ReducaoZ+" + (enviarDataHoraDoPC ? "(" + new SimpleDateFormat("dd/MM/yy HH:mm:ss").format(new Date()) + ")" : ""));
+        comandoECF("ReducaoZ" + (enviarDataHoraDoPC ? "(" + new SimpleDateFormat("dd/MM/yy HH:mm:ss").format(new Date()) + ")" : ""));
     }
 
     public void pulaLinha() throws ACBrECFException {

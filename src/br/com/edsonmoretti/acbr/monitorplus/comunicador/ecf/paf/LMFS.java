@@ -5,8 +5,8 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf;
 
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBr;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrUtils;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import java.util.Date;
 
@@ -38,7 +38,7 @@ public class LMFS {
          * @throws ACBrECFException
          */
         public void porPeriodo(Date dataIni, Date dataFim) throws ACBrECFException {
-            ACBrECF.comandoECF("PafMF_LMFS_Impressao(" + ACBr.formatDataBR(dataIni) + ", " + ACBr.formatDataBR(dataFim) + ")");
+            ACBrECF.comandoECF("PafMF_LMFS_Impressao(" + ACBrUtils.formatDataBR(dataIni) + ", " + ACBrUtils.formatDataBR(dataFim) + ")");
         }
 
         /**
@@ -66,7 +66,7 @@ public class LMFS {
          * @throws ACBrECFException
          */
         public void porPeriodo(Date dataIni, Date dataFim, String caminho) throws ACBrECFException {
-            ACBrECF.comandoECF("PafMF_LMFS_Espelho(" + ACBr.formatDataBR(dataIni) + ", " + ACBr.formatDataBR(dataFim) + "," + caminho + ")");
+            ACBrECF.comandoECF("PafMF_LMFS_Espelho(" + ACBrUtils.formatDataBR(dataIni) + ", " + ACBrUtils.formatDataBR(dataFim) + "," + caminho + ")");
         }
 
         /**

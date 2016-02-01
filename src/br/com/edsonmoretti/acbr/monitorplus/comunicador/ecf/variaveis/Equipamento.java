@@ -7,10 +7,16 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Estado;
 import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrUtils;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,14 +26,14 @@ public class Equipamento {
 
     /**
      * Retorna o getEstado atual do ECF<br>
- Tipo de getEstado de retorno:
- <br><br>
+     * Tipo de getEstado de retorno:
+     * <br><br>
      * <b>estNaoInicializada</b>, Porta Serial ainda não foi aberta;
      *
      * <br><br>
      * <b>estDesconhecido</b>, Porta aberta, mas getEstado ainda não definido;
-
- <br><br>
+     *
+     * <br><br>
      * <b>estLivre</b>, Impressora Livre, sem nenhum cupom aberto pronta para
      * nova venda, Redução Z e Leitura X ok, pode ou não já ter ocorrido 1ª
      * venda no dia...;
@@ -92,10 +98,9 @@ public class Equipamento {
      * @throws ACBrECFException
      */
     public Date getDataHora() throws ACBrECFException {
-        SimpleDateFormat s = new SimpleDateFormat("dd/MM/YY HH:mm:ss");
         try {
-            return s.parse(comandoECF("DataHora"));
-        } catch (ParseException ex) {
+            return ACBrUtils.strDataEHoraToDateBR(comandoECF("DataHora"));
+        } catch (ACBrException ex) {
             throw new ACBrECFException(ex.getMessage());
         }
     }
@@ -107,8 +112,8 @@ public class Equipamento {
      * @throws
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
-    public String marcaStr() throws ACBrECFException {
-        return modeloStr();
+    public String getMarcaStr() throws ACBrECFException {
+        return getModeloStr();
     }
 
     /**
@@ -118,7 +123,7 @@ public class Equipamento {
      * @throws
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
-    public String modeloStr() throws ACBrECFException {
+    public String getModeloStr() throws ACBrECFException {
         return comandoECF("ModeloStr");
     }
 
@@ -129,7 +134,7 @@ public class Equipamento {
      * @throws
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
-    public String subModeloECF() throws ACBrECFException {
+    public String getSubModeloECF() throws ACBrECFException {
         return comandoECF("SubModeloECF");
     }
 
@@ -139,7 +144,7 @@ public class Equipamento {
      * @return String com numero do ECF. EX: 001
      * @throws ACBrECFException
      */
-    public String numECF() throws ACBrECFException {
+    public String getNumECF() throws ACBrECFException {
         return comandoECF("NumECF");
     }
 
@@ -161,6 +166,20 @@ public class Equipamento {
      */
     public String getNumSerie() throws ACBrECFException {
         return comandoECF("NumSerie");
+    }
+
+    /**
+     * Retorna o MD5 do Número de Série do ECF.
+     *
+     * @return String com numero serie. <br>EX: fb76c603070c7dd8c502a0c36a5465cc
+     * @throws ACBrECFException
+     */
+    public String getNumSerieEmMD5() throws ACBrECFException {
+        try {
+            return ACBrUtils.MD5String(getNumSerie());
+        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            throw new ACBrECFException(ex.getMessage());
+        }
     }
 
     /**
@@ -186,10 +205,10 @@ public class Equipamento {
     /**
      * Retorna o CNPJ cadastrado no ECF.
      *
-     * @return String com cnpj. EX: 10.493.367/0001-48
+     * @return String com getCnpj. EX: 10.493.367/0001-48
      * @throws ACBrECFException
      */
-    public String cnpj() throws ACBrECFException {
+    public String getCnpj() throws ACBrECFException {
         return comandoECF("CNPJ");
     }
 
@@ -199,7 +218,7 @@ public class Equipamento {
      * @return String com IE na impressora. EX: 687.138.770
      * @throws ACBrECFException
      */
-    public String ie() throws ACBrECFException {
+    public String getIe() throws ACBrECFException {
         return comandoECF("IE");
     }
 
@@ -209,7 +228,7 @@ public class Equipamento {
      * @return String com IM do ECF: 21098765432
      * @throws ACBrECFException
      */
-    public String im() throws ACBrECFException {
+    public String getIm() throws ACBrECFException {
         return comandoECF("IM");
     }
 
@@ -223,7 +242,7 @@ public class Equipamento {
      * 1.2.1
      * @throws ACBrECFException
      */
-    public String paf() throws ACBrECFException {
+    public String getPaf() throws ACBrECFException {
         return comandoECF("PAF");
     }
 
@@ -233,12 +252,12 @@ public class Equipamento {
      * @return String com numero do usuario do ecf. EX: 01
      * @throws ACBrECFException
      */
-    public String usuarioAtual() throws ACBrECFException {
+    public String getUsuarioAtual() throws ACBrECFException {
         return comandoECF("UsuarioAtual");
     }
 
     /**
-     * Retorna as linhas do cliche do proprietário cadastrado no ECF
+     * Retorna as linhas do getCliche do proprietário cadastrado no ECF
      * (Cabeçalho).
      *
      * @return String com Cabeçalho do ECF. EX:<br>
@@ -246,7 +265,7 @@ public class Equipamento {
      * Caruaru-PE.
      * @throws ACBrECFException
      */
-    public String cliche() throws ACBrECFException {
+    public String getCliche() throws ACBrECFException {
         return comandoECF("Cliche");
     }
 
@@ -258,7 +277,7 @@ public class Equipamento {
      * @return Um Date com data hora do SB do ECF. EX: 07/12/12 08:59:36
      * @throws ACBrECFException
      */
-    public Date dataHoraSwBasico() throws ACBrECFException {
+    public Date getDataHoraSwBasico() throws ACBrECFException {
         SimpleDateFormat s = new SimpleDateFormat("dd/MM/YY HH:mm:ss");
         try {
             return s.parse(comandoECF("DataHoraSB"));
@@ -273,7 +292,7 @@ public class Equipamento {
      * @return int com a quantidade de casas decimais. EX: 3
      * @throws ACBrECFException
      */
-    public int decimaisQtd() throws ACBrECFException {
+    public int getDecimaisQtd() throws ACBrECFException {
         return Integer.parseInt(comandoECF("DecimaisQtd"));
     }
 
@@ -283,17 +302,17 @@ public class Equipamento {
      * @return int com a quantidade de casas decimais. EX: 3
      * @throws ACBrECFException
      */
-    public int decimaisPreco() throws ACBrECFException {
+    public int getDecimaisPreco() throws ACBrECFException {
         return Integer.parseInt(comandoECF("DecimaisPreco"));
     }
 
     /**
-     * Retorna número de colunas do ECF.
+     * Retorna número de getColunas do ECF.
      *
      * @return ex: 48
      * @throws ACBrECFException
      */
-    public String colunas() throws ACBrECFException {
+    public String getColunas() throws ACBrECFException {
         return comandoECF("Colunas");
     }
 
@@ -306,7 +325,7 @@ public class Equipamento {
      * Exemplo sem a MF Adicional: DR0105BR000000054098
      * @throws ACBrECFException
      */
-    public String mfAdicional() throws ACBrECFException {
+    public String getMfAdicional() throws ACBrECFException {
         return comandoECF("MFAdicional");
     }
 
@@ -316,7 +335,7 @@ public class Equipamento {
      * @return String com registro de fita detalhe. EX: DR
      * @throws ACBrECFException
      */
-    public String rfdid() throws ACBrECFException {
+    public String getRfdid() throws ACBrECFException {
         return comandoECF("RFDID");
     }
 
@@ -326,7 +345,7 @@ public class Equipamento {
      * @return String com registro de fita detalhe. EX: DR
      * @throws ACBrECFException
      */
-    public String registroFitaDetalhe() throws ACBrECFException {
-        return rfdid();
+    public String getRegistroFitaDetalhe() throws ACBrECFException {
+        return getRfdid();
     }
 }

@@ -48,13 +48,13 @@ public class TesteECF {
                     e.getCupomFiscal().vendeItem("001", "descricao item 1", Numeros.parseToBig("18"), new BigDecimal("5"), Numeros.parseToBig("5,00"));
                     e.getCupomFiscal().vendeItem("002", "descricao item 2", "17", "2", "1,02");
                     e.getCupomFiscal().vendeItem("003", "descricao item 3", Double.parseDouble("18"), Double.parseDouble("2"), Double.parseDouble("1.02"));
-                    if (e.getVariaveis().getEquipamento().marcaStr().toLowerCase().contains("daruma")) {
+                    if (e.getVariaveis().getEquipamento().getMarcaStr().toLowerCase().contains("daruma")) {
                         e.getCupomFiscal().vendeItem("004", "descricao item 4", Numeros.parseToBig("17"), new BigDecimal("20"), BigDecimal.ONE, BigDecimal.TEN, "UND", '$', 'A', 1);
                     }
                     e.getCupomFiscal().cancelaItemVendido(2);
                     e.getCupomFiscal().vendeItem("005", "descricao item 5", "17", "4", "1,02");
                     e.getCupomFiscal().cancelaItemVendido(4);
-                    if (e.getVariaveis().getEquipamento().marcaStr().toLowerCase().contains("daruma")) {
+                    if (e.getVariaveis().getEquipamento().getMarcaStr().toLowerCase().contains("daruma")) {
                         e.getCupomFiscal().cancelaItemVendidoParcial(1, "1,5");
                     }
                     e.getCupomFiscal().vendeItem("006", "descricao item 6 - aplicar desc", "FF", "6", "1,00");
@@ -118,7 +118,7 @@ public class TesteECF {
     private static void mapaDeResumo() throws ACBrECFException {
         System.out.println(e.getVariaveis().getMapaResumo().dataMovimento());
         System.out.println(e.getVariaveis().getMapaResumo().dadosReducaoZ());
-        if (e.getVariaveis().getEquipamento().marcaStr().toLowerCase().contains("sweda")) {
+        if (e.getVariaveis().getEquipamento().getMarcaStr().toLowerCase().contains("sweda")) {
             JOptionPane.showMessageDialog(null, "DadosUltimReducao Nao implementado Impressora Sweda.");
         } else {
             System.out.println(e.getVariaveis().getMapaResumo().dadosUltimaReducaoZ()); //TODO: Testar em impressora Fisica
@@ -145,27 +145,27 @@ public class TesteECF {
     private static void dadosEquipamento() throws ACBrECFException {
         System.out.println(e.getVariaveis().getEquipamento().getEstado());
         System.out.println(e.getVariaveis().getEquipamento().getDataHora());
-        System.out.println(e.getVariaveis().getEquipamento().marcaStr());
-        System.out.println(e.getVariaveis().getEquipamento().modeloStr());
-        System.out.println(e.getVariaveis().getEquipamento().subModeloECF());
-        System.out.println(e.getVariaveis().getEquipamento().numECF());
+        System.out.println(e.getVariaveis().getEquipamento().getMarcaStr());
+        System.out.println(e.getVariaveis().getEquipamento().getModeloStr());
+        System.out.println(e.getVariaveis().getEquipamento().getSubModeloECF());
+        System.out.println(e.getVariaveis().getEquipamento().getNumECF());
         System.out.println(e.getVariaveis().getEquipamento().getNumLoja());
         System.out.println(e.getVariaveis().getEquipamento().numSeriaMFD());
         System.out.println(e.getVariaveis().getEquipamento().getNumSerie());
         System.out.println(e.getVariaveis().getEquipamento().numVersao());
-        System.out.println(e.getVariaveis().getEquipamento().cnpj());
-        System.out.println(e.getVariaveis().getEquipamento().ie());
-        System.out.println(e.getVariaveis().getEquipamento().im());
-        System.out.println(e.getVariaveis().getEquipamento().paf());
-        System.out.println(e.getVariaveis().getEquipamento().usuarioAtual());
-        System.out.println(e.getVariaveis().getEquipamento().cliche());
-        System.out.println(e.getVariaveis().getEquipamento().dataHoraSwBasico());
-        System.out.println(e.getVariaveis().getEquipamento().decimaisQtd());
-        System.out.println(e.getVariaveis().getEquipamento().decimaisPreco());
-        System.out.println(e.getVariaveis().getEquipamento().colunas());
-        System.out.println(e.getVariaveis().getEquipamento().mfAdicional());
-        System.out.println(e.getVariaveis().getEquipamento().rfdid());
-        System.out.println(e.getVariaveis().getEquipamento().registroFitaDetalhe());
+        System.out.println(e.getVariaveis().getEquipamento().getCnpj());
+        System.out.println(e.getVariaveis().getEquipamento().getIe());
+        System.out.println(e.getVariaveis().getEquipamento().getIm());
+        System.out.println(e.getVariaveis().getEquipamento().getPaf());
+        System.out.println(e.getVariaveis().getEquipamento().getUsuarioAtual());
+        System.out.println(e.getVariaveis().getEquipamento().getCliche());
+        System.out.println(e.getVariaveis().getEquipamento().getDataHoraSwBasico());
+        System.out.println(e.getVariaveis().getEquipamento().getDecimaisQtd());
+        System.out.println(e.getVariaveis().getEquipamento().getDecimaisPreco());
+        System.out.println(e.getVariaveis().getEquipamento().getColunas());
+        System.out.println(e.getVariaveis().getEquipamento().getMfAdicional());
+        System.out.println(e.getVariaveis().getEquipamento().getRfdid());
+        System.out.println(e.getVariaveis().getEquipamento().getRegistroFitaDetalhe());
     }
 
     private static void aliquotas() throws ACBrECFException {

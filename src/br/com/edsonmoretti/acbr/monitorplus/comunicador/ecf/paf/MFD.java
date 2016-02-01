@@ -5,8 +5,8 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf;
 
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBr;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrUtils;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import java.util.Date;
 
@@ -18,6 +18,14 @@ public class MFD {
 
     private Espelho espelho;
     private Cotepe1704 cotepe1704;
+
+    public Espelho getEspelho() {
+        return espelho == null ? espelho = new Espelho() : espelho;
+    }
+
+    public Cotepe1704 getCotepe1704() {
+        return cotepe1704 == null ? cotepe1704 = new Cotepe1704() : cotepe1704;
+    }
 
     public class Espelho {
 
@@ -33,7 +41,7 @@ public class MFD {
          * @throws ACBrECFException
          */
         public void porPeriodo(Date dataIni, Date dataFim, String caminho) throws ACBrECFException {
-            ACBrECF.comandoECF("PafMF_MFD_Espelho(" + ACBr.formatDataBR(dataIni) + ", " + ACBr.formatDataBR(dataFim) + "," + caminho + ")");
+            ACBrECF.comandoECF("PafMF_MFD_Espelho(" + ACBrUtils.formatDataBR(dataIni) + ", " + ACBrUtils.formatDataBR(dataFim) + "," + caminho + ")");
         }
 
         /**
@@ -66,7 +74,7 @@ public class MFD {
          * @throws ACBrECFException
          */
         public void porPeriodo(Date dataIni, Date dataFim, String caminho) throws ACBrECFException {
-            ACBrECF.comandoECF("PafMF_MFD_Cotepe1704(" + ACBr.formatDataBR(dataIni) + ", " + ACBr.formatDataBR(dataFim) + "," + caminho + ")");
+            ACBrECF.comandoECF("PafMF_MFD_Cotepe1704(" + ACBrUtils.formatDataBR(dataIni) + ", " + ACBrUtils.formatDataBR(dataFim) + "," + caminho + ")");
         }
 
         /**

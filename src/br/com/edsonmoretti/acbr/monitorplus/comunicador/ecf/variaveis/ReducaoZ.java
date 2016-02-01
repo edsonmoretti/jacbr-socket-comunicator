@@ -14,8 +14,9 @@ import java.util.HashMap;
  * @author Edson
  */
 public class ReducaoZ {
-    //dados do ECF
 
+    //dados do ECF
+    //CONTADORES
     private Date dataMovimento;
     private String numSerie;
     private String numECF;
@@ -24,14 +25,35 @@ public class ReducaoZ {
     private String numCOO;
     private String numCRZ;
     private String numCRO;
+    private String numGNF;
+    private String numCCF;
+    private String numCFD;
+    private String numCDC;
+    private String numGRG;
+    private String numNFC;
+    private String numGNFC;
+    private String numCFC;
+    private String numNCN;
+    private String numCCDC;
+
     //Totalizadores
+    private BigDecimal vendaLiquida;
     private BigDecimal vendaBruta;
     private BigDecimal grandeTotal;
     private BigDecimal totalDescontos;
     private BigDecimal totalCancelamentos;
     private BigDecimal totalAcrescimos;
     private BigDecimal totalNaoFiscal;
-    //Aliquotas
+
+    private BigDecimal totalDescontosISSQN;
+    private BigDecimal totalCancelamentosISSQN;
+    private BigDecimal totalAcrescimosISSQN;
+    private BigDecimal totalDescontosOPNF;
+    private BigDecimal totalCancelamentosOPNF;
+    private BigDecimal totalAcrescimosOPNF;
+    private BigDecimal totalTroco;
+
+    //Aliquotas/ICMS
     private HashMap<String, BigDecimal> totaisAliquotas;
     //Outras ICMS
     private BigDecimal totalSubstituicaoTributaria;
@@ -201,6 +223,152 @@ public class ReducaoZ {
         this.totalSuprimento = totalSuprimento;
     }
 
+    public BigDecimal getVendaLiquida() {
+        return vendaLiquida;
+    }
+
+    protected void setVendaLiquida(BigDecimal vendaLiquida) {
+        this.vendaLiquida = vendaLiquida;
+    }
+////////////////////////
+
+    public String getNumGNF() {
+        return numGNF;
+    }
+
+    protected void setNumGNF(String numGNF) {
+        this.numGNF = numGNF;
+    }
+
+    public String getNumCCF() {
+        return numCCF;
+    }
+
+    protected void setNumCCF(String numCCF) {
+        this.numCCF = numCCF;
+    }
+
+    public String getNumCFD() {
+        return numCFD;
+    }
+
+    protected void setNumCFD(String numCFD) {
+        this.numCFD = numCFD;
+    }
+
+    public String getNumCDC() {
+        return numCDC;
+    }
+
+    protected void setNumCDC(String numCDC) {
+        this.numCDC = numCDC;
+    }
+
+    public String getNumGRG() {
+        return numGRG;
+    }
+
+    protected void setNumGRG(String numGRG) {
+        this.numGRG = numGRG;
+    }
+
+    public String getNumNFC() {
+        return numNFC;
+    }
+
+    protected void setNumNFC(String numNFC) {
+        this.numNFC = numNFC;
+    }
+
+    public String getNumGNFC() {
+        return numGNFC;
+    }
+
+    protected void setNumGNFC(String numGNFC) {
+        this.numGNFC = numGNFC;
+    }
+
+    public String getNumCFC() {
+        return numCFC;
+    }
+
+    protected void setNumCFC(String numCFC) {
+        this.numCFC = numCFC;
+    }
+
+    public String getNumNCN() {
+        return numNCN;
+    }
+
+    protected void setNumNCN(String numNCN) {
+        this.numNCN = numNCN;
+    }
+
+    public String getNumCCDC() {
+        return numCCDC;
+    }
+
+    protected void setNumCCDC(String numCCDC) {
+        this.numCCDC = numCCDC;
+    }
+
+    public BigDecimal getTotalDescontosISSQN() {
+        return totalDescontosISSQN;
+    }
+
+    protected void setTotalDescontosISSQN(BigDecimal totalDescontosISSQN) {
+        this.totalDescontosISSQN = totalDescontosISSQN;
+    }
+
+    public BigDecimal getTotalCancelamentosISSQN() {
+        return totalCancelamentosISSQN;
+    }
+
+    protected void setTotalCancelamentosISSQN(BigDecimal totalCancelamentosISSQN) {
+        this.totalCancelamentosISSQN = totalCancelamentosISSQN;
+    }
+
+    public BigDecimal getTotalAcrescimosISSQN() {
+        return totalAcrescimosISSQN;
+    }
+
+    protected void setTotalAcrescimosISSQN(BigDecimal totalAcrescimosISSQN) {
+        this.totalAcrescimosISSQN = totalAcrescimosISSQN;
+    }
+
+    public BigDecimal getTotalDescontosOPNF() {
+        return totalDescontosOPNF;
+    }
+
+    protected void setTotalDescontosOPNF(BigDecimal totalDescontosOPNF) {
+        this.totalDescontosOPNF = totalDescontosOPNF;
+    }
+
+    public BigDecimal getTotalCancelamentosOPNF() {
+        return totalCancelamentosOPNF;
+    }
+
+    protected void setTotalCancelamentosOPNF(BigDecimal totalCancelamentosOPNF) {
+        this.totalCancelamentosOPNF = totalCancelamentosOPNF;
+    }
+
+    public BigDecimal getTotalAcrescimosOPNF() {
+        return totalAcrescimosOPNF;
+    }
+
+    protected void setTotalAcrescimosOPNF(BigDecimal totalAcrescimosOPNF) {
+        this.totalAcrescimosOPNF = totalAcrescimosOPNF;
+    }
+
+    public BigDecimal getTotalTroco() {
+        return totalTroco;
+    }
+
+    protected void setTotalTroco(BigDecimal totalTroco) {
+        this.totalTroco = totalTroco;
+    }
+    
+    
     @Override
     public String toString() {
         String s = "{";

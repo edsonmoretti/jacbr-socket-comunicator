@@ -58,8 +58,8 @@ public class Aliquotas {
     /**
      * Retorna os valores totais das alíquotas cadastradas no ECF. OBS:
      * Totalizador ficará null, pois o metodo pega os indices e os valores
-     * totais.
-     * <br><br>
+     * totais.<br>
+     *
      * IIII999.99|IIII999.99|IIII999.99|....
      * <br><br>
      * Onde:<br>
@@ -77,23 +77,22 @@ public class Aliquotas {
         List<Aliquota> lista = new ArrayList<>();
         for (String s : comandoECF(tipo).split("\\|")) {
             s = s.trim();
-            Aliquota a = new Aliquota();
-            a.setTipo(s.charAt(0));
-            a.setIndice(s.substring(1, 3));
+            Aliquota aliq = new Aliquota();
+            aliq.setTipo(s.charAt(2));
+            aliq.setIndice(s.substring(0, 2));
             if (tipo.endsWith("LerTotaisAliquota")) {
-                for (Aliquota aliquota : getAliquotas()) {
-                    if (aliquota.getIndice().equals(a.getIndice())) {
-                        if (aliquota.getTipo() == a.getTipo()) {
-                            a.setPercentualImposto(aliquota.getPercentualImposto());
-                            break;
-                        }
+                for (Aliquota aliqForDentro : getAliquotas()) {
+                    if (aliqForDentro.getIndice().equals(aliq.getIndice())) {
+                        aliq.setTipo(aliqForDentro.getTipo());
+                        aliq.setPercentualImposto(aliqForDentro.getPercentualImposto());
+                        break;
                     }
                 }
-                a.setTotal(Numeros.parseToBig(s.substring(4)));
+                aliq.setTotal(Numeros.parseToBig(s.substring(2)));
             } else {
-                a.setPercentualImposto(Numeros.parseToBig(s.substring(4)));
+                aliq.setPercentualImposto(Numeros.parseToBig(s.substring(4)));
             }
-            lista.add(a);
+            lista.add(aliq);
         }
         return lista;
     }

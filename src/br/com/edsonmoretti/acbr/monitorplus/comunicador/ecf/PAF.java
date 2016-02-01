@@ -7,6 +7,7 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBr;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrUtils;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.LMFC;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.LMFS;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.MFD;
@@ -44,7 +45,7 @@ public class PAF {
      * @throws ACBrECFException
      */
     public void cat52(Date dataInicial, Date dataFinal, String dirArquivos) throws ACBrECFException {
-        ACBrECF.comandoECF("PafMF_LX_Impressao(" + ACBr.formatDataBR(dataInicial) + "," + ACBr.formatDataBR(dataFinal) + "," + dirArquivos + ")");
+        ACBrECF.comandoECF("PafMF_LX_Impressao(" + ACBrUtils.formatDataBR(dataInicial) + "," + ACBrUtils.formatDataBR(dataFinal) + "," + dirArquivos + ")");
     }
 
     /**

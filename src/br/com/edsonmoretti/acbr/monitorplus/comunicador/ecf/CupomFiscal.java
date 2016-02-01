@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  */
 public class CupomFiscal {
 
-    private Variaveis variaveis;
+    private br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal.Variaveis variaveis;
 
     /**
      * Realiza o teste com o estado da ECF se está livre para emissão de Cupom
@@ -665,10 +665,10 @@ public class CupomFiscal {
 
     /**
      * Variáveis do Cupom Fiscal
-     * @return 
+     *
+     * @return
      */
-    public Variaveis getVariaveis() {
-        return variaveis == null ? variaveis = new Variaveis() : variaveis;
+    public br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal.Variaveis getVariaveis() {
+        return variaveis == null ? variaveis = new br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal.Variaveis() : variaveis;
     }
-
 }

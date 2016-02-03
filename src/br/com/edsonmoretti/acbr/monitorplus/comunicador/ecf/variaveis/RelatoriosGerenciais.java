@@ -6,7 +6,7 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.RelatorioGerencial;
-import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF.comandoECF;
+import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,7 +26,7 @@ public class RelatoriosGerenciais {
      * @return
      * @throws ACBrECFException
      */
-    public List<RelatorioGerencial> relatoriosGerenciais() throws ACBrECFException {
+    public List<RelatorioGerencial> getRelatoriosGerenciais() throws ACBrECFException {
         return relatoriosGer("RelatoriosGerenciais");
     }
 
@@ -72,7 +72,7 @@ public class RelatoriosGerenciais {
             rg.setIndice(s.substring(0, 2));
             if (comando.equals("LerTotaisRelatoriosGerenciais")) {
                 rg.setContadorGeral(Integer.parseInt(s.substring(2)));
-                for (RelatorioGerencial relatoriosGerenciai : relatoriosGerenciais()) {
+                for (RelatorioGerencial relatoriosGerenciai : getRelatoriosGerenciais()) {
                     if (relatoriosGerenciai.getIndice().equals(rg.getIndice())) {
                         rg.setDescricao(relatoriosGerenciai.getDescricao());
                         rg.setContadorDoDia(relatoriosGerenciai.getContadorDoDia());

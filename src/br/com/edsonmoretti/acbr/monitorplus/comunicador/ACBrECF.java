@@ -1,6 +1,10 @@
-package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf;
+package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBr;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.CupomFiscal;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Dispositivos;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Relatorios;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Variaveis;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.listener.ACBrEvent;
@@ -19,6 +23,7 @@ public class ACBrECF {
     private Variaveis variaveis;
     private Relatorios relatorios;
     private CupomFiscal cupomFiscal;
+    private Dispositivos dispositivos;
 
     public ACBrECF(boolean ativar) throws ACBrECFException {
         this.acbrPoucoPapelListeners = new ArrayList<>();
@@ -87,6 +92,10 @@ public class ACBrECF {
 
     public Relatorios getRelatorios() {
         return relatorios == null ? relatorios = new Relatorios() : relatorios;
+    }
+
+    public Dispositivos getDispositivos() {
+        return dispositivos == null ? dispositivos = new Dispositivos() : dispositivos;
     }
 
     public synchronized void addOnPoucoPapel(ACBrEventListener l) {

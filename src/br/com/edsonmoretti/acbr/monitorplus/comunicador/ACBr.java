@@ -13,6 +13,9 @@ import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -30,6 +33,7 @@ public class ACBr {
     private static Socket acbrSocket;
     private static final String NAMEHOST = getConfig().getNameHost();
     private static final int PORTA = getConfig().getPorta();
+    private static SimpleDateFormat dateFormatBR;
 
     private ACBr() {
     }
@@ -373,6 +377,10 @@ public class ACBr {
         }
     }
 
+    public static String formatDataBR(Date d) {
+        return (dateFormatBR == null ? dateFormatBR = new SimpleDateFormat("dd/MM/yyyy") : dateFormatBR).format(d);
+    }
+
     public static ACBr getInstance() {
         return ACBrHolder.INSTANCE;
     }
@@ -403,5 +411,18 @@ public class ACBr {
             this.porta = porta;
         }
 
+    }
+
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Digite a chave");
+        String chave = sc.nextLine();
+        System.out.println("CNPJ");
+        String cnpj = sc.nextLine();
+        try {
+            System.out.println(ACBrNFe.getInstance().downloadNFe(cnpj, chave));
+        } catch (ACBrException ex) {
+            Logger.getLogger(ACBr.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

@@ -1,6 +1,6 @@
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.math.BigDecimal;
 import java.util.logging.Level;
@@ -143,15 +143,15 @@ public class TesteECF {
     }
 
     private static void dadosEquipamento() throws ACBrECFException {
-        System.out.println(e.getVariaveis().getEquipamento().estado());
-        System.out.println(e.getVariaveis().getEquipamento().dataHora());
+        System.out.println(e.getVariaveis().getEquipamento().getEstado());
+        System.out.println(e.getVariaveis().getEquipamento().getDataHora());
         System.out.println(e.getVariaveis().getEquipamento().marcaStr());
         System.out.println(e.getVariaveis().getEquipamento().modeloStr());
         System.out.println(e.getVariaveis().getEquipamento().subModeloECF());
         System.out.println(e.getVariaveis().getEquipamento().numECF());
-        System.out.println(e.getVariaveis().getEquipamento().numLoja());
+        System.out.println(e.getVariaveis().getEquipamento().getNumLoja());
         System.out.println(e.getVariaveis().getEquipamento().numSeriaMFD());
-        System.out.println(e.getVariaveis().getEquipamento().numSerie());
+        System.out.println(e.getVariaveis().getEquipamento().getNumSerie());
         System.out.println(e.getVariaveis().getEquipamento().numVersao());
         System.out.println(e.getVariaveis().getEquipamento().cnpj());
         System.out.println(e.getVariaveis().getEquipamento().ie());

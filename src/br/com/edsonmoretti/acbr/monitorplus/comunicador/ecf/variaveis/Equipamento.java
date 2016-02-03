@@ -6,7 +6,7 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Estado;
-import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF.comandoECF;
+import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,15 +19,15 @@ import java.util.Date;
 public class Equipamento {
 
     /**
-     * Retorna o estado atual do ECF<br>
-     * Tipo de estado de retorno:
-     * <br><br>
+     * Retorna o getEstado atual do ECF<br>
+ Tipo de getEstado de retorno:
+ <br><br>
      * <b>estNaoInicializada</b>, Porta Serial ainda não foi aberta;
      *
      * <br><br>
-     * <b>estDesconhecido</b>, Porta aberta, mas estado ainda não definido;
-     *
-     * <br><br>
+     * <b>estDesconhecido</b>, Porta aberta, mas getEstado ainda não definido;
+
+ <br><br>
      * <b>estLivre</b>, Impressora Livre, sem nenhum cupom aberto pronta para
      * nova venda, Redução Z e Leitura X ok, pode ou não já ter ocorrido 1ª
      * venda no dia...;
@@ -60,7 +60,7 @@ public class Equipamento {
      * <b>ACBrECF.Estado</b>.
      * @throws ACBrECFException
      */
-    public Estado estado() throws ACBrECFException {
+    public Estado getEstado() throws ACBrECFException {
         switch (comandoECF("Estado")) {
             case "estNaoInicializada":
                 return Estado.estNaoInicializada;
@@ -91,7 +91,7 @@ public class Equipamento {
      * @return Date com data e hora do ECF
      * @throws ACBrECFException
      */
-    public Date dataHora() throws ACBrECFException {
+    public Date getDataHora() throws ACBrECFException {
         SimpleDateFormat s = new SimpleDateFormat("dd/MM/YY HH:mm:ss");
         try {
             return s.parse(comandoECF("DataHora"));
@@ -149,7 +149,7 @@ public class Equipamento {
      * @return String com numero da loja ex: 001
      * @throws ACBrECFException
      */
-    public String numLoja() throws ACBrECFException {
+    public String getNumLoja() throws ACBrECFException {
         return comandoECF("NumLoja");
     }
 
@@ -159,7 +159,7 @@ public class Equipamento {
      * @return String com numero serie. <br>EX: DR0208BR000000000000
      * @throws ACBrECFException
      */
-    public String numSerie() throws ACBrECFException {
+    public String getNumSerie() throws ACBrECFException {
         return comandoECF("NumSerie");
     }
 

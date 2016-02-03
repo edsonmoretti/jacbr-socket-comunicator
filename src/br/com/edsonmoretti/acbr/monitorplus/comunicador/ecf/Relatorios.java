@@ -6,7 +6,7 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.relatorios.CupomVinculadoOuCCD;
-import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF.comandoECF;
+import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import java.text.SimpleDateFormat;
 import java.util.Date;

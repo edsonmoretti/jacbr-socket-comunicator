@@ -1,6 +1,6 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis;
 
-import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF.comandoECF;
+import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.math.BigDecimal;
@@ -34,7 +34,7 @@ public class Aliquotas {
      * @return List com Aliquotas
      * @throws ACBrECFException
      */
-    public List<Aliquota> aliquotas() throws ACBrECFException {
+    public List<Aliquota> getAliquotas() throws ACBrECFException {
         return listaAliquotas("Aliquotas");
     }
 
@@ -81,7 +81,7 @@ public class Aliquotas {
             a.setTipo(s.charAt(0));
             a.setIndice(s.substring(1, 3));
             if (tipo.endsWith("LerTotaisAliquota")) {
-                for (Aliquota aliquota : aliquotas()) {
+                for (Aliquota aliquota : getAliquotas()) {
                     if (aliquota.getIndice().equals(a.getIndice())) {
                         if (aliquota.getTipo() == a.getTipo()) {
                             a.setPercentualImposto(aliquota.getPercentualImposto());

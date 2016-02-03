@@ -5,7 +5,7 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis;
 
-import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF.comandoECF;
+import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.util.ArrayList;
@@ -35,7 +35,7 @@ public class ComprovantesNaoFiscais {
      * carga, elas são transferidas para a memória do ACBrECF
      * <br><b>NOTA 2:</b> Esse método não traz o contadorDoDia no item
      */
-    public List<ComprovanteNaoFiscal> comprovantesNaoFiscais() throws ACBrECFException {
+    public List<ComprovanteNaoFiscal> getComprovantesNaoFiscais() throws ACBrECFException {
         return compNFiscal("ComprovantesNaoFiscais");
     }
 
@@ -56,6 +56,7 @@ public class ComprovantesNaoFiscais {
      * sempre se comunica com o ECF a fim de ler novamente todas os Comprovantes
      * não Fiscais cadastrados
      * <br><b>NOTA:</b> Esse método não traz o contadorDoDia no item
+     * @throws br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
     public List<ComprovanteNaoFiscal> carregaComprovantesNaoFiscais() throws ACBrECFException {
         return compNFiscal("CarregaComprovantesNaoFiscais");
@@ -70,7 +71,7 @@ public class ComprovantesNaoFiscais {
             c.setIndice(string.substring(0, 2).trim());
             if (comando.equals("lerTotaisComprovanteNaoFiscal")) {
                 c.setTotal(Numeros.parseToBig(string.substring(3)));
-                for (ComprovanteNaoFiscal compro : comprovantesNaoFiscais()) {
+                for (ComprovanteNaoFiscal compro : getComprovantesNaoFiscais()) {
                     if (compro.getIndice().equals(c.getIndice())) {
                         c.setDescricao(compro.getDescricao());
                         c.setEntrada(compro.isEntrada());

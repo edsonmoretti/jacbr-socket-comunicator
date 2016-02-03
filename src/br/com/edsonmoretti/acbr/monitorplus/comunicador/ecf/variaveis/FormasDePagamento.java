@@ -5,7 +5,7 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis;
 
-import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF.comandoECF;
+import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class FormasDePagamento {
      * @throws
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
-    public List<FormaDePagamento> formasPagamento() throws ACBrECFException {
+    public List<FormaDePagamento> getFormasPagamento() throws ACBrECFException {
         return formasPgto("FormasPagamento");
     }
 
@@ -67,7 +67,7 @@ public class FormasDePagamento {
             f.setIndice(Integer.parseInt(s.substring(0, 2)));
             if (tipo.equals("LerTotaisFormaPagamento")) {
                 f.setTotal(Numeros.parseToBig(s.substring(2)));
-                for (FormaDePagamento formaDePagamento : formasPagamento()) {
+                for (FormaDePagamento formaDePagamento : getFormasPagamento()) {
                     if (formaDePagamento.getIndice() == f.getIndice()) {
                         f.setDescricao(formaDePagamento.getDescricao());
                         f.setImprimeVinculado(formaDePagamento.isImprimeVinculado());

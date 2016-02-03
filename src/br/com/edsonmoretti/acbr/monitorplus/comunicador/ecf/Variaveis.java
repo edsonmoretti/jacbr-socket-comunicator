@@ -11,7 +11,7 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis.Equipament
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis.MapaResumo;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis.RelatoriosGerenciais;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis.Aliquotas;
-import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF.comandoECF;
+import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 
 /**

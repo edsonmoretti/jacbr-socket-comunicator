@@ -1,6 +1,6 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.relatorios;
 
-import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF.comandoECF;
+import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import java.math.BigDecimal;
 

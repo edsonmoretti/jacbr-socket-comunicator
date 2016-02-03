@@ -5,7 +5,7 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf;
 
-import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF.comandoECF;
+import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.math.BigDecimal;

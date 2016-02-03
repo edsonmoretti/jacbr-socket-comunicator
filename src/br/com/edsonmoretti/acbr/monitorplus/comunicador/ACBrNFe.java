@@ -74,6 +74,10 @@ public class ACBrNFe {
         }
     }
 
+    public String downloadNFe(String cnpj, String chave) throws ACBrException {
+        return ACBr.getInstance().comandoAcbr("NFe.DownloadNFe(" + cnpj + "," + chave + ")");
+    }
+
     public static ACBrNFe getInstance() {
         return ACBrNFeHolder.INSTANCE;
     }

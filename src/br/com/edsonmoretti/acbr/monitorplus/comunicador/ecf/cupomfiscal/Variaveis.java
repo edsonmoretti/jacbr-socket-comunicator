@@ -5,7 +5,7 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal;
 
-import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.ACBrECF.comandoECF;
+import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.math.BigDecimal;
@@ -24,7 +24,7 @@ public class Variaveis {
      * @return String com num do Cupom. EX: 002482
      * @throws ACBrECFException
      */
-    public String numCupom() throws ACBrECFException {
+    public String getNumCupom() throws ACBrECFException {
         return comandoECF("NumCupom").trim();
     }
 
@@ -36,7 +36,7 @@ public class Variaveis {
      * @return BigDecimal com valor do SubTotal
      * @throws ACBrECFException
      */
-    public BigDecimal subTotal() throws ACBrECFException {
+    public BigDecimal getSubTotal() throws ACBrECFException {
         return Numeros.parseToBig(comandoECF("SubTotal").trim());
     }
 
@@ -47,7 +47,7 @@ public class Variaveis {
      * @return BigDecimal com Valores já pagos.
      * @throws ACBrECFException
      */
-    public BigDecimal totalPago() throws ACBrECFException {
+    public BigDecimal getTotalPago() throws ACBrECFException {
         return Numeros.parseToBig(comandoECF("TotalPago").trim());
     }
 
@@ -57,7 +57,7 @@ public class Variaveis {
      * @return int Com Numéro do último item, ex: 3
      * @throws ACBrECFException
      */
-    public int numUltItem() throws ACBrECFException {
+    public int getNumUltItem() throws ACBrECFException {
         return Integer.parseInt(comandoECF("NumUltItem").trim());
     }
 }

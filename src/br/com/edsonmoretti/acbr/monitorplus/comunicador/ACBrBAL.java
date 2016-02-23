@@ -9,6 +9,8 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBALException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +26,7 @@ public class ACBrBAL {
      * @throws
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBALException
      */
-    public boolean ativo() throws ACBrBALException {
+    public boolean isAtivo() throws ACBrBALException {
         try {
             return ACBr.getInstance().comandoAcbr("Ativo").equals("true");
         } catch (ACBrException ex) {
@@ -33,14 +35,14 @@ public class ACBrBAL {
     }
 
     /**
-     * Ativa a comunicação com a Balança conectada na porta Serial.
+     * Ativa a comunicação com a Balança conectada na getPorta Serial.
      *
      * @throws
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBALException
      */
     public void ativar() throws ACBrBALException {
         try {
-            ACBr.getInstance().comandoAcbr("Ativar");
+            ACBr.getInstance().comandoAcbr("BAL.Ativar");
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
         }
@@ -68,9 +70,9 @@ public class ACBrBAL {
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBALException
      *
      */
-    public String modeloStr() throws ACBrBALException {
+    public String getModeloStr() throws ACBrBALException {
         try {
-            return ACBr.getInstance().comandoAcbr("ModeloStr");
+            return ACBr.getInstance().comandoAcbr("BAL.ModeloStr");
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
         }
@@ -83,9 +85,9 @@ public class ACBrBAL {
      * @throws
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBALException
      */
-    public String modelo() throws ACBrBALException {
+    public String getModelo() throws ACBrBALException {
         try {
-            return ACBr.getInstance().comandoAcbr("ModeloStr");
+            return ACBr.getInstance().comandoAcbr("BAL.Modelo");
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
         }
@@ -99,7 +101,7 @@ public class ACBrBAL {
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBALException
      *
      */
-    public String porta() throws ACBrBALException {
+    public String getPorta() throws ACBrBALException {
         try {
             return ACBr.getInstance().comandoAcbr("Porta");
         } catch (ACBrException ex) {
@@ -115,7 +117,7 @@ public class ACBrBAL {
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBALException
      *
      */
-    public void SetIntervalo(int intervalo) throws ACBrBALException {
+    public void setIntervalo(int intervalo) throws ACBrBALException {
         try {
             ACBr.getInstance().comandoAcbr("SetIntervalo(" + intervalo + ")");
         } catch (ACBrException ex) {
@@ -129,9 +131,9 @@ public class ACBrBAL {
      * @throws ACBrBALException
      */
     public synchronized BigDecimal lePeso() throws ACBrBALException {
-        if (!ativo()) {
+        if (!isAtivo()) {
             ativar();
-            if (ativo()) {
+            if (isAtivo()) {
                 return lePeso();
             }
             throw new ACBrBALException("Balança desativada, após configurar, use o BAL.Ativar");
@@ -155,9 +157,9 @@ public class ACBrBAL {
      * @throws ACBrBALException
      */
     public BigDecimal lePeso(int timeOut) throws ACBrBALException {
-        if (!ativo()) {
+        if (!isAtivo()) {
             ativar();
-            if (ativo()) {
+            if (isAtivo()) {
                 return lePeso();
             }
             throw new ACBrBALException("Balança desativada, após configurar, use o BAL.Ativar");
@@ -179,7 +181,7 @@ public class ACBrBAL {
      * @throws
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException
      */
-    public BigDecimal ultimoPesoLido() throws ACBrException {
+    public BigDecimal getUltimoPesoLido() throws ACBrException {
         return Numeros.parseToBig(ACBr.getInstance().comandoAcbr("UltimoPesoLido"));
     }
 
@@ -190,7 +192,7 @@ public class ACBrBAL {
      * @throws
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBALException
      */
-    public String ultimaResposta() throws ACBrBALException {
+    public String getUltimaResposta() throws ACBrBALException {
         try {
             return ACBr.getInstance().comandoAcbr("UltimoPesoLido");
         } catch (ACBrException ex) {
@@ -205,8 +207,26 @@ public class ACBrBAL {
      * @throws
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException
      */
-    public boolean monitorarBalanca() throws ACBrException {
-        return ACBr.getInstance().comandoAcbr("MonitorarBalanca").equals("true");
+    public boolean isMonitorarBalanca() throws ACBrBALException {
+        try {
+            return ACBr.getInstance().comandoAcbr("MonitorarBalanca").equals("true");
+        } catch (ACBrException ex) {
+            throw new ACBrBALException(ex.getMessage());
+        }
+    }
+
+    public boolean isTemBalancaConfigurada() throws ACBrBALException {
+        try {
+            if (ACBr.getInstance().comandoAcbr("BAL.Modelo").equals("balNenhum")) {
+                return false;
+            }
+            if (ACBr.getInstance().comandoAcbr("BAL.ModeloStr").equals("Não Definida")) {
+                return false;
+            }
+            return true;
+        } catch (ACBrException ex) {
+            throw new ACBrBALException(ex.getMessage());
+        }
     }
 
     public static ACBrBAL getInstance() {

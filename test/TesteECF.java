@@ -1,6 +1,10 @@
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.RelatorioGerencial;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis.Aliquota;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis.ComprovanteNaoFiscal;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.variaveis.FormaDePagamento;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.math.BigDecimal;
 import java.util.logging.Level;
@@ -22,7 +26,7 @@ public class TesteECF {
 
     public static void main(String[] args) {
         try {
-             e = new ACBrECF(false);
+            e = new ACBrECF(false);
             e.ativar();
             {//Variaveis
 //                variaveis();
@@ -63,12 +67,12 @@ public class TesteECF {
                     e.getCupomFiscal().acrescimoItemAnterior(BigDecimal.ONE, '%');
                     e.getCupomFiscal().vendeItem("008", "descricao item 8 - aplicar desc item", "II", BigDecimal.TEN, BigDecimal.ONE);
                     e.getCupomFiscal().descontoAcrescimoItem(BigDecimal.ONE, 'D', '$', 8);
-                    System.out.println("Numero Cupom: " + e.getCupomFiscal().getVariaveis().numCupom());
-                    System.out.println("Numero ultimo item: " + e.getCupomFiscal().getVariaveis().numUltItem());
+                    System.out.println("Numero Cupom: " + e.getCupomFiscal().getVariaveis().getNumCupom());
+                    System.out.println("Numero ultimo item: " + e.getCupomFiscal().getVariaveis().getNumUltItem());
                     e.getCupomFiscal().subtotalizaCupom();
                     e.getCupomFiscal().efetuaPagamento("01", new BigDecimal(100));
-                    System.out.println("Subtotal: " + e.getCupomFiscal().getVariaveis().subTotal());
-                    System.out.println("Total pago: " + e.getCupomFiscal().getVariaveis().totalPago());
+                    System.out.println("Subtotal: " + e.getCupomFiscal().getVariaveis().getSubTotal());
+                    System.out.println("Total pago: " + e.getCupomFiscal().getVariaveis().getTotalPago());
                     e.getCupomFiscal().fechaCupom("mensagem linha1|mensagem linha2");
                 } catch (Exception ex) {
                     System.err.println(ex);
@@ -83,15 +87,16 @@ public class TesteECF {
 
     private static void comprovantesNFiscais() throws ACBrECFException {
         System.out.println("\ncomprovantesNaoFiscais");
-        for (ACBrECF.Variaveis.ComprovanteNaoFiscal comprovanteNaoFiscal : e.getVariaveis().getComprovantesNaoFiscais().comprovantesNaoFiscais()) {
-            System.out.println(comprovanteNaoFiscal);
+        for (ComprovanteNaoFiscal comprovantesNaoFiscai : e.getVariaveis().getComprovantesNaoFiscais().getComprovantesNaoFiscais()) {
+            System.out.println(comprovantesNaoFiscai);
+
         }
         System.out.println("\ncarregaComprovantesNaoFiscais");
-        for (ACBrECF.Variaveis.ComprovanteNaoFiscal comprovanteNaoFiscal : e.getVariaveis().getComprovantesNaoFiscais().carregaComprovantesNaoFiscais()) {
+        for (ComprovanteNaoFiscal comprovanteNaoFiscal : e.getVariaveis().getComprovantesNaoFiscais().carregaComprovantesNaoFiscais()) {
             System.out.println(comprovanteNaoFiscal);
         }
         System.out.println("\nlerTotaisComprovanteNaoFiscal");
-        for (ACBrECF.Variaveis.ComprovanteNaoFiscal comprovanteNaoFiscal : e.getVariaveis().getComprovantesNaoFiscais().lerTotaisComprovanteNaoFiscal()) {
+        for (ComprovanteNaoFiscal comprovanteNaoFiscal : e.getVariaveis().getComprovantesNaoFiscais().lerTotaisComprovanteNaoFiscal()) {
             System.out.println(comprovanteNaoFiscal);
         }
         System.out.println("\nAchar");
@@ -100,15 +105,15 @@ public class TesteECF {
 
     private static void relatoriosGerenciais() throws ACBrECFException {
         System.out.println("relatoriosGerenciais");
-        for (ACBrECF.Variaveis.RelatorioGerencial r : e.getVariaveis().getRelatoriosGerenciais().relatoriosGerenciais()) {
+        for (RelatorioGerencial r : e.getVariaveis().getRelatoriosGerenciais().getRelatoriosGerenciais()) {
             System.out.println(r);
         }
         System.out.println("carregaRelatoriosGerenciais");
-        for (ACBrECF.Variaveis.RelatorioGerencial r : e.getVariaveis().getRelatoriosGerenciais().carregaRelatoriosGerenciais()) {
+        for (RelatorioGerencial r : e.getVariaveis().getRelatoriosGerenciais().carregaRelatoriosGerenciais()) {
             System.out.println(r);
         }
         System.out.println("lerTotaisRelatoriosGerenciais");
-        for (ACBrECF.Variaveis.RelatorioGerencial r : e.getVariaveis().getRelatoriosGerenciais().lerTotaisRelatoriosGerenciais()) {
+        for (RelatorioGerencial r : e.getVariaveis().getRelatoriosGerenciais().lerTotaisRelatoriosGerenciais()) {
             System.out.println(r);
         }
         System.out.println("achar");
@@ -116,30 +121,30 @@ public class TesteECF {
     }
 
     private static void mapaDeResumo() throws ACBrECFException {
-        System.out.println(e.getVariaveis().getMapaResumo().dataMovimento());
-        System.out.println(e.getVariaveis().getMapaResumo().dadosReducaoZ());
+        System.out.println(e.getVariaveis().getMapaResumo().getDataMovimento());
+        System.out.println(e.getVariaveis().getMapaResumo().getDadosReducaoZ());
         if (e.getVariaveis().getEquipamento().getMarcaStr().toLowerCase().contains("sweda")) {
             JOptionPane.showMessageDialog(null, "DadosUltimReducao Nao implementado Impressora Sweda.");
         } else {
-            System.out.println(e.getVariaveis().getMapaResumo().dadosUltimaReducaoZ()); //TODO: Testar em impressora Fisica
+            System.out.println(e.getVariaveis().getMapaResumo().getDadosUltimaReducaoZ()); //TODO: Testar em impressora Fisica
         }
-        System.out.println(e.getVariaveis().getMapaResumo().numReducoesZRestantes());
-        System.out.println(e.getVariaveis().getMapaResumo().numCOO());
-        System.out.println(e.getVariaveis().getMapaResumo().numCRZ());
-        System.out.println(e.getVariaveis().getMapaResumo().numCRO());
-        System.out.println(e.getVariaveis().getMapaResumo().numCCF());
-        System.out.println(e.getVariaveis().getMapaResumo().numCOOInicial());
-        System.out.println(e.getVariaveis().getMapaResumo().numGNF());
-        System.out.println(e.getVariaveis().getMapaResumo().numGNFC());
-        System.out.println(e.getVariaveis().getMapaResumo().numGRG());
-        System.out.println(e.getVariaveis().getMapaResumo().numCDC());
-        System.out.println(e.getVariaveis().getMapaResumo().numCFC());
-        System.out.println(e.getVariaveis().getMapaResumo().numCCDC());
-        System.out.println(e.getVariaveis().getMapaResumo().numCFD());
-        System.out.println(e.getVariaveis().getMapaResumo().numNCN());
-        System.out.println(e.getVariaveis().getMapaResumo().vendaBruta());
-        System.out.println(e.getVariaveis().getMapaResumo().grandeTotal());
-        System.out.println(e.getVariaveis().getMapaResumo().totalTroco());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumReducoesZRestantes());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumCOO());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumCRZ());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumCRO());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumCCF());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumCOOInicial());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumGNF());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumGNFC());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumGRG());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumCDC());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumCFC());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumCCDC());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumCFD());
+        System.out.println(e.getVariaveis().getMapaResumo().getNumNCN());
+        System.out.println(e.getVariaveis().getMapaResumo().getVendaBruta());
+        System.out.println(e.getVariaveis().getMapaResumo().getGrandeTotal());
+        System.out.println(e.getVariaveis().getMapaResumo().getTotalTroco());
     }
 
     private static void dadosEquipamento() throws ACBrECFException {
@@ -150,9 +155,9 @@ public class TesteECF {
         System.out.println(e.getVariaveis().getEquipamento().getSubModeloECF());
         System.out.println(e.getVariaveis().getEquipamento().getNumECF());
         System.out.println(e.getVariaveis().getEquipamento().getNumLoja());
-        System.out.println(e.getVariaveis().getEquipamento().numSeriaMFD());
+        System.out.println(e.getVariaveis().getEquipamento().getNumSerieMFD());
         System.out.println(e.getVariaveis().getEquipamento().getNumSerie());
-        System.out.println(e.getVariaveis().getEquipamento().numVersao());
+        System.out.println(e.getVariaveis().getEquipamento().getNumVersao());
         System.out.println(e.getVariaveis().getEquipamento().getCnpj());
         System.out.println(e.getVariaveis().getEquipamento().getIe());
         System.out.println(e.getVariaveis().getEquipamento().getIm());
@@ -169,13 +174,13 @@ public class TesteECF {
     }
 
     private static void aliquotas() throws ACBrECFException {
-        for (ACBrECF.Variaveis.Aliquota aliquota : e.getVariaveis().getAliquotas().aliquotas()) {
+        for (Aliquota aliquota : e.getVariaveis().getAliquotas().getAliquotas()) {
             System.out.println("Aliquotas: " + aliquota);
         }
-        for (ACBrECF.Variaveis.Aliquota aliquota : e.getVariaveis().getAliquotas().carregaAliquotas()) {
+        for (Aliquota aliquota : e.getVariaveis().getAliquotas().carregaAliquotas()) {
             System.out.println("carregaAliquotas: " + aliquota);
         }
-        for (ACBrECF.Variaveis.Aliquota aliquota : e.getVariaveis().getAliquotas().lerTotaisAliquota()) {
+        for (Aliquota aliquota : e.getVariaveis().getAliquotas().lerTotaisAliquota()) {
             System.out.println("lerTotaisAliquota: " + aliquota + " - Total: " + aliquota.getTotal());
         }
         System.out.println(e.getVariaveis().getAliquotas().acharAliquotaPorValor(BigDecimal.TEN));
@@ -184,13 +189,13 @@ public class TesteECF {
     }
 
     private static void formasDePagamento() throws ACBrECFException {
-        for (ACBrECF.Variaveis.FormaDePagamento formaDePagamento : e.getVariaveis().getFormasDePagamento().formasPagamento()) {
+        for (FormaDePagamento formaDePagamento : e.getVariaveis().getFormasDePagamento().getFormasPagamento()) {
             System.out.println("Formas " + formaDePagamento);
         }
-        for (ACBrECF.Variaveis.FormaDePagamento formaDePagamento : e.getVariaveis().getFormasDePagamento().carregaFormasPagamento()) {
+        for (FormaDePagamento formaDePagamento : e.getVariaveis().getFormasDePagamento().carregaFormasPagamento()) {
             System.out.println("Carrega " + formaDePagamento);
         }
-        for (ACBrECF.Variaveis.FormaDePagamento formaDePagamento : e.getVariaveis().getFormasDePagamento().lerTotaisFormaPagamento()) {
+        for (FormaDePagamento formaDePagamento : e.getVariaveis().getFormasDePagamento().getTotaisFormaPagamento()) {
             System.out.println("LerTotais " + formaDePagamento);
         }
         System.out.println(e.getVariaveis().getFormasDePagamento().achaFPGDescricao("dinheiro"));

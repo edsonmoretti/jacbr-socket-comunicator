@@ -90,7 +90,7 @@ public class Aliquotas {
                 }
                 aliq.setTotal(Numeros.parseToBig(s.substring(2)));
             } else {
-                aliq.setPercentualImposto(Numeros.parseToBig(s.substring(4)));
+                aliq.setPercentualImposto(Numeros.parseToBig(s.substring(3)));
             }
             lista.add(aliq);
         }

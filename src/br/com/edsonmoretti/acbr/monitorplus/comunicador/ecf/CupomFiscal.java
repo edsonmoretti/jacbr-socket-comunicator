@@ -470,7 +470,7 @@ public class CupomFiscal {
     }
 
     /**
-     * Subtotaliza o cupom.
+     * Subtotaliza o cupom. < 0 para desconto > 0 para acrescimo
      *
      * @param descontoAcrescimo Para Descontos, informe valores negativos, para
      * acréscimos valores positivos
@@ -481,7 +481,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void subtotalizaCupom(BigDecimal descontoAcrescimo, String mensagemRodape) throws ACBrECFException {
-
+        comandoECF("SubtotalizaCupom(" + descontoAcrescimo + "," + mensagemRodape + ")");
     }
 
     /**
@@ -494,7 +494,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void subtotalizaCupom(String mensagemRodape) throws ACBrECFException {
-        comandoECF("SubtotalizaCupom(0," + mensagemRodape + ")");
+        subtotalizaCupom(BigDecimal.ZERO, mensagemRodape);
     }
 
     /**

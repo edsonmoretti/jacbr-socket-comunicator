@@ -55,7 +55,7 @@ public class FormasDePagamento {
      * forma.
      * @throws ACBrECFException
      */
-    public List<FormaDePagamento> lerTotaisFormaPagamento() throws ACBrECFException {
+    public List<FormaDePagamento> getTotaisFormaPagamento() throws ACBrECFException {
         return formasPgto("LerTotaisFormaPagamento");
     }
 

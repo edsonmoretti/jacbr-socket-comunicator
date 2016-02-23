@@ -4,6 +4,7 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.CupomFiscal;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Dispositivos;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.NaoFiscal;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.PAF;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Parametros;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Relatorios;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Variaveis;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
@@ -27,6 +28,7 @@ public class ACBrECF {
     private Dispositivos dispositivos;
     private PAF paf;
     private NaoFiscal naoFiscal;
+    private Parametros parametros;
 
     public ACBrECF(boolean ativar) throws ACBrECFException {
         this.acbrPoucoPapelListeners = new ArrayList<>();
@@ -52,6 +54,9 @@ public class ACBrECF {
      */
     public final void ativar() throws ACBrECFException {
         comandoECF("Ativar");
+        if (this.getVariaveis().getMapaResumo().getFlags().isPoucoPapel()) {
+            disparaOnPoucoPapel();
+        }
     }
 
     /**
@@ -107,6 +112,10 @@ public class ACBrECF {
 
     public NaoFiscal getNaoFiscal() {
         return naoFiscal == null ? naoFiscal = new NaoFiscal() : naoFiscal;
+    }
+
+    public Parametros getParametros() {
+        return parametros == null ? parametros = new Parametros() : parametros;
     }
 
     public synchronized void addOnPoucoPapel(ACBrEventListener l) {

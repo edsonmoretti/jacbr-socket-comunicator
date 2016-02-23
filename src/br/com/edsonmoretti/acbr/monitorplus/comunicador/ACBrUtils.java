@@ -26,13 +26,21 @@ public class ACBrUtils {
     private static SimpleDateFormat dateFormatBRAnoRed;
     private static SimpleDateFormat dateFormatHora;
 
-    public static String MD5String(String text) throws NoSuchAlgorithmException, UnsupportedEncodingException {
-        MessageDigest md;
-        md = MessageDigest.getInstance("MD5");
-        byte[] md5hash = new byte[32];
-        md.update(text.getBytes("iso-8859-1"), 0, text.length());
-        md5hash = md.digest();
-        return convertToHex(md5hash);
+    public static String MD5(char[] text) throws ACBrException {
+        return MD5(String.valueOf(text));
+    }
+
+    public static String MD5(String text) throws ACBrException {
+        try {
+            MessageDigest md;
+            md = MessageDigest.getInstance("MD5");
+            byte[] md5hash = new byte[32];
+            md.update(text.getBytes("iso-8859-1"), 0, text.length());
+            md5hash = md.digest();
+            return convertToHex(md5hash);
+        } catch (UnsupportedEncodingException | NoSuchAlgorithmException ex) {
+            throw new ACBrException(ex.getMessage());
+        }
     }
 
     private static String convertToHex(byte[] data) {
@@ -64,11 +72,12 @@ public class ACBrUtils {
 
     /**
      * Formata um Date para Hora no formato: HH:mm:ss
+     *
      * @param d
      * @return
      */
     public static String formatHora(Date d) {
-        return (dateFormatHora == null ? dateFormatHora = new SimpleDateFormat("dd/MM/yyyy") : dateFormatHora).format(d);
+        return (dateFormatHora == null ? dateFormatHora = new SimpleDateFormat("HH:mm:ss") : dateFormatHora).format(d);
     }
 
     /**
@@ -84,11 +93,12 @@ public class ACBrUtils {
             throw new ACBrException("Erro ao tentar dar o parse na data. " + ex.getMessage());
         }
     }
+
     /**
      * Converte String para Date, String no formato: dd/MM/YY
      *
      * @param dataBRRed
-     * @exception 
+     * @exception
      * @return
      */
     public static Date strDataRedToDateBR(String dataBRRed) throws ACBrException {

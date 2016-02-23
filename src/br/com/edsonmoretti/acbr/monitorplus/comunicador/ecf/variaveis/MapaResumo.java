@@ -127,9 +127,13 @@ public class MapaResumo {
             r.setTotalTroco(Numeros.parseToBig(p.getProperty("TotalTroco")));
 
             //Outras ICMS
-            r.setTotalSubstituicaoTributaria(Numeros.parseToBig(p.getProperty("TotalSubstituicaoTributaria")));
-            r.setTotalNaoTributado(Numeros.parseToBig(p.getProperty("TotalNaoTributado")));
-            r.setTotalIsencao(Numeros.parseToBig(p.getProperty("TotalIsencao")));
+            r.setTotalSubstituicaoTributariaICMS(Numeros.parseToBig(p.getProperty("TotalSubstituicaoTributaria")));
+            r.setTotalNaoTributadoICMS(Numeros.parseToBig(p.getProperty("TotalNaoTributado")));
+            r.setTotalIsencaoICMS(Numeros.parseToBig(p.getProperty("TotalIsencao")));
+            //Outras ISSQN
+            r.setTotalSubstituicaoTributariaISSQN(Numeros.parseToBig(p.getProperty("TotalSubstituicaoTributariaISSQN")));
+            r.setTotalNaoTributadoISSQN(Numeros.parseToBig(p.getProperty("TotalNaoTributadoISSQN")));
+            r.setTotalIsencaoISSQN(Numeros.parseToBig(p.getProperty("TotalIsencaoISSQN")));
             //Nao Fiscal
             r.setTotalSangria(Numeros.parseToBig(p.getProperty("SA_Sangria")));
             r.setTotalSuprimento(Numeros.parseToBig(p.getProperty("SU_Suprimento")));
@@ -314,6 +318,20 @@ public class MapaResumo {
      */
     public BigDecimal getGrandeTotal() throws ACBrECFException {
         return Numeros.parseToBig(comandoECF("GrandeTotal"));
+    }
+
+    /**
+     * Retorna o MD5 do Valor do Grande Total .
+     *
+     * @return
+     * @throws ACBrECFException
+     */
+    public String getGrandeTotalMD5() throws ACBrECFException {
+        try {
+            return ACBrUtils.MD5(Numeros.parseToBig(comandoECF("GrandeTotal")).toString());
+        } catch (ACBrException ex) {
+            throw new ACBrECFException(ex.getMessage());
+        }
     }
 
     /**

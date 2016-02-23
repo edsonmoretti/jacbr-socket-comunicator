@@ -10,13 +10,9 @@ import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoEC
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrUtils;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -176,8 +172,8 @@ public class Equipamento {
      */
     public String getNumSerieEmMD5() throws ACBrECFException {
         try {
-            return ACBrUtils.MD5String(getNumSerie());
-        } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            return ACBrUtils.MD5(getNumSerie());
+        } catch (ACBrException ex) {
             throw new ACBrECFException(ex.getMessage());
         }
     }
@@ -188,7 +184,7 @@ public class Equipamento {
      * @return String com a serie da MFD. EX: MFDSW00000000001
      * @throws ACBrECFException
      */
-    public String numSeriaMFD() throws ACBrECFException {
+    public String getNumSerieMFD() throws ACBrECFException {
         return comandoECF("NumSerieMFD");
     }
 
@@ -198,7 +194,7 @@ public class Equipamento {
      * @return String com numero da versao. EX: 01.00.01
      * @throws ACBrECFException
      */
-    public String numVersao() throws ACBrECFException {
+    public String getNumVersao() throws ACBrECFException {
         return comandoECF("NumVersao");
     }
 

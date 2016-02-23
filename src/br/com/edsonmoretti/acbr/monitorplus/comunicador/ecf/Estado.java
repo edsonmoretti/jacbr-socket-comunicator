@@ -27,6 +27,5 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf;
  * @author Edson
  */
 public enum Estado {
-    estNaoInicializada, estDesconhecido, estLivre, estVenda, estPagamento, estRelatorio, estBloqueada, estRequerZ, estRequerX
-
+    estNaoInicializada, estDesconhecido, estLivre, estVenda, estPagamento, estRelatorio, estBloqueada, estRequerZ, estRequerX, estNaoFiscal
 }

@@ -10,6 +10,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -33,6 +34,7 @@ public class ACBr {
     private static Socket acbrSocket;
     private static final String NAMEHOST = getConfig().getNameHost();
     private static final int PORTA = getConfig().getPorta();
+    private static InetAddress hostName;
 
     private ACBr() {
     }
@@ -287,14 +289,16 @@ public class ACBr {
                 }
                 throw new ACBrException(e);
             default:
-                throw new AssertionError();
+                throw new ACBrException("Erro ao receber mensagem do monitor. Mensagem Não tratada.");
         }
         return r.trim();
     }
 
     private static String writeToReadFromSocket(String comando) throws ACBrException {
         try {
-            InetAddress hostName = InetAddress.getByName(NAMEHOST);
+            if (hostName == null) {
+                hostName = InetAddress.getByName(NAMEHOST);
+            }
             boolean primeiraInstancia = false;
             if (acbrSocket == null) {
                 primeiraInstancia = true;
@@ -349,6 +353,17 @@ public class ACBr {
         } catch (IOException ex) {
             throw new ACBrException(ex.getMessage());
         }
+    }
+
+    /**
+     * Reconecta, as variaveis serão atribuidas independente da atribuição
+     * anterior
+     */
+    public void resetarConexao() {
+        hostName = null;
+        acbrSocket = null;
+        enviaComando = null;
+        recebeComando = null;
     }
 
     private static Config getConfig() {

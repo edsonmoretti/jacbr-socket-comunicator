@@ -56,9 +56,13 @@ public class ReducaoZ {
     //Aliquotas/ICMS
     private HashMap<String, BigDecimal> totaisAliquotas;
     //Outras ICMS
-    private BigDecimal totalSubstituicaoTributaria;
-    private BigDecimal totalNaoTributado;
-    private BigDecimal totalIsencao;
+    private BigDecimal totalSubstituicaoTributariaICMS;
+    private BigDecimal totalNaoTributadoICMS;
+    private BigDecimal totalIsencaoICMS;
+    //Outras ISSQN
+    private BigDecimal totalSubstituicaoTributariaISSQN;
+    private BigDecimal totalNaoTributadoISSQN;
+    private BigDecimal totalIsencaoISSQN;
     //Nao Fiscal
     private BigDecimal totalSangria;
     private BigDecimal totalSuprimento;
@@ -183,28 +187,52 @@ public class ReducaoZ {
         this.totaisAliquotas = totaisAliquotas;
     }
 
-    public BigDecimal getTotalSubstituicaoTributaria() {
-        return totalSubstituicaoTributaria;
+    public BigDecimal getTotalSubstituicaoTributariaICMS() {
+        return totalSubstituicaoTributariaICMS;
     }
 
-    protected void setTotalSubstituicaoTributaria(BigDecimal totalSubstituicaoTributaria) {
-        this.totalSubstituicaoTributaria = totalSubstituicaoTributaria;
+    protected void setTotalSubstituicaoTributariaICMS(BigDecimal totalSubstituicaoTributariaICMS) {
+        this.totalSubstituicaoTributariaICMS = totalSubstituicaoTributariaICMS;
     }
 
-    public BigDecimal getTotalNaoTributado() {
-        return totalNaoTributado;
+    public BigDecimal getTotalNaoTributadoICMS() {
+        return totalNaoTributadoICMS;
     }
 
-    protected void setTotalNaoTributado(BigDecimal totalNaoTributado) {
-        this.totalNaoTributado = totalNaoTributado;
+    protected void setTotalNaoTributadoICMS(BigDecimal totalNaoTributadoICMS) {
+        this.totalNaoTributadoICMS = totalNaoTributadoICMS;
     }
 
-    public BigDecimal getTotalIsencao() {
-        return totalIsencao;
+    public BigDecimal getTotalIsencaoICMS() {
+        return totalIsencaoICMS;
     }
 
-    protected void setTotalIsencao(BigDecimal totalIsencao) {
-        this.totalIsencao = totalIsencao;
+    protected void setTotalIsencaoICMS(BigDecimal totalIsencaoICMS) {
+        this.totalIsencaoICMS = totalIsencaoICMS;
+    }
+
+    public BigDecimal getTotalSubstituicaoTributariaISSQN() {
+        return totalSubstituicaoTributariaISSQN;
+    }
+
+    public void setTotalSubstituicaoTributariaISSQN(BigDecimal totalSubstituicaoTributariaISSQN) {
+        this.totalSubstituicaoTributariaISSQN = totalSubstituicaoTributariaISSQN;
+    }
+
+    public BigDecimal getTotalNaoTributadoISSQN() {
+        return totalNaoTributadoISSQN;
+    }
+
+    public void setTotalNaoTributadoISSQN(BigDecimal totalNaoTributadoISSQN) {
+        this.totalNaoTributadoISSQN = totalNaoTributadoISSQN;
+    }
+
+    public BigDecimal getTotalIsencaoISSQN() {
+        return totalIsencaoISSQN;
+    }
+
+    public void setTotalIsencaoISSQN(BigDecimal totalIsencaoISSQN) {
+        this.totalIsencaoISSQN = totalIsencaoISSQN;
     }
 
     public BigDecimal getTotalSangria() {
@@ -367,8 +395,7 @@ public class ReducaoZ {
     protected void setTotalTroco(BigDecimal totalTroco) {
         this.totalTroco = totalTroco;
     }
-    
-    
+
     @Override
     public String toString() {
         String s = "{";
@@ -376,6 +403,6 @@ public class ReducaoZ {
             s += string + " = " + totaisAliquotas.get(string) + "\n";
         }
         s += "}";
-        return "ReducaoZ{" + "dataMovimento=" + dataMovimento + ",\nnumSerie=" + numSerie + ",\nnumECF=" + numECF + ",\nnumLoja=" + numLoja + ",\nnumCOOInicial=" + numCOOInicial + ",\nnumCOO=" + numCOO + ",\nnumCRZ=" + numCRZ + ",\nnumCRO=" + numCRO + ",\nvendaBruta=" + vendaBruta + ",\ngrandeTotal=" + grandeTotal + ",\ntotalDescontos=" + totalDescontos + ",\ntotalCancelamentos=" + totalCancelamentos + ",\ntotalAcrescimos=" + totalAcrescimos + ",\ntotalNaoFiscal=" + totalNaoFiscal + ",\ntotaisAliquotas=" + s + ",\ntotalSubstituicaoTributaria=" + totalSubstituicaoTributaria + ",\ntotalNaoTributado=" + totalNaoTributado + ",\ntotalIsencao=" + totalIsencao + ",\ntotalSangria=" + totalSangria + ",\ntotalSuprimento=" + totalSuprimento + '}';
+        return "ReducaoZ{" + "dataMovimento=" + dataMovimento + ",\nnumSerie=" + numSerie + ",\nnumECF=" + numECF + ",\nnumLoja=" + numLoja + ",\nnumCOOInicial=" + numCOOInicial + ",\nnumCOO=" + numCOO + ",\nnumCRZ=" + numCRZ + ",\nnumCRO=" + numCRO + ",\nvendaBruta=" + vendaBruta + ",\ngrandeTotal=" + grandeTotal + ",\ntotalDescontos=" + totalDescontos + ",\ntotalCancelamentos=" + totalCancelamentos + ",\ntotalAcrescimos=" + totalAcrescimos + ",\ntotalNaoFiscal=" + totalNaoFiscal + ",\ntotaisAliquotas=" + s + ",\ntotalSubstituicaoTributaria=" + totalSubstituicaoTributariaICMS + ",\ntotalNaoTributado=" + totalNaoTributadoICMS + ",\ntotalIsencao=" + totalIsencaoICMS + ",\ntotalSangria=" + totalSangria + ",\ntotalSuprimento=" + totalSuprimento + '}';
     }
 }

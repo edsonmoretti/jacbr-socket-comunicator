@@ -10,9 +10,6 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.vo.nfe.StatusDoServico;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException;
 import java.io.File;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *

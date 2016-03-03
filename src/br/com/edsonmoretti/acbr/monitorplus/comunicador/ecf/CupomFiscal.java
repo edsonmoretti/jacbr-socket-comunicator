@@ -55,7 +55,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void identificaConsumidor(String documento, String nome, String endereco) throws ACBrECFException {
-        comandoECF("IdentificaConsumidor (" + documento + ", " + nome + ", " + endereco + ")");
+        comandoECF("IdentificaConsumidor (" + documento + ", " + nome + ", \"" + endereco + "\")");
     }
 
     /**
@@ -81,7 +81,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void abreCupom(String documento, String nome, String endereco) throws ACBrECFException {
-        comandoECF("AbreCupom (" + documento + ", " + nome + ", " + endereco + ")");
+        comandoECF("AbreCupom (" + documento + ", " + nome + ", \"" + endereco + "\")");
     }
 
     /**
@@ -175,7 +175,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void vendeItem(String codigo, String descricao, String aliquotaICMS, String qtd, String valorUnitario) throws ACBrECFException {
-        comandoECF("VendeItem(" + codigo + ", " + descricao + ", " + aliquotaICMS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ")");
+        comandoECF("VendeItem(" + codigo + ", \"" + descricao + "\", " + aliquotaICMS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ")");
     }
 
     /**
@@ -631,7 +631,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void estornaPagamento(String codFormaPagtoEstornar, String codFormaPagtoEfetivar, String valor, String observacao) throws ACBrECFException {
-        comandoECF("EstornaPagamento(" + codFormaPagtoEstornar + "," + codFormaPagtoEfetivar + "," + valor + ", " + observacao + ")");
+        comandoECF("EstornaPagamento(" + codFormaPagtoEstornar + "," + codFormaPagtoEfetivar + "," + valor + ", \"" + observacao + "\")");
     }
 
     /**
@@ -660,7 +660,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void fechaCupom(String mensagemRodape) throws ACBrECFException {
-        comandoECF("FechaCupom(" + mensagemRodape + ")");
+        comandoECF("FechaCupom(\"" + mensagemRodape + "\")");
     }
 
     /**

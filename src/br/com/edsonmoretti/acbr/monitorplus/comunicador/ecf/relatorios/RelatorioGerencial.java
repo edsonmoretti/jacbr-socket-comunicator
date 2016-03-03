@@ -95,6 +95,6 @@ public class RelatorioGerencial {
      * @throws ACBrECFException
      */
     public void linhaRelatorioGerencial(String linha) throws ACBrECFException {
-        ACBrECF.comandoECF("LinhaRelatorioGerencial(" + linha + ")");
+        ACBrECF.comandoECF("LinhaRelatorioGerencial(\"" + linha + "\")");
     }
 }

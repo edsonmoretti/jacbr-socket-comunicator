@@ -30,6 +30,6 @@ public class Gaveta {
      * @throws ACBrECFException
      */
     public boolean isGavetaAberta() throws ACBrECFException {
-        return ACBrECF.comandoECF("AbreGaveta").equalsIgnoreCase("true");
+        return ACBrECF.comandoECF("GavetaAberta").equalsIgnoreCase("true");
     }
 }

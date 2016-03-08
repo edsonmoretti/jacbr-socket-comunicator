@@ -18,7 +18,7 @@ public class TesteETQ {
     public static void main(String[] args) {
         try {
             ACBrETQ etq = new ACBrETQ();
-            if (!etq.ativo()) {
+            if (!etq.isAtivo()) {
                 etq.ativar();
             }
             System.out.println("Modelo: " + etq.modelo() + " - " + etq.modeloStr());

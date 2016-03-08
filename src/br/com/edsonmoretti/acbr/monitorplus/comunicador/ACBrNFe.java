@@ -7,7 +7,7 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.vo.nfe.StatusDoServico;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.StatusDoServico;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException;
 import java.io.File;
 

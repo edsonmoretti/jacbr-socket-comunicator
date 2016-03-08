@@ -569,7 +569,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void efetuaPagamento(String codFormaPagto, String valor, String obs, boolean imprimeVinculado) throws ACBrECFException {
-        comandoECF("EfetuaPagamento(" + codFormaPagto + "," + valor + "," + obs + ", " + imprimeVinculado + ")");
+        comandoECF("EfetuaPagamento(" + codFormaPagto + ",\"" + valor + "\",\"" + obs + "\", " + imprimeVinculado + ")");
     }
 
     /**

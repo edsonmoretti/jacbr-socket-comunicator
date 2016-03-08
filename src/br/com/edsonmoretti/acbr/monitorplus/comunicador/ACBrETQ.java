@@ -29,7 +29,7 @@ public class ACBrETQ {
      * @return true se ok
      * @throws ACBrECFException
      */
-    public boolean ativo() throws ACBrECFException {
+    public boolean isAtivo() throws ACBrECFException {
         return comandoEtq("Ativo").toLowerCase().equals("true");
     }
 
@@ -176,7 +176,7 @@ public class ACBrETQ {
      * @throws ACBrECFException
      */
     public void imprimirTexto(int orientacao, int fonte, int multiplicadorH, int multiplicadorV, int vertical, int horizontal, String texto, int subFonte) throws ACBrECFException {
-        comandoEtq("ImprimirTexto(" + orientacao + "," + fonte + "," + multiplicadorH + "," + multiplicadorV + "," + vertical + "," + horizontal + "," + texto + "," + subFonte + ")");
+        comandoEtq("ImprimirTexto(" + orientacao + "," + fonte + "," + multiplicadorH + "," + multiplicadorV + "," + vertical + "," + horizontal + ",\"" + texto + "\"," + subFonte + ")");
     }
 
     /**
@@ -213,7 +213,7 @@ public class ACBrETQ {
      * @return Ex: False
      * @throws ACBrECFException
      */
-    public boolean limparMemoria() throws ACBrECFException {
+    public boolean isLimparMemoria() throws ACBrECFException {
         return comandoEtq("LimparMemoria").toLowerCase().equals("true");
     }
 

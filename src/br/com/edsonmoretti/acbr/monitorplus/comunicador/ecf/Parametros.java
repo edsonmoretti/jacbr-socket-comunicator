@@ -196,8 +196,8 @@ public class Parametros {
      * @return
      * @throws ACBrECFException
      */
-    public String getLinhasEntreCupons() throws ACBrECFException {
-        return ACBrECF.comandoECF("LinhasEntreCupons");
+    public Integer getLinhasEntreCupons() throws ACBrECFException {
+        return Integer.parseInt(ACBrECF.comandoECF("LinhasEntreCupons"));
     }
 
     /**

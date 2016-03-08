@@ -6,7 +6,7 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.vo.Endereco;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ibge.Endereco;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;

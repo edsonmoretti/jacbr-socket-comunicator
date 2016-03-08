@@ -82,7 +82,7 @@ public class Relatorios {
         pulaLinhas(1);
     }
 
-    private void pulaLinhas(int qtdLinhas) throws ACBrECFException {
+    public void pulaLinhas(int qtdLinhas) throws ACBrECFException {
         comandoECF("PulaLinhas(" + qtdLinhas + ")");
     }
 
@@ -93,5 +93,25 @@ public class Relatorios {
      */
     public void fechaRelatorio() throws ACBrECFException {
         comandoECF("FechaRelatorio");
+    }
+
+    /**
+     * Realiza o corte parcial do papel.
+     *
+     * @throws ACBrECFException
+     */
+    public void cortaPapel() throws ACBrECFException {
+        comandoECF("CortaPapel");
+    }
+
+    /**
+     * Realiza o corte parcial do papel.
+     *
+     * @param parcial Se informado como True efetua corte parcial do papel no
+     * ECF para equipamentos com guilhotina.
+     * @throws ACBrECFException
+     */
+    public void cortaPapel(boolean parcial) throws ACBrECFException {
+        comandoECF("CortaPapel(" + parcial + ")");
     }
 }

@@ -6,6 +6,7 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.NaoFiscal;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.PAF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Parametros;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Relatorios;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Utilitarios;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Variaveis;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
@@ -29,6 +30,8 @@ public class ACBrECF {
     private PAF paf;
     private NaoFiscal naoFiscal;
     private Parametros parametros;
+    private Utilitarios utilitarios;
+    private static final String ECF = "ECF.";
 
     public ACBrECF(boolean ativar) throws ACBrECFException {
         this.acbrPoucoPapelListeners = new ArrayList<>();
@@ -84,7 +87,7 @@ public class ACBrECF {
 
     public static String comandoECF(String s) throws ACBrECFException {
         try {
-            return ACBr.getInstance().comandoAcbr("ECF." + s);
+            return ACBr.getInstance().comandoAcbr(ECF + s);
         } catch (ACBrException ex) {
             throw new ACBrECFException(ex.getMessage());
         }
@@ -116,6 +119,10 @@ public class ACBrECF {
 
     public Parametros getParametros() {
         return parametros == null ? parametros = new Parametros() : parametros;
+    }
+
+    public Utilitarios getUtilitarios() {
+        return utilitarios == null ? utilitarios = new Utilitarios() : utilitarios;
     }
 
     public synchronized void addOnPoucoPapel(ACBrEventListener l) {

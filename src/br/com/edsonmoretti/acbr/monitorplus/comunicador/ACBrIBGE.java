@@ -2,7 +2,7 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.vo.Ibge;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ibge.Ibge;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.util.ArrayList;

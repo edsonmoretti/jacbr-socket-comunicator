@@ -228,6 +228,6 @@ public class ACBrETQ {
      * @throws ACBrECFException
      */
     public void setLimparMemoria(boolean b) throws ACBrECFException {
-        comandoEtq("SetLimparMoemoria(" + b + ")");
+        comandoEtq("SetLimparMemoria(" + b + ")");
     }
 }

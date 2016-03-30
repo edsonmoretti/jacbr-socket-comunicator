@@ -47,6 +47,26 @@ public class CupomVinculadoOuCCD {
      * @exception ACBrECFException
      */
     public void abreCupomVinculado(String COO, String codFormaPagto, BigDecimal valor) throws ACBrECFException {
+        abreCupomVinculado(COO, codFormaPagto, valor.toString());
+    }
+
+    /**
+     * Emite o Cupom vinculado conforme os dados que foram informados nos
+     * parâmetros. A emissão é automaticamente encerrada 2 minutos após abertura
+     * (Tempo máximo de emissão).<br>
+     **<b>Nota:</b> Para imprimir um Cupom Vinculado você deve ter informaçoes
+     * dos Pagamentos Efetuados no último Cupom Fiscal.
+     *
+     * @param COO Número de COO do cupom anterior. (Necessário documento
+     * anterior seja cupom fiscal)
+     *
+     * @param codFormaPagto Código da forma de pagamento utilizada no cupom
+     * anterior.(Permite Vinculado)
+     *
+     * @param valor Valor a vincular no cupom anterior.
+     * @exception ACBrECFException
+     */
+    public void abreCupomVinculado(String COO, String codFormaPagto, String valor) throws ACBrECFException {
         abreCupomVinculado(COO, codFormaPagto, "", valor);
     }
 
@@ -78,6 +98,48 @@ public class CupomVinculadoOuCCD {
         }
     }
 
+    /**
+     * Emite o Cupom vinculado conforme os dados que foram informados nos
+     * parâmetros. A emissão é automaticamente encerrada 2 minutos após abertura
+     * (Tempo máximo de emissão).<br>
+     * <b>Nota:</b> Para imprimir um Cupom Vinculado você deve ter informaçoes
+     * dos Pagamentos Efetuados no último Cupom Fiscal.
+     *
+     * @param COO Número de COO do cupom anterior. (Necessário documento
+     * anterior seja cupom fiscal)
+     *
+     * @param codFormaPagto Código da forma de pagamento utilizada no cupom
+     * anterior.(Permite Vinculado)
+     *
+     * @param codComprovanteNaoFiscal Se necessário, informe o Código do
+     * Comprovante Não Fiscal.
+     *
+     * @param valor Valor a vincular no cupom anterior.
+     * @exception ACBrECFException
+     *
+     */
+    public void abreCupomVinculado(String COO, String codFormaPagto, String codComprovanteNaoFiscal, String valor) throws ACBrECFException {
+        if (codComprovanteNaoFiscal.isEmpty()) {
+            comandoECF("AbreCupomVinculado(" + COO + ",\"" + codFormaPagto + "\"," + valor + ")");
+        } else {
+            comandoECF("AbreCupomVinculado(" + COO + "," + codFormaPagto + "," + codComprovanteNaoFiscal + "," + valor + ")");
+        }
+    }
+
+    /**
+     * Semelhante ao comando ECF.AbreCupomVinculado. A diferença é que este
+     * comando realiza a impressão do cupom vinculado realizando o fechamento
+     * sem utilizar o tempo de espera do ECF.<br>
+     * Nota: Não permite imprimir linhas no cupom vinculado.
+     *
+     * @param COO
+     * @param codFormaPagto
+     * @param valor
+     * @throws ACBrECFException
+     */
+    public void cupomVinculado(String COO, String codFormaPagto, String valor) throws ACBrECFException {
+        comandoECF("CupomVinculado( " + COO + ", " + codFormaPagto + ", " + valor + " )");
+    }
     /**
      * Semelhante ao comando ECF.AbreCupomVinculado. A diferença é que este
      * comando realiza a impressão do cupom vinculado realizando o fechamento
@@ -121,7 +183,7 @@ public class CupomVinculadoOuCCD {
      * @throws ACBrECFException
      */
     public void linhaCupomVinculado(String linha) throws ACBrECFException {
-        comandoECF("LinhaCupomVinculado");
+        comandoECF("LinhaCupomVinculado(\"" + linha + "\")");
     }
 
     /**

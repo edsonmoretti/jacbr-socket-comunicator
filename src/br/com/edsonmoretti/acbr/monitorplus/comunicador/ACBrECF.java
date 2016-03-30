@@ -14,6 +14,7 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.listener.ACBrEvent;
 import java.util.ArrayList;
 import java.util.Collection;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.listener.ACBrEventListener;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -73,6 +74,8 @@ public class ACBrECF {
 
     /**
      * Realiza o corte parcial do papel no ECF para equipamentos com guilhotina.
+     *
+     * @throws ACBrECFException
      */
     public void cortaPapelParcial() throws ACBrECFException {
         comandoECF("CortaPapel(true)");
@@ -80,17 +83,68 @@ public class ACBrECF {
 
     /**
      * Realiza o corte do papel no ECF para equipamentos com guilhotina.
+     *
+     * @throws ACBrECFException
      */
     public void cortaPapel() throws ACBrECFException {
         comandoECF("CortaPapel");
     }
+    private static int numTentativas = 1;
 
     public static String comandoECF(String s) throws ACBrECFException {
         try {
-            return ACBr.getInstance().comandoAcbr(ECF + s);
+            String retorno = (ACBr.getInstance().comandoAcbr(ECF + s));
+            numTentativas = 1;
+            return retorno;
         } catch (ACBrException ex) {
+            if (ex.getMessage().contains("FIM DE PAPEL")) {//Essa mensagem sá acontece uma vez, após isso ao continuar ele retorna fora de linha, entrando no IF a baixo.
+                Object opcoes[] = {"Tentar novamente", "Cancelar"}; //0 1 2
+                int i = JOptionPane.showOptionDialog(
+                        null, "<html><b>FIM DE PAPEL</b> na Impressora Fiscal, troque a bobina.</html>", "",
+                        0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+                switch (i) {
+                    case 0:
+                        return comandoECF(s);
+                    case 1:
+                        break;
+                }
+            }
+            if (ex.getMessage().endsWith("não está em linha") && comandoECF("Ativo").equalsIgnoreCase("true")) { //Se o retorno foi não está em linha, mas o ECF está ativado no monitor...
+                Object opcoes[] = {"Tentar novamente", "Cancelar"}; //0 1 2
+                int i = JOptionPane.showOptionDialog(
+                        null, "Impressora Fiscal Não está em Linha.", "",
+                        0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+                switch (i) {
+                    case 0:
+                        return comandoECF(s);
+                    case 1:
+                        break;
+                }
+            }
+            if (ex.getMessage().contains("Connection refused: connect") || ex.getMessage().contains("Connection reset")) {
+                if (numTentativas <= 3) {
+                    try {
+                        for (int i = 5; i > 0; i--) {
+                            System.err.println((mensagem = traduzMensagem(ex.getMessage())) + "\nVerifique se o ACBrMonitorPlus Está ativo.\nTentando novamente em " + i + " segundos. (Tentativa " + numTentativas + ")");
+                            Thread.sleep(1000);
+                        }
+                        System.out.println("Resetando conexão e tentando novamente...");
+                        ACBr.getInstance().resetarConexao();
+                    } catch (InterruptedException ex1) {
+                        throw new ACBrECFException(ex1.getMessage());
+                    }
+                    numTentativas++;
+                    return comandoECF(s);
+                }
+            }
             throw new ACBrECFException(ex.getMessage());
         }
+    }
+
+    private static String mensagem = "";
+
+    public synchronized String getMensagem() {
+        return traduzMensagem(mensagem);
     }
 
     public Variaveis getVariaveis() {
@@ -143,6 +197,17 @@ public class ACBrECF {
         ACBrEvent evento = new ACBrEvent(this);
         for (ACBrEventListener t : tl) {
             t.msgPoucoPapel(evento);
+        }
+    }
+
+    private static String traduzMensagem(String mensagem) {
+        switch (mensagem) {
+            case "Connection refused: connect":
+                return "Conexão rejeitada: Conectar";
+            case "Connection reset":
+                return "Conexão resetada.";
+            default:
+                return mensagem;
         }
     }
 

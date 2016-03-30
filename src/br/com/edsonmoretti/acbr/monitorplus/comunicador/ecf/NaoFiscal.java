@@ -181,9 +181,9 @@ public class NaoFiscal {
      * Subtotaliza o comprovane não fiscal.<br>
      * Exemplos:<br>
      * ECF.SubtotalizaNaoFiscal<br>
-     * ECF.SubtotalizaNaoFiscal( -1.45 ) -> Desconto de R$ 1,45<br>
-     * ECF.SubtotalizaNaoFiscal( 5 ) -> Acréscimo de R$ 5,00<br>
-     * ECF.SubtotalizaNaoFiscal( 0, "Mensagem Linha 1|Mensagem Linha 2") -> Sem
+     * ECF.SubtotalizaNaoFiscal( -1.45 ) para Desconto de R$ 1,45<br>
+     * ECF.SubtotalizaNaoFiscal( 5 ) para Acréscimo de R$ 5,00<br>
+     * ECF.SubtotalizaNaoFiscal( 0, "Mensagem Linha 1|Mensagem Linha 2") para Sem
      * desconto / acréscimo mas informando 2 linhas de mensagem para serem
      * impressas no rodapé.
      * <br>

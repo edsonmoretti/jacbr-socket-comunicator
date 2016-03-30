@@ -68,7 +68,7 @@ public class ACBrETQ {
      * @return EX: etqPpla
      * @throws ACBrECFException
      */
-    public String modelo() throws ACBrECFException {
+    public String getModelo() throws ACBrECFException {
         return comandoEtq("Modelo");
     }
 
@@ -77,14 +77,14 @@ public class ACBrETQ {
      *
      * @return EX: "COM4";
      */
-    public String porta() throws ACBrECFException {
+    public String getPorta() throws ACBrECFException {
         return comandoEtq("Porta");
     }
 
     /**
-     * Altera a porta de comunicação com a impressora de etiqueta.
+     * Altera a getPorta de comunicação com a impressora de etiqueta.
      *
-     * @param porta Valor da porta, ex: COM3
+     * @param porta Valor da getPorta, ex: COM3
      */
     public void setPorta(String porta) throws ACBrECFException {
         comandoEtq("SetAvanco(" + porta + ")");
@@ -95,14 +95,14 @@ public class ACBrETQ {
      *
      * @return EX: "10";
      */
-    public int temperatura() throws ACBrECFException {
+    public int getTemperatura() throws ACBrECFException {
         return Integer.parseInt(comandoEtq("Temperatura"));
     }
 
     /**
-     * Altera a temperatura da Impressora.
+     * Altera a getTemperatura da Impressora.
      *
-     * @param valor Valor da temperatura. ex: 15
+     * @param valor Valor da getTemperatura. ex: 15
      */
     public void setTemperatura(int valor) throws ACBrECFException {
         comandoEtq("SetTemperatura(" + valor + ")");
@@ -113,7 +113,7 @@ public class ACBrETQ {
      *
      * @return EX: "0";
      */
-    public int avanco() throws ACBrECFException {
+    public int getAvanco() throws ACBrECFException {
         return Integer.parseInt(comandoEtq("Avanco"));
     }
 
@@ -131,10 +131,10 @@ public class ACBrETQ {
      * <b>Nota:</b> É necessário chamar o comando ETQ.Imprimir para realizar a
      * impressão.<br>
      * <b>Tabela de Orientação:</b><br>
-     * 0 -> Normal<br>
-     * 1 -> 270º<br>
-     * 2 -> 180º<br>
-     * 3 -> 90º<br>
+     * 0 para Normal<br>
+     * 1 para 270º<br>
+     * 2 para 180º<br>
+     * 3 para 90º<br>
      *
      * @param orientacao Tipo de orientação do texto. Informar conforme tabela
      * de orientação.
@@ -157,10 +157,10 @@ public class ACBrETQ {
      * <b>Nota:</b> É necessário chamar o comando ETQ.Imprimir para realizar a
      * impressão.<br>
      * <b>Tabela de Orientação:</b><br>
-     * 0 -> Normal<br>
-     * 1 -> 270º<br>
-     * 2 -> 180º<br>
-     * 3 -> 90º<br>
+     * 0 para Normal<br>
+     * 1 para 270º<br>
+     * 2 para 180º<br>
+     * 3 para 90º<br>
      *
      * @param orientacao Tipo de orientação do texto. Informar conforme tabela
      * de orientação.

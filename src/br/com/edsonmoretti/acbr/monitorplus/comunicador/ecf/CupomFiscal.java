@@ -175,7 +175,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void vendeItem(String codigo, String descricao, String aliquotaICMS, String qtd, String valorUnitario) throws ACBrECFException {
-        comandoECF("VendeItem(" + codigo + ", \"" + descricao + "\", " + aliquotaICMS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ")");
+        comandoECF("VendeItem(" + codigo + ", '" + descricao + "', " + aliquotaICMS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ")");
     }
 
     /**
@@ -470,7 +470,7 @@ public class CupomFiscal {
     }
 
     /**
-     * Subtotaliza o cupom. < 0 para desconto > 0 para acrescimo
+     * Subtotaliza o cupom. 'Menor que 0' para desconto 'Maior que 0' para acrescimo
      *
      * @param descontoAcrescimo Para Descontos, informe valores negativos, para
      * acréscimos valores positivos

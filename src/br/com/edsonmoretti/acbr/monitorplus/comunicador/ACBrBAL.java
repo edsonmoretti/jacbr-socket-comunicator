@@ -204,8 +204,7 @@ public class ACBrBAL {
      * Retorna “True” se a balança esta sendo monitorada
      *
      * @return
-     * @throws
-     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException
+     * @throws ACBrBALException
      */
     public boolean isMonitorarBalanca() throws ACBrBALException {
         try {

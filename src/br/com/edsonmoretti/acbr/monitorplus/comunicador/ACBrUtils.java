@@ -98,7 +98,7 @@ public class ACBrUtils {
      * Converte String para Date, String no formato: dd/MM/YY
      *
      * @param dataBRRed
-     * @exception
+     * @throws ACBrException
      * @return
      */
     public static Date strDataRedToDateBR(String dataBRRed) throws ACBrException {

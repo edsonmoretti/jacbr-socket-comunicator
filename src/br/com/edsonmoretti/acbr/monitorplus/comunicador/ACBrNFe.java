@@ -6,10 +6,13 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.StatusDoServico;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeInvalidaException;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.StatusDoServico;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,7 +20,18 @@ import java.io.File;
  */
 public class ACBrNFe {
 
-    private ACBrNFe() {
+    private static String NFE = "NFE.";
+
+    public ACBrNFe() {
+    }
+
+    public static String comandoNFe(String s) throws ACBrNFeException {
+        try {
+            String retorno = (ACBr.getInstance().comandoAcbr(NFE + s));
+            return retorno;
+        } catch (ACBrException ex) {
+            throw new ACBrNFeException(ex);
+        }
     }
 
     /**
@@ -28,59 +42,67 @@ public class ACBrNFe {
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException
      *
      */
-    public StatusDoServico statusServico() throws ACBrNFeException {
+    public StatusDoServico getStatusServico() throws ACBrNFeException {
+        String re = comandoNFe("StatusServico");
+        StatusDoServico sds = new StatusDoServico();
+        sds.setCStat(TextUtils.lerTagIni("CStat", re));
+        sds.setCUF(TextUtils.lerTagIni("CUF", re));
+        sds.setDhRecbto(TextUtils.lerTagIni("DhRecbto", re));
+        sds.setTMed(TextUtils.lerTagIni("TMed", re));
+        sds.setTpAmb(TextUtils.lerTagIni("TpAmb", re));
+        sds.setVerAplic(TextUtils.lerTagIni("VerAplic", re));
+        sds.setVersao(TextUtils.lerTagIni("Versao", re));
+        sds.setXMotivo(TextUtils.lerTagIni("XMotivo", re));
+        return sds;
+    }
+
+    /**
+     * Valida arquivo da NFe. Arquivo deve estar assinado.
+     *
+     * @param arquivo Caminho do arquivo a ser validado.
+     * @throws ACBrNFeInvalidaException
+     */
+    public void validarNFe(String arquivo) throws ACBrNFeInvalidaException {
         try {
-            String re = ACBr.getInstance().comandoAcbr("NFE.StatusServico");
-            StatusDoServico sds = new StatusDoServico();
-            sds.setCStat(TextUtils.lerTagIni("CStat", re));
-            sds.setCUF(TextUtils.lerTagIni("CUF", re));
-            sds.setDhRecbto(TextUtils.lerTagIni("DhRecbto", re));
-            sds.setTMed(TextUtils.lerTagIni("TMed", re));
-            sds.setTpAmb(TextUtils.lerTagIni("TpAmb", re));
-            sds.setVerAplic(TextUtils.lerTagIni("VerAplic", re));
-            sds.setVersao(TextUtils.lerTagIni("Versao", re));
-            sds.setXMotivo(TextUtils.lerTagIni("XMotivo", re));
-            return sds;
-        } catch (ACBrException ex) {
-            throw new ACBrNFeException(ex.getMessage());
+            comandoNFe("ValidarNFe(\"" + arquivo + "\")");
+        } catch (ACBrNFeException ex) {
+            throw new ACBrNFeInvalidaException(ex);
         }
     }
 
     /**
      * Valida arquivo da NFe. Arquivo deve estar assinado.
      *
-     * @param f Caminho do arquivo a ser validado
-     * @return
-     * @throws
-     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException
+     * @param arquivo Caminho do arquivo a ser validado.
+     * @throws ACBrNFeInvalidaException
      */
-    public String validarNFe(File f) throws ACBrNFeException {
+    public void validarNFe(File arquivo) throws ACBrNFeInvalidaException {
         try {
-            return ACBr.getInstance().comandoAcbr("NFE.ValidarNFe(" + f + ")");
-        } catch (Exception ex) {
-            throw new ACBrNFeException(ex.getMessage());
+            comandoNFe("ValidarNFe(\"" + arquivo + "\")");
+        } catch (ACBrNFeException ex) {
+            throw new ACBrNFeInvalidaException(ex);
         }
     }
 
-    //asdfsadf botar o objeto retorno
-    public String criarNFe(String cIniNFe, boolean bRetornaXML) throws ACBrNFeException {
-        try {
-            return ACBr.getInstance().comandoAcbr("NFE.CriarNFe(" + cIniNFe + "," + bRetornaXML + ")");
-        } catch (Exception ex) {
-            throw new ACBrNFeException(ex.getMessage());
-        }
+    /**
+     * Assina uma NFe. Arquivo assinado será salvo na pasta configurada na aba
+     * WebService na opção "Salvar Arquivos de Envio e Resposta".
+     *
+     * @param arquivo Caminho do arquivo a ser assinado.
+     * @throws ACBrNFeException
+     */
+    public void assinarNFe(String arquivo) throws ACBrNFeException {
+        comandoNFe("AssinarNFe(" + arquivo + ")");
     }
 
-    public String downloadNFe(String cnpj, String chave) throws ACBrException {
-        return ACBr.getInstance().comandoAcbr("NFe.DownloadNFe(" + cnpj + "," + chave + ")");
-    }
-
-    public static ACBrNFe getInstance() {
-        return ACBrNFeHolder.INSTANCE;
-    }
-
-    private static class ACBrNFeHolder {
-
-        private static final ACBrNFe INSTANCE = new ACBrNFe();
+    /**
+     * Assina uma NFe. Arquivo assinado será salvo na pasta configurada na aba
+     * WebService na opção "Salvar Arquivos de Envio e Resposta".
+     *
+     * @param arquivo Caminho do arquivo a ser assinado.
+     * @throws ACBrNFeException
+     */
+    public void assinarNFe(File arquivo) throws ACBrNFeException {
+        comandoNFe("AssinarNFe(" + arquivo + ")");
     }
 }

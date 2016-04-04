@@ -9,13 +9,13 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions;
  *
  * @author Edson Moretti - www.edsonmoretti.com.br
  */
-public class ACBrNFeException extends Exception {
+public class ACBrNFeInvalidaException extends Exception {
 
     /**
      * Creates a new instance of <code>ACBrNFeException</code> without detail
      * message.
      */
-    public ACBrNFeException() {
+    public ACBrNFeInvalidaException() {
     }
 
     /**
@@ -24,11 +24,15 @@ public class ACBrNFeException extends Exception {
      *
      * @param msg the detail message.
      */
-    public ACBrNFeException(String msg) {
+    public ACBrNFeInvalidaException(String msg) {
         super(msg);
     }
 
-    public ACBrNFeException(ACBrException ex) {
+    public ACBrNFeInvalidaException(ACBrException ex) {
+        super(ex.getMessage());
+    }
+
+    public ACBrNFeInvalidaException(ACBrNFeException ex) {
         super(ex.getMessage());
     }
 }

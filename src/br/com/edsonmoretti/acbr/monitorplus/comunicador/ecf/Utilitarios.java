@@ -44,7 +44,7 @@ public class Utilitarios {
      * ECF.ProgramaAliquota( 2.46 ,"T") – Programa a Alíquota de 2,46% do
      * ICMS<br>
      * ECF.ProgramaAliquota( 2.5, "S" ) – Programa a Alíquota de 2,5% do ISS<br>
-     * <b>Notas:<b><br>
+     * <b>Notas:</b><br>
      * Na maioria dos ECFs este comando somente é aceito quando o Movimento não
      * foi iniciado, ou seja, após uma Redução Z e antes de uma Venda ou Leitura
      * X<br>
@@ -72,7 +72,7 @@ public class Utilitarios {
      * ECF.ProgramaAliquota( 2.46 ,"T") – Programa a Alíquota de 2,46% do
      * ICMS<br>
      * ECF.ProgramaAliquota( 2.5, "S" ) – Programa a Alíquota de 2,5% do ISS<br>
-     * <b>Notas:<b><br>
+     * <b>Notas:</b><br>
      * Na maioria dos ECFs este comando somente é aceito quando o Movimento não
      * foi iniciado, ou seja, após uma Redução Z e antes de uma Venda ou Leitura
      * X<br>
@@ -95,7 +95,7 @@ public class Utilitarios {
      * ECF.ProgramaAliquota( 2.46 ,"T") – Programa a Alíquota de 2,46% do
      * ICMS<br>
      * ECF.ProgramaAliquota( 2.5, "S" ) – Programa a Alíquota de 2,5% do ISS<br>
-     * <b>Notas:<b><br>
+     * <b>Notas:</b><br>
      * Na maioria dos ECFs este comando somente é aceito quando o Movimento não
      * foi iniciado, ou seja, após uma Redução Z e antes de uma Venda ou Leitura
      * X<br>
@@ -107,9 +107,6 @@ public class Utilitarios {
      * 2.46
      * @param tipoAliquota Tipo da Alíquota , Use "T" para ICMS ou "S" para ISS.
      * Pode ser omitido, nesse caso assume "T"
-     * @param posicaoAliquota Posição de cadastro da Alíquota. Não é aceito em
-     * todos os modelos de ECFs, e em alguns outros apenas é aceito em modo de
-     * Intervenção. Normalmente esse parâmetro deve ser omitido
      * @throws ACBrECFException
      */
     public void programaAliquota(int valorAliquota, String tipoAliquota) throws ACBrECFException {
@@ -143,9 +140,6 @@ public class Utilitarios {
      * @param descricao Descrição da forma de pagamento a programar.
      * @param permitevinculado Permite vinculado "true" ou "false". Pode ser
      * omitido, nesse caso assume "True"
-     * @param posicao Posição de cadastro da Forma de Pagamento. Não é aceito em
-     * todos os modelos de ECFs, e em alguns outros apenas é aceito em modo de
-     * Intervenção. Normalmente esse parâmetro deve ser omitido
      * @throws ACBrECFException
      */
     public void programaFormaPagamento(String descricao, boolean permitevinculado) throws ACBrECFException {

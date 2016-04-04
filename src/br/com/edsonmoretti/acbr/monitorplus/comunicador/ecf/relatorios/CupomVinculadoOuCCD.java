@@ -140,6 +140,7 @@ public class CupomVinculadoOuCCD {
     public void cupomVinculado(String COO, String codFormaPagto, String valor) throws ACBrECFException {
         comandoECF("CupomVinculado( " + COO + ", " + codFormaPagto + ", " + valor + " )");
     }
+
     /**
      * Semelhante ao comando ECF.AbreCupomVinculado. A diferença é que este
      * comando realiza a impressão do cupom vinculado realizando o fechamento

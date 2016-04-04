@@ -11,9 +11,9 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Variaveis;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.listener.ACBrEvent;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.listener.ACBrEventListener;
 import java.util.ArrayList;
 import java.util.Collection;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.listener.ACBrEventListener;
 import javax.swing.JOptionPane;
 
 /**

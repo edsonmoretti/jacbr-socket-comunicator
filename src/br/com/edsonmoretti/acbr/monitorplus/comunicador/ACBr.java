@@ -419,17 +419,4 @@ public class ACBr {
         }
 
     }
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite a chave");
-        String chave = sc.nextLine();
-        System.out.println("CNPJ");
-        String cnpj = sc.nextLine();
-        try {
-            System.out.println(ACBrNFe.getInstance().downloadNFe(cnpj, chave));
-        } catch (ACBrException ex) {
-            Logger.getLogger(ACBr.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 }

@@ -11,6 +11,7 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeInvali
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivo;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoCancelamento;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoConsulta;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoInutilizar;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoStatusDoServico;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
 import java.io.File;
@@ -35,16 +36,6 @@ public class ACBrNFe {
         }
     }
 
-    private void setXMotivo(String s, XMotivo x) {
-        x.setCStat(TextUtils.lerTagIni("CStat", s));
-        x.setCUF(TextUtils.lerTagIni("CUF", s));
-        x.setDhRecbto(TextUtils.lerTagIni("DhRecbto", s));
-        x.setTpAmb(TextUtils.lerTagIni("TpAmb", s));
-        x.setVerAplic(TextUtils.lerTagIni("VerAplic", s));
-        x.setVersao(TextUtils.lerTagIni("Versao", s));
-        x.setXMotivo(TextUtils.lerTagIni("XMotivo", s));
-    }
-
     /**
      * Verifica o Status do Serviço dos WebServices da Receita
      *
@@ -55,8 +46,8 @@ public class ACBrNFe {
      */
     public XMotivoStatusDoServico getStatusServico() throws ACBrNFeException {
         String re = comandoNFe("StatusServico");
-        XMotivoStatusDoServico sds = new XMotivoStatusDoServico();
-        setXMotivo(re, sds);
+        XMotivoStatusDoServico sds = new XMotivoStatusDoServico(re);
+
         sds.setTMed(TextUtils.lerTagIni("TMed", re));
         return sds;
     }
@@ -1124,8 +1115,7 @@ public class ACBrNFe {
      */
     public XMotivoConsulta consultarNFe(String arquivo) throws ACBrNFeException {
         String re = comandoNFe("ConsultarNFe(" + arquivo + ")");
-        XMotivoConsulta consulta = new XMotivoConsulta();
-        setXMotivo(re, consulta);
+        XMotivoConsulta consulta = new XMotivoConsulta(re);
         consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
         consulta.setNProt(TextUtils.lerTagIni("NProt", re));
         consulta.setDigVal(TextUtils.lerTagIni("DigVal", re));
@@ -1179,5 +1169,25 @@ public class ACBrNFe {
 
     public void consultaCadastro(String UF, String documento) throws ACBrNFeException {
         System.out.println(comandoNFe("ConsultaCadastro(" + UF + "," + documento + ")"));
+    }
+
+    /**
+     * Inutiliza uma faixa de numeração de NFe.
+     *
+     * @param CNPJ CNPJ do contribuinte
+     * @param justificativa Justificativa para inutilização
+     * @param ano Ano que foi inutilizado a numeração
+     * @param modelo Modelo da Nota Fiscal
+     * @param serie Série da Nota Fiscal
+     * @param numInicial Número Inicial a ser inutilizado
+     * @param numFinal Número Final a ser inutilizado
+     * @return
+     * @throws ACBrNFeException
+     */
+    public XMotivoInutilizar inutilizarNFe(String CNPJ, String justificativa, String ano, String modelo, String serie, String numInicial, String numFinal) throws ACBrNFeException {
+        String re = comandoNFe("InutilizarNFe(" + CNPJ + ",\"" + justificativa + "\"," + ano + "," + modelo + "," + serie + "," + numInicial + "," + numFinal + ")");
+        XMotivoInutilizar c = new XMotivoInutilizar(re);
+        c.setNProt(TextUtils.lerTagIni("NProt", re));
+        return c;
     }
 }

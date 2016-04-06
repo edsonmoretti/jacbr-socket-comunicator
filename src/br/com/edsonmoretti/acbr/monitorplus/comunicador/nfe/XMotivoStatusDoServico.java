@@ -13,6 +13,14 @@ public class XMotivoStatusDoServico extends XMotivo {
 
     private String TMed;
 
+    public XMotivoStatusDoServico(String re) {
+        super(re);
+    }
+
+    public XMotivoStatusDoServico(XMotivo re) {
+        super(re);
+    }
+
     public String getTMed() {
         return TMed;
     }

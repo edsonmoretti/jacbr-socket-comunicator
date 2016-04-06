@@ -12,7 +12,7 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.utils;
 public class TextUtils {
 
     public static String lerTagIni(String ler, String deOnde) {
-        ler = ler.toLowerCase() + "=";
+        ler = ler/*.toLowerCase()*/ + "=";
         deOnde = deOnde + "\n";
         int index = deOnde.indexOf(ler);
         String temp = deOnde.substring(index + ler.length());
@@ -24,5 +24,13 @@ public class TextUtils {
             }
         }
         return retorno.trim().replace("\r", "");
+    }
+
+    public static String lpadZero(int tamanho, int numero) {
+        return String.format("%0" + tamanho + "d", numero);
+    }
+    //USE APENAS PARA TESTES
+    public static void main(String[] args) {
+        System.out.println(lpadZero(3, 1));
     }
 }

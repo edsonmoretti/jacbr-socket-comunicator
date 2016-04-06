@@ -5,6 +5,8 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe;
 
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
+
 /**
  *
  * @author Edson
@@ -18,7 +20,14 @@ public class XMotivo {
     private String XMotivo;
     private String CUF;
     private String DhRecbto;
-    
+
+    public XMotivo(String re) {
+        setCamposXMotivo(re);
+    }
+
+    public XMotivo(XMotivo re) {
+        setCamposXMotivo(re);
+    }
 
     public String getVersao() {
         return Versao;
@@ -74,6 +83,26 @@ public class XMotivo {
 
     public void setDhRecbto(String DhRecbto) {
         this.DhRecbto = DhRecbto;
+    }
+
+    private void setCamposXMotivo(XMotivo xMotivo) {
+        this.setCStat(xMotivo.getCStat());
+        this.setCUF(xMotivo.getCUF());
+        this.setDhRecbto(xMotivo.getDhRecbto());
+        this.setTpAmb(xMotivo.getTpAmb());
+        this.setVerAplic(xMotivo.getVerAplic());
+        this.setVersao(xMotivo.getVersao());
+        this.setXMotivo(xMotivo.getXMotivo());
+    }
+
+    private void setCamposXMotivo(String s) {
+        this.setCStat(TextUtils.lerTagIni("CStat", s));
+        this.setCUF(TextUtils.lerTagIni("CUF", s));
+        this.setDhRecbto(TextUtils.lerTagIni("DhRecbto", s));
+        this.setTpAmb(TextUtils.lerTagIni("TpAmb", s));
+        this.setVerAplic(TextUtils.lerTagIni("VerAplic", s));
+        this.setVersao(TextUtils.lerTagIni("Versao", s));
+        this.setXMotivo(TextUtils.lerTagIni("XMotivo", s));
     }
 
     @Override

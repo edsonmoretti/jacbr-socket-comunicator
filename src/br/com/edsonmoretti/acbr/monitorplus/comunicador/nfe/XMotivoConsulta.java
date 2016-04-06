@@ -15,6 +15,14 @@ public class XMotivoConsulta extends XMotivo {
     private String NProt;
     private String DigVal;
 
+    public XMotivoConsulta(String re) {
+        super(re);
+    }
+
+    public XMotivoConsulta(XMotivo re) {
+        super(re);
+    }
+
     public String getChNFe() {
         return ChNFe;
     }

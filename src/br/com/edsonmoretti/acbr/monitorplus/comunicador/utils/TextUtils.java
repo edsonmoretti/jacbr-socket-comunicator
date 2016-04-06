@@ -25,8 +25,4 @@ public class TextUtils {
         }
         return retorno.trim().replace("\r", "");
     }
-
-    public static void main(String[] args) {
-
-    }
 }

@@ -8,8 +8,10 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeInvalidaException;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.NFeConsultada;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.StatusDoServico;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivo;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoCancelamento;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoConsulta;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoStatusDoServico;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
 import java.io.File;
 
@@ -33,6 +35,16 @@ public class ACBrNFe {
         }
     }
 
+    private void setXMotivo(String s, XMotivo x) {
+        x.setCStat(TextUtils.lerTagIni("CStat", s));
+        x.setCUF(TextUtils.lerTagIni("CUF", s));
+        x.setDhRecbto(TextUtils.lerTagIni("DhRecbto", s));
+        x.setTpAmb(TextUtils.lerTagIni("TpAmb", s));
+        x.setVerAplic(TextUtils.lerTagIni("VerAplic", s));
+        x.setVersao(TextUtils.lerTagIni("Versao", s));
+        x.setXMotivo(TextUtils.lerTagIni("XMotivo", s));
+    }
+
     /**
      * Verifica o Status do Serviço dos WebServices da Receita
      *
@@ -41,17 +53,11 @@ public class ACBrNFe {
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException
      *
      */
-    public StatusDoServico getStatusServico() throws ACBrNFeException {
+    public XMotivoStatusDoServico getStatusServico() throws ACBrNFeException {
         String re = comandoNFe("StatusServico");
-        StatusDoServico sds = new StatusDoServico();
-        sds.setCStat(TextUtils.lerTagIni("CStat", re));
-        sds.setCUF(TextUtils.lerTagIni("CUF", re));
-        sds.setDhRecbto(TextUtils.lerTagIni("DhRecbto", re));
+        XMotivoStatusDoServico sds = new XMotivoStatusDoServico();
+        setXMotivo(re, sds);
         sds.setTMed(TextUtils.lerTagIni("TMed", re));
-        sds.setTpAmb(TextUtils.lerTagIni("TpAmb", re));
-        sds.setVerAplic(TextUtils.lerTagIni("VerAplic", re));
-        sds.setVersao(TextUtils.lerTagIni("Versao", re));
-        sds.setXMotivo(TextUtils.lerTagIni("XMotivo", re));
         return sds;
     }
 
@@ -1116,18 +1122,10 @@ public class ACBrNFe {
      * @return
      * @throws ACBrNFeException
      */
-    public NFeConsultada consultarNFe(String arquivo) throws ACBrNFeException {
+    public XMotivoConsulta consultarNFe(String arquivo) throws ACBrNFeException {
         String re = comandoNFe("ConsultarNFe(" + arquivo + ")");
-        NFeConsultada consulta = new NFeConsultada();
-        consulta.setCStat(TextUtils.lerTagIni("CStat", re));
-        consulta.setCUF(TextUtils.lerTagIni("CUF", re));
-        consulta.setDhRecbto(TextUtils.lerTagIni("DhRecbto", re));
-        consulta.setTpAmb(TextUtils.lerTagIni("TpAmb", re));
-        consulta.setVerAplic(TextUtils.lerTagIni("VerAplic", re));
-        consulta.setVersao(TextUtils.lerTagIni("Versao", re));
-        consulta.setXMotivo(TextUtils.lerTagIni("XMotivo", re));
-//        sds.setTMed(TextUtils.lerTagIni("TMed", re));//Usado apenas em Status do Serviço
-
+        XMotivoConsulta consulta = new XMotivoConsulta();
+        setXMotivo(re, consulta);
         consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
         consulta.setNProt(TextUtils.lerTagIni("NProt", re));
         consulta.setDigVal(TextUtils.lerTagIni("DigVal", re));
@@ -1143,7 +1141,43 @@ public class ACBrNFe {
      * @return
      * @throws ACBrNFeException
      */
-    public NFeConsultada consultarNFe(File arquivo) throws ACBrNFeException {
+    public XMotivoConsulta consultarNFe(File arquivo) throws ACBrNFeException {
         return consultarNFe(arquivo.toString());
+    }
+
+    /**
+     * Cancela um NFe já autorizada.
+     * <br>
+     * <b>Exemplo:</b>
+     * NFE.CANCELARNFE("35XXXXXXXXXXXXXXXX550010000000050000000058","Teste de
+     * Cancelamento,99999999000191")
+     *
+     * @param chaveNFe
+     * @param justificativa
+     * @param CNPJ
+     * @param evento
+     * @return
+     * @throws ACBrNFeException
+     */
+    public XMotivoCancelamento cancelarNFe(String chaveNFe, String justificativa, String CNPJ, String evento) throws ACBrNFeException {
+        String re = comandoNFe("CancelarNFe(" + chaveNFe + ",\"" + justificativa + "\"," + CNPJ + ",\"" + evento + "\")");
+        XMotivoCancelamento c = new XMotivoCancelamento(re);
+        c.setChNFe(TextUtils.lerTagIni("ChNFe", re));
+        c.setNProt(TextUtils.lerTagIni("NProt", re));
+        c.setTpEvento(TextUtils.lerTagIni("TpEvento", re));
+        c.setxEvento(TextUtils.lerTagIni("xEvento", re));
+        c.setnSeqEvento(TextUtils.lerTagIni("nSeqEvento", re));
+        c.setCNPJDest(TextUtils.lerTagIni("CNPJDest", re));
+        c.setEmailDest(TextUtils.lerTagIni("EmailDest", re));
+        c.setXML(TextUtils.lerTagIni("XML", re));
+        return c;
+    }
+
+    public void consultaCadastro(String UF, String documento, String IE) throws ACBrNFeException {
+        System.out.println(comandoNFe("ConsultaCadastro(" + UF + "," + documento + "," + IE + ")"));
+    }
+
+    public void consultaCadastro(String UF, String documento) throws ACBrNFeException {
+        System.out.println(comandoNFe("ConsultaCadastro(" + UF + "," + documento + ")"));
     }
 }

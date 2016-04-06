@@ -5,13 +5,11 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe;
 
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException;
-
 /**
  *
  * @author Edson
  */
-public class NFeConsultada extends StatusDoServico {
+public class XMotivoConsulta extends XMotivo {
 
     private String ChNFe;
     private String NProt;
@@ -40,4 +38,10 @@ public class NFeConsultada extends StatusDoServico {
     public void setDigVal(String DigVal) {
         this.DigVal = DigVal;
     }
+
+    @Override
+    public String toString() {
+        return "XMotivoConsulta{" + "ChNFe=" + ChNFe + ", NProt=" + NProt + ", DigVal=" + DigVal + " - " + super.toString();
+    }
+
 }

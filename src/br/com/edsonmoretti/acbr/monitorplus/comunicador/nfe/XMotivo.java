@@ -7,9 +7,9 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe;
 
 /**
  *
- * @author Edson Moretti - www.edsonmoretti.com.br
+ * @author Edson
  */
-public class StatusDoServico {
+public class XMotivo {
 
     private String Versao;
     private String TpAmb;
@@ -18,7 +18,7 @@ public class StatusDoServico {
     private String XMotivo;
     private String CUF;
     private String DhRecbto;
-    private String TMed;
+    
 
     public String getVersao() {
         return Versao;
@@ -76,17 +76,8 @@ public class StatusDoServico {
         this.DhRecbto = DhRecbto;
     }
 
-    public String getTMed() {
-        return TMed;
-    }
-
-    public void setTMed(String TMed) {
-        this.TMed = TMed;
-    }
-
     @Override
     public String toString() {
-        return "StatusDoServico{" + "Versao=" + Versao + ", TpAmb=" + TpAmb + ", VerAplic=" + VerAplic + ", CStat=" + CStat + ", XMotivo=" + XMotivo + ", CUF=" + CUF + ", DhRecbto=" + DhRecbto + ", TMed=" + TMed + '}';
+        return "XMotivo{" + "Versao=" + Versao + ", TpAmb=" + TpAmb + ", VerAplic=" + VerAplic + ", CStat=" + CStat + ", XMotivo=" + XMotivo + ", CUF=" + CUF + ", DhRecbto=" + DhRecbto + '}';
     }
-
 }

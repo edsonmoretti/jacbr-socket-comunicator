@@ -1244,4 +1244,14 @@ public class ACBrNFe {
             throw new ACBrNFeException(ex);
         }
     }
+
+    /**
+     * Retorna o CNPJ do Certificado Configurado
+     *
+     * @return
+     * @throws ACBrNFeException
+     */
+    public String getCNPJDoCertificado() throws ACBrNFeException {
+        return comandoNFe("CNPJCertificado");
+    }
 }

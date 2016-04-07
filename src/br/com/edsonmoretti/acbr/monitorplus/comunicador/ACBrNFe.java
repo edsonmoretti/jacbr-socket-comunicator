@@ -8,13 +8,14 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeInvalidaException;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivo;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.Cadastro;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoCancelamento;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoConsulta;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoInutilizar;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoStatusDoServico;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
 import java.io.File;
+import java.util.Date;
 
 /**
  *
@@ -34,6 +35,10 @@ public class ACBrNFe {
         } catch (ACBrException ex) {
             throw new ACBrNFeException(ex);
         }
+    }
+
+    private String enviarEvento(String iniEvento) throws ACBrNFeException {
+        return comandoNFe("EnviarEvento(\"" + iniEvento + "\")");
     }
 
     /**
@@ -1163,12 +1168,31 @@ public class ACBrNFe {
         return c;
     }
 
-    public void consultaCadastro(String UF, String documento, String IE) throws ACBrNFeException {
-        System.out.println(comandoNFe("ConsultaCadastro(" + UF + "," + documento + "," + IE + ")"));
+    /**
+     *
+     * @param UF
+     * @param documento
+     * @param IE
+     * @return
+     * @throws ACBrNFeException
+     * @deprecated Em desenvolvimento, não usar pois esta retornando
+     * ACBrNFeException: URL não definida para: TNFeConsultaCadastro
+     */
+    public Cadastro consultaCadastro(String UF, String documento, String IE) throws ACBrNFeException {
+        return new Cadastro(comandoNFe("ConsultaCadastro(" + UF + "," + documento + "," + IE + ")"));
     }
 
-    public void consultaCadastro(String UF, String documento) throws ACBrNFeException {
-        System.out.println(comandoNFe("ConsultaCadastro(" + UF + "," + documento + ")"));
+    /**
+     *
+     * @param UF
+     * @param documento
+     * @return
+     * @throws ACBrNFeException
+     * @deprecated Em desenvolvimento, não usar pois esta retornando
+     * ACBrNFeException: URL não definida para: TNFeConsultaCadastro
+     */
+    public Cadastro consultaCadastro(String UF, String documento) throws ACBrNFeException {
+        return new Cadastro(comandoNFe("ConsultaCadastro(" + UF + "," + documento + ")"));
     }
 
     /**
@@ -1189,5 +1213,35 @@ public class ACBrNFe {
         XMotivoInutilizar c = new XMotivoInutilizar(re);
         c.setNProt(TextUtils.lerTagIni("NProt", re));
         return c;
+    }
+
+    public void enviarCartaDeCorrecao(String idLote, String chNFe, String ccOrgao,
+            String cCNPJ, String cdhEvento, String cnSeqEvento,
+            String cversaoEvento, String cxCorrecao, String cxCondUso) throws ACBrNFeException {
+        String evt = "[CCE]\n"
+                + "idLote=" + idLote + "\n"
+                + "[EVENTO001]\n"
+                + "chNFe=" + chNFe + "\n"
+                + "cOrgao=" + ccOrgao + "\n"
+                + "CNPJ=" + cCNPJ + "\n"
+                + "dhEvento=" + cdhEvento + "\n"
+                + "nSeqEvento=" + cnSeqEvento + 1 + "\n"
+                + "xCorrecao=" + cxCorrecao + "\n";
+        enviarEvento(evt);
+    }
+
+    /**
+     * Retorna a data de vencimento do certificado configurado no
+     * ACBrNFeMonitor(funciona apenas na versão CAPICOM).
+     *
+     * @return
+     * @throws ACBrNFeException
+     */
+    public Date getDataVencimentoCertificado() throws ACBrNFeException {
+        try {
+            return ACBrUtils.strDataRedToDateBR(comandoNFe("CertificadoDataVencimento"));
+        } catch (ACBrException ex) {
+            throw new ACBrNFeException(ex);
+        }
     }
 }

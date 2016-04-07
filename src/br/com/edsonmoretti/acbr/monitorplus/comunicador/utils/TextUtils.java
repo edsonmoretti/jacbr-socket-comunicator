@@ -12,14 +12,15 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.utils;
 public class TextUtils {
 
     public static String lerTagIni(String ler, String deOnde) {
-        ler = ler/*.toLowerCase()*/ + "=";
-        deOnde = deOnde + "\n";
-        int index = deOnde.indexOf(ler);
-        String temp = deOnde.substring(index + ler.length());
+        ler = ler.toLowerCase() + "="; //deixando minuscula pra ignorar o case e adicionado o =
+        String original = deOnde; //guarando a string deOnde original para pegar os dados no formato normal
+        deOnde = deOnde.toLowerCase() + "\n"; //deixando minuscula o conteudo do ini pra poder usar a tag minuscula e dando um enter no final para pegar a ultima tag caso n tenha \n, pois o char \n eh usado para saber o final da tag ini
+        int index = deOnde.indexOf(ler); //pegando o index no conteudo INI minusculo
+        String temp = original.substring(index + ler.length()); //usando o (index + variavelIni lenght) em minusculo para pegar o conteúdo do INI original
         String retorno = "";
-        int i = 0;
         if (index > -1) {
-            while (temp.charAt(i) != '\n') {
+            int i = 0;
+            while (temp.charAt(i) != '\n') { //ler o conteúdo até o achar o \n (final da String da variavel do INI)
                 retorno += temp.charAt(i++);
             }
         }
@@ -29,8 +30,24 @@ public class TextUtils {
     public static String lpadZero(int tamanho, int numero) {
         return String.format("%0" + tamanho + "d", numero);
     }
+
     //USE APENAS PARA TESTES
     public static void main(String[] args) {
-        System.out.println(lpadZero(3, 1));
+        String ini = "[STATUS]\n"
+                + "Versao=1.07\n"
+                + "TpAmb=2\n"
+                + "VerAplic=SP_NFE_PL_005c\n"
+                + "CStat=107\n"
+                + "XMotivo=Serviço em Operação\n"
+                + "CUF=35\n"
+                + "DhRecbto=2009-03-25T08:44:20\n"
+                + "TMed=1\n"
+                + "DhRetorno=\n"
+                + "XObs=";
+        System.out.println(lerTagIni("VeRsAo", ini));
+        System.out.println(lerTagIni("tpamb", ini));
+        System.out.println(lerTagIni("VERAPLIC", ini));
+        System.out.println(lerTagIni("DHRECBto", ini));
+        System.out.println(lerTagIni("xmOTIVO", ini));
     }
 }

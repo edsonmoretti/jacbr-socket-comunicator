@@ -12,8 +12,6 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -22,8 +20,8 @@ import java.util.logging.Logger;
 public class ACBrUtils {
 
     private static SimpleDateFormat dateFormatBR;
-    private static SimpleDateFormat dateTimeFormatBRAnoRed;
-    private static SimpleDateFormat dateFormatBRAnoRed;
+    private static SimpleDateFormat dateTimeFormatBRAnoReduzido;
+    private static SimpleDateFormat dateFormatBRAnoReduzido;
     private static SimpleDateFormat dateFormatHora;
 
     public static String MD5(char[] text) throws ACBrException {
@@ -81,14 +79,29 @@ public class ACBrUtils {
     }
 
     /**
-     * Converte String para Date, String no formato: dd/MM/YY HH:mm
+     * Converte String para Date, String no formato: dd/MM/YY HH:mm:ss
      *
      * @param dataHoraBRRed
      * @return
      */
     public static Date strDataEHoraToDateBR(String dataHoraBRRed) throws ACBrException {
         try {
-            return (dateTimeFormatBRAnoRed == null ? dateTimeFormatBRAnoRed = new SimpleDateFormat("dd/MM/yy HH:mm:ss") : dateTimeFormatBRAnoRed).parse(dataHoraBRRed);
+            return (dateTimeFormatBRAnoReduzido == null ? dateTimeFormatBRAnoReduzido = new SimpleDateFormat("dd/MM/yy HH:mm:ss") : dateTimeFormatBRAnoReduzido).parse(dataHoraBRRed);
+        } catch (ParseException ex) {
+            throw new ACBrException("Erro ao tentar dar o parse na data. " + ex.getMessage());
+        }
+    }
+
+    /**
+     * Converte String para Date, String no formato: dd/MM/yyyy
+     *
+     * @param dataBR
+     * @throws ACBrException
+     * @return
+     */
+    public static Date strDataToDateBR(String dataBR) throws ACBrException {
+        try {
+            return (dateFormatBR == null ? dateFormatBR = new SimpleDateFormat("dd/MM/yyyy") : dateFormatBR).parse(dataBR);
         } catch (ParseException ex) {
             throw new ACBrException("Erro ao tentar dar o parse na data. " + ex.getMessage());
         }
@@ -103,9 +116,19 @@ public class ACBrUtils {
      */
     public static Date strDataRedToDateBR(String dataBRRed) throws ACBrException {
         try {
-            return (dateFormatBRAnoRed == null ? dateFormatBRAnoRed = new SimpleDateFormat("dd/MM/yy") : dateFormatBRAnoRed).parse(dataBRRed);
+            return (dateFormatBRAnoReduzido == null ? dateFormatBRAnoReduzido = new SimpleDateFormat("dd/MM/yy") : dateFormatBRAnoReduzido).parse(dataBRRed);
         } catch (ParseException ex) {
             throw new ACBrException("Erro ao tentar dar o parse na data. " + ex.getMessage());
         }
+    }
+
+    /**
+     * Formata um Date para Data e Hora no formato: dd/MM/yyyy HH:mm:ss
+     *
+     * @param d
+     * @return
+     */
+    public static String formatDataHora(Date d) {
+        return formatDataBR(d) + " " + formatHora(d);
     }
 }

@@ -1090,10 +1090,11 @@ public class ACBrNFe {
      *
      * @param arqXML Caminho do arquivo a ser enviado.
      * @param lote Número do Lote
+     * @return String
      * @throws ACBrNFeException
      */
-    public void enviarNFe(String arqXML, int lote) throws ACBrNFeException {
-        comandoNFe("EnviarNFe(\"" + arqXML + "\"," + lote + ")");
+    public String enviarNFe(String arqXML, int lote) throws ACBrNFeException {
+        return comandoNFe("EnviarNFe(\"" + arqXML + "\"," + lote + ")");
     }
 
     /**
@@ -1119,7 +1120,7 @@ public class ACBrNFe {
      * @throws ACBrNFeException
      */
     public XMotivoConsulta consultarNFe(String arquivo) throws ACBrNFeException {
-        String re = comandoNFe("ConsultarNFe(" + arquivo + ")");
+        String re = comandoNFe("ConsultarNFe(\"" + arquivo + "\")");
         XMotivoConsulta consulta = new XMotivoConsulta(re);
         consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
         consulta.setNProt(TextUtils.lerTagIni("NProt", re));

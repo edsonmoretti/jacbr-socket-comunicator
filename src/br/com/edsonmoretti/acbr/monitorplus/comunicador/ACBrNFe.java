@@ -1215,9 +1215,7 @@ public class ACBrNFe {
         return c;
     }
 
-    public void enviarCartaDeCorrecao(String idLote, String chNFe, String ccOrgao,
-            String cCNPJ, String cdhEvento, String cnSeqEvento,
-            String cversaoEvento, String cxCorrecao, String cxCondUso) throws ACBrNFeException {
+    public void enviarCartaDeCorrecao(String idLote, String chNFe, String ccOrgao, String cCNPJ, String cdhEvento, String cnSeqEvento, String cversaoEvento, String cxCorrecao, String cxCondUso) throws ACBrNFeException {
         String evt = "[CCE]\n"
                 + "idLote=" + idLote + "\n"
                 + "[EVENTO001]\n"
@@ -1254,4 +1252,5 @@ public class ACBrNFe {
     public String getCNPJDoCertificado() throws ACBrNFeException {
         return comandoNFe("CNPJCertificado");
     }
+
 }

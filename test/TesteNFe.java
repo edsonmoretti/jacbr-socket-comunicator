@@ -1,18 +1,6 @@
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrNFe;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.Avulsa;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.Destinatario;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.Emitente;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.Entrega;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.Identificacao;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.InfNfe;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.NFRef;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.NFeVO;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.Produto;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.Retirada;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.AautXML;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.produto.NVE;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -32,6 +20,12 @@ public class TesteNFe {
      */
     public static void main(String[] args) {
         ACBrNFe n = new ACBrNFe();
+        System.out.println("----------CONSULTANDO CERTIFICADO----------");
+        try {
+            System.out.println(n.getCNPJDoCertificado());
+        } catch (ACBrNFeException ex) {
+            Logger.getLogger(TesteNFe.class.getName()).log(Level.SEVERE, null, ex);
+        }
         System.out.println("----------CONSULTANDO STATUS----------");
         try {
             System.out.println(n.getStatusServico());
@@ -79,9 +73,21 @@ public class TesteNFe {
 //        } catch (ACBrNFeInvalidaException ex) {
 //            Logger.getLogger(TesteNFe.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-//        System.out.println("----------ASSINANDO NFE VIA CAMINHO STRING----------");
+        System.out.println("----------ASSINANDO NFE VIA CAMINHO STRING----------");
         try {
-            n.assinarNFe("D:\\SVN\\COPIA LOCAL\\GESTAO-INTEGRADO\\smallfit\\INTEGRADO smallfit\\dir\\sis\\nfe\\xml\\tempFiles\\26160410444524000125550010000000311970192297data.xml");
+            n.assinarNFe("D:\\SVN\\COPIA LOCAL\\GESTAO-INTEGRADO\\smallfit\\INTEGRADO smallfit\\dir\\sis\\nfe\\xml\\tempFiles\\26160404387293000162550010000001001325742550data.xml");
+        } catch (ACBrNFeException ex) {
+            Logger.getLogger(TesteNFe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("----------ENVIANDO NFE VIA CAMINHO STRING----------");
+        try {
+            System.out.println(n.enviarNFe("D:\\SVN\\COPIA LOCAL\\GESTAO-INTEGRADO\\smallfit\\INTEGRADO smallfit\\dir\\sis\\nfe\\xml\\tempFiles\\26160404387293000162550010000001001325742550data.xml", 1));
+        } catch (ACBrNFeException ex) {
+            Logger.getLogger(TesteNFe.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        System.out.println("----------CONSULTANDO NFE VIA CAMINHO STRING----------");
+        try {
+            System.out.println(n.consultarNFe("D:\\SVN\\COPIA LOCAL\\GESTAO-INTEGRADO\\smallfit\\INTEGRADO smallfit\\dir\\sis\\nfe\\xml\\tempFiles\\26160404387293000162550010000001001325742550data.xml"));
         } catch (ACBrNFeException ex) {
             Logger.getLogger(TesteNFe.class.getName()).log(Level.SEVERE, null, ex);
         }

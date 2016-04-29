@@ -11,6 +11,7 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeInvali
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.Cadastro;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoCancelamento;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoConsulta;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoEvento;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoInutilizar;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.XMotivoStatusDoServico;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
@@ -1216,7 +1217,7 @@ public class ACBrNFe {
         return c;
     }
 
-    public void enviarCartaDeCorrecao(String idLote, String chNFe, String ccOrgao,
+    public XMotivoEvento enviarCartaDeCorrecao(String idLote, String chNFe, String ccOrgao,
             String cCNPJ, String cdhEvento, String cnSeqEvento,
             String cversaoEvento, String cxCorrecao, String cxCondUso) throws ACBrNFeException {
         String evt = "[CCE]\n"
@@ -1228,7 +1229,20 @@ public class ACBrNFe {
                 + "dhEvento=" + cdhEvento + "\n"
                 + "nSeqEvento=" + cnSeqEvento + 1 + "\n"
                 + "xCorrecao=" + cxCorrecao + "\n";
-        enviarEvento(evt);
+
+        String re = enviarEvento(evt);
+        XMotivoEvento c = new XMotivoEvento(re);
+        c.setXMotivo(TextUtils.lerTagIni("xMotivo", re, "[EVENTO001]"));
+        c.setCStat(TextUtils.lerTagIni("cStat", re, "[EVENTO001]"));
+        c.setChNFe(TextUtils.lerTagIni("ChNFe", re, "[EVENTO001]"));
+        c.setNProt(TextUtils.lerTagIni("NProt", re));
+        c.setTpEvento(TextUtils.lerTagIni("TpEvento", re));
+        c.setxEvento(TextUtils.lerTagIni("xEvento", re));
+        c.setnSeqEvento(TextUtils.lerTagIni("nSeqEvento", re));
+        c.setCNPJDest(TextUtils.lerTagIni("CNPJDest", re));
+        c.setEmailDest(TextUtils.lerTagIni("EmailDest", re));
+
+        return c;
     }
 
     /**

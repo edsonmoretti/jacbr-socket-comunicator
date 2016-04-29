@@ -45,7 +45,7 @@ public class TextUtils {
             while (temp.charAt(i) != '\n') { //ler o conteúdo até o achar o \n (final da String da variavel do INI)
                 retorno += temp.charAt(i++);
             }
-            System.out.println(ler + retorno);
+//            System.out.println(ler + retorno);
         }
         return retorno.trim().replace("\r", "");
     }

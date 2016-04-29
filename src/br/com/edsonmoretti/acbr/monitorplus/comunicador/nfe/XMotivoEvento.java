@@ -85,7 +85,7 @@ public class XMotivoEvento extends XMotivo {
 
     @Override
     public String toString() {
-        return "XMotivoEvento{" + "ChNFe=" + ChNFe + ", NProt=" + NProt + ", tpEvento=" + tpEvento + ", xEvento=" + xEvento + ", nSeqEvento=" + nSeqEvento + ", CNPJDest=" + CNPJDest + ", emailDest=" + emailDest + '}';
+        return super.toString() + "XMotivoEvento{" + "ChNFe=" + ChNFe + ", NProt=" + NProt + ", tpEvento=" + tpEvento + ", xEvento=" + xEvento + ", nSeqEvento=" + nSeqEvento + ", CNPJDest=" + CNPJDest + ", emailDest=" + emailDest + '}';
     }
 
 }

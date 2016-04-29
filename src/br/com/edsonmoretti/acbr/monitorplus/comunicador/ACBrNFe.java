@@ -1058,10 +1058,18 @@ public class ACBrNFe {
      * @param impressora
      * @param sincrono Coloque 1 para indicar modo síncrono e 0 para modo
      * assíncrono.
+     * @return XMotivoConsulta
      * @throws ACBrNFeException
      */
-    public void enviarNFe(String arqXML, int lote, boolean assina, boolean imprime, String impressora, boolean sincrono) throws ACBrNFeException {
-        comandoNFe("EnviarNFe(\"" + arqXML + "\"," + lote + "," + assina + "," + imprime + "," + impressora + "," + sincrono + ")");
+    public XMotivoConsulta enviarNFe(String arqXML, int lote, boolean assina, boolean imprime, String impressora, boolean sincrono) throws ACBrNFeException {
+        String re = comandoNFe("EnviarNFe(\"" + arqXML + "\"," + lote + "," + assina + "," + imprime + "," + impressora + "," + sincrono + ")");
+        XMotivoConsulta consulta = new XMotivoConsulta(re);
+        consulta.setCStat(TextUtils.lerTagIni("cStat", re, "[RETORNO]"));
+        consulta.setXMotivo(TextUtils.lerTagIni("xMotivo", re, "[RETORNO]"));
+        consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
+        consulta.setNProt(TextUtils.lerTagIni("NProt", re));
+        consulta.setDigVal(TextUtils.lerTagIni("DigVal", re));
+        return consulta;
     }
 
     /**
@@ -1078,10 +1086,18 @@ public class ACBrNFe {
      * @param impressora
      * @param sincrono Coloque 1 para indicar modo síncrono e 0 para modo
      * assíncrono.
+     * @return XMotivoConsulta
      * @throws ACBrNFeException
      */
-    public void enviarNFe(File arqXML, int lote, boolean assina, boolean imprime, String impressora, boolean sincrono) throws ACBrNFeException {
-        comandoNFe("EnviarNFe(\"" + arqXML + "\"," + lote + "," + assina + "," + imprime + "," + impressora + "," + sincrono + ")");
+    public XMotivoConsulta enviarNFe(File arqXML, int lote, boolean assina, boolean imprime, String impressora, boolean sincrono) throws ACBrNFeException {
+        String re = comandoNFe("EnviarNFe(\"" + arqXML + "\"," + lote + "," + assina + "," + imprime + "," + impressora + "," + sincrono + ")");
+        XMotivoConsulta consulta = new XMotivoConsulta(re);
+        consulta.setCStat(TextUtils.lerTagIni("cStat", re, "[RETORNO]"));
+        consulta.setXMotivo(TextUtils.lerTagIni("xMotivo", re, "[RETORNO]"));
+        consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
+        consulta.setNProt(TextUtils.lerTagIni("NProt", re));
+        consulta.setDigVal(TextUtils.lerTagIni("DigVal", re));
+        return consulta;
     }
 
     /**
@@ -1091,11 +1107,18 @@ public class ACBrNFe {
      *
      * @param arqXML Caminho do arquivo a ser enviado.
      * @param lote Número do Lote
-     * @return String
+     * @return XMotivoConsulta
      * @throws ACBrNFeException
      */
-    public String enviarNFe(String arqXML, int lote) throws ACBrNFeException {
-        return comandoNFe("EnviarNFe(\"" + arqXML + "\"," + lote + ")");
+    public XMotivoConsulta enviarNFe(String arqXML, int lote) throws ACBrNFeException {
+        String re = comandoNFe("EnviarNFe(\"" + arqXML + "\"," + lote + ")");
+        XMotivoConsulta consulta = new XMotivoConsulta(re);
+        consulta.setCStat(TextUtils.lerTagIni("cStat", re, "[RETORNO]"));
+        consulta.setXMotivo(TextUtils.lerTagIni("xMotivo", re, "[RETORNO]"));
+        consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
+        consulta.setNProt(TextUtils.lerTagIni("NProt", re));
+        consulta.setDigVal(TextUtils.lerTagIni("DigVal", re));
+        return consulta;
     }
 
     /**
@@ -1105,10 +1128,18 @@ public class ACBrNFe {
      *
      * @param arqXML Caminho do arquivo a ser enviado.
      * @param lote Número do Lote
+     * @return XMotivoConsulta
      * @throws ACBrNFeException
      */
-    public void enviarNFe(File arqXML, int lote) throws ACBrNFeException {
-        comandoNFe("EnviarNFe(" + arqXML + "," + lote + ")");
+    public XMotivoConsulta enviarNFe(File arqXML, int lote) throws ACBrNFeException {
+        String re = comandoNFe("EnviarNFe(" + arqXML + "," + lote + ")");
+        XMotivoConsulta consulta = new XMotivoConsulta(re);
+        consulta.setCStat(TextUtils.lerTagIni("cStat", re, "[RETORNO]"));
+        consulta.setXMotivo(TextUtils.lerTagIni("xMotivo", re, "[RETORNO]"));
+        consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
+        consulta.setNProt(TextUtils.lerTagIni("NProt", re));
+        consulta.setDigVal(TextUtils.lerTagIni("DigVal", re));
+        return consulta;
     }
 
     /**
@@ -1227,7 +1258,7 @@ public class ACBrNFe {
                 + "cOrgao=" + ccOrgao + "\n"
                 + "CNPJ=" + cCNPJ + "\n"
                 + "dhEvento=" + cdhEvento + "\n"
-                + "nSeqEvento=" + cnSeqEvento + 1 + "\n"
+                + "nSeqEvento=" + cnSeqEvento + "\n"
                 + "xCorrecao=" + cxCorrecao + "\n";
 
         String re = enviarEvento(evt);
@@ -1237,6 +1268,7 @@ public class ACBrNFe {
         c.setChNFe(TextUtils.lerTagIni("ChNFe", re, "[EVENTO001]"));
         c.setNProt(TextUtils.lerTagIni("NProt", re));
         c.setTpEvento(TextUtils.lerTagIni("TpEvento", re));
+        c.setDhRecbto(TextUtils.lerTagIni("dhRegEvento", re));
         c.setxEvento(TextUtils.lerTagIni("xEvento", re));
         c.setnSeqEvento(TextUtils.lerTagIni("nSeqEvento", re));
         c.setCNPJDest(TextUtils.lerTagIni("CNPJDest", re));

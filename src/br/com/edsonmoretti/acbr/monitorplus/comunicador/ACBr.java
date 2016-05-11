@@ -259,6 +259,7 @@ public class ACBr {
         String[] retorno;
         try {
             retorno = writeToReadFromSocket(comando).split(":");
+            System.out.println(retorno);
         } catch (Exception ex) {
             throw new ACBrException(ex.getMessage());
         }

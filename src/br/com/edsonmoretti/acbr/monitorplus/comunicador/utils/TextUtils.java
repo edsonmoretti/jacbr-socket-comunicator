@@ -21,7 +21,7 @@ public class TextUtils {
         deOnde = deOnde.toLowerCase() + "\n"; //deixando minuscula o conteudo do ini pra poder usar a tag minuscula e dando um enter no final para pegar a ultima tag caso n tenha \n, pois o char \n eh usado para saber o final da tag ini
         original = deOnde = original.substring(deOnde.indexOf(chaveTitulo) + 1);
         try {
-            original = "[" + original.substring(0, deOnde.indexOf("["));
+            original = "[" + original.substring(0, deOnde.indexOf("\n["));
         } catch (Exception e) {
 
         }

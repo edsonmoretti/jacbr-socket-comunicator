@@ -75,19 +75,19 @@ public class TesteNFe {
 //        }
         System.out.println("----------ASSINANDO NFE VIA CAMINHO STRING----------");
         try {
-            n.assinarNFe("D:\\SVN\\COPIA LOCAL\\GESTAO-INTEGRADO\\smallfit\\INTEGRADO smallfit\\dir\\sis\\nfe\\xml\\tempFiles\\26160404387293000162550010000001001325742550data.xml");
+            n.assinarNFe("D:\\SVN\\COPIA LOCAL\\GESTAO-INTEGRADO\\smallfit\\INTEGRADO smallfit\\dir\\sis\\nfe\\xml\\tempFiles\\26160404387293000162550010000001191193043113data.xml");
         } catch (ACBrNFeException ex) {
             Logger.getLogger(TesteNFe.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("----------ENVIANDO NFE VIA CAMINHO STRING----------");
         try {
-            System.out.println(n.enviarNFe("D:\\SVN\\COPIA LOCAL\\GESTAO-INTEGRADO\\smallfit\\INTEGRADO smallfit\\dir\\sis\\nfe\\xml\\tempFiles\\26160404387293000162550010000001001325742550data.xml", 1));
+            System.out.println(n.enviarNFe("D:\\SVN\\COPIA LOCAL\\GESTAO-INTEGRADO\\smallfit\\INTEGRADO smallfit\\dir\\sis\\nfe\\xml\\tempFiles\\26160404387293000162550010000001191193043113data.xml", 1));
         } catch (ACBrNFeException ex) {
             Logger.getLogger(TesteNFe.class.getName()).log(Level.SEVERE, null, ex);
         }
         System.out.println("----------CONSULTANDO NFE VIA CAMINHO STRING----------");
         try {
-            System.out.println(n.consultarNFe("D:\\SVN\\COPIA LOCAL\\GESTAO-INTEGRADO\\smallfit\\INTEGRADO smallfit\\dir\\sis\\nfe\\xml\\tempFiles\\26160404387293000162550010000001001325742550data.xml"));
+            System.out.println(n.consultarNFe("D:\\SVN\\COPIA LOCAL\\GESTAO-INTEGRADO\\smallfit\\INTEGRADO smallfit\\dir\\sis\\nfe\\xml\\tempFiles\\26160404387293000162550010000001191193043113data.xml"));
         } catch (ACBrNFeException ex) {
             Logger.getLogger(TesteNFe.class.getName()).log(Level.SEVERE, null, ex);
         }

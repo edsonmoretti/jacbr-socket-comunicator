@@ -30,10 +30,12 @@ public class ACBrNFe {
     }
 
     public static String comandoNFe(String s) throws ACBrNFeException {
+        String retorno = null;
         try {
-            String retorno = (ACBr.getInstance().comandoAcbr(NFE + s));
+            retorno = (ACBr.getInstance().comandoAcbr(NFE + s));
             return retorno;
         } catch (ACBrException ex) {
+            System.out.println(retorno);
             throw new ACBrNFeException(ex);
         }
     }
@@ -1160,19 +1162,18 @@ public class ACBrNFe {
         return consulta;
     }
 
-    /**
-     * Consulta uma NFe.<br><br>
-     * <b>Exemplo:</b><br>
-     * CONSULTARNFE("c:\35XXXXXXXXXXXXXXXX550010000000050000000058-nfe.xml")
-     *
-     * @param arquivo Caminho do arquivo a ser consultado.
-     * @return
-     * @throws ACBrNFeException
-     */
-    public XMotivoConsulta consultarNFe(File arquivo) throws ACBrNFeException {
-        return consultarNFe(arquivo.toString());
-    }
-
+//    /**
+//     * Consulta uma NFe.<br><br>
+//     * <b>Exemplo:</b><br>
+//     * CONSULTARNFE("c:\35XXXXXXXXXXXXXXXX550010000000050000000058-nfe.xml")
+//     *
+//     * @param arquivo Caminho do arquivo a ser consultado.
+//     * @return
+//     * @throws ACBrNFeException
+//     */
+//    public XMotivoConsulta consultarNFe(File arquivo) throws ACBrNFeException {
+//        return consultarNFe(arquivo.toString());
+//    }
     /**
      * Cancela um NFe já autorizada.
      * <br>

@@ -19,6 +19,7 @@ import java.util.Date;
  */
 public class ACBrUtils {
 
+    private static SimpleDateFormat dateFormatDB;
     private static SimpleDateFormat dateFormatBR;
     private static SimpleDateFormat dateTimeFormatBRAnoReduzido;
     private static SimpleDateFormat dateFormatBRAnoReduzido;
@@ -56,6 +57,16 @@ public class ACBrUtils {
             } while (two_halfs++ < 1);
         }
         return buf.toString();
+    }
+
+    /**
+     * Formata um Date em String no formato yyyy-MM-dd
+     *
+     * @param d
+     * @return
+     */
+    public static String formatDataDB(Date d) {
+        return (dateFormatDB == null ? dateFormatDB = new SimpleDateFormat("yyyy-MM-dd") : dateFormatDB).format(d);
     }
 
     /**

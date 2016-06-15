@@ -185,7 +185,7 @@ public class Parametros {
      * @return
      * @throws ACBrECFException
      */
-    public boolean isBloqueiaMouseTeclado(boolean b) throws ACBrECFException {
+    public boolean isBloqueiaMouseTeclado() throws ACBrECFException {
         return ACBrECF.comandoECF("BloqueiaMouseTeclado").equalsIgnoreCase(TRUE);
     }
 

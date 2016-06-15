@@ -175,7 +175,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void vendeItem(String codigo, String descricao, String aliquotaICMS, String qtd, String valorUnitario) throws ACBrECFException {
-        comandoECF("VendeItem(" + codigo + ", '" + descricao + "', " + aliquotaICMS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ")");
+        comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ")");
     }
 
     /**
@@ -345,7 +345,7 @@ public class CupomFiscal {
         ehDescontoOuAcrescimo = String.valueOf(ehDescontoOuAcrescimo).toUpperCase().charAt(0);
         if (tipoDescontoAcrescimo == '%' || tipoDescontoAcrescimo == '$') {
             if (ehDescontoOuAcrescimo == 'D' || ehDescontoOuAcrescimo == 'A') {
-                comandoECF("VendeItem(" + codigo + ", " + descricao + ", " + aliquotaICMS + ", " + qtd + ", " + valorUnitario + ","
+                comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + ", " + qtd + ", " + valorUnitario + ","
                         + "" + valorDescontoAcrescimo + "," + unidade + ",\"" + tipoDescontoAcrescimo + "\",\"" + ehDescontoOuAcrescimo + "\"," + codDepartamento + ")");
             } else {
                 throw new ACBrECFException("Informação sobre ser desconto ou acrescimo invalido. Possíveis: D - Desconto ou A - Acrescimo");
@@ -470,7 +470,8 @@ public class CupomFiscal {
     }
 
     /**
-     * Subtotaliza o cupom. 'Menor que 0' para desconto 'Maior que 0' para acrescimo
+     * Subtotaliza o cupom. 'Menor que 0' para desconto 'Maior que 0' para
+     * acrescimo
      *
      * @param descontoAcrescimo Para Descontos, informe valores negativos, para
      * acréscimos valores positivos

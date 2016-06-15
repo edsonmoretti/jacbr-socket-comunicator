@@ -82,6 +82,8 @@ public class Equipamento {
                 return Estado.estRequerZ;
             case "estRequerX":
                 return Estado.estRequerX;
+            case "estNaoFiscal":
+                return Estado.estNaoFiscal;
             default:
                 throw new ACBrECFException("Estado desconhecido.");
         }

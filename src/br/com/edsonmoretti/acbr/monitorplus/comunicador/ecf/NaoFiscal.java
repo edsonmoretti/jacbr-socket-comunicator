@@ -67,7 +67,7 @@ public class NaoFiscal {
      * @throws ACBrECFException
      */
     public void sangria(BigDecimal valor, String obs, String descricaoCNF, String descricaoFPG) throws ACBrECFException {
-        ACBrECF.comandoECF("Sangria(" + valor + ", " + obs + ", " + descricaoCNF + "," + descricaoFPG + ")");
+        ACBrECF.comandoECF("Sangria(" + valor + ",\"" + obs + "\"," + descricaoCNF + "," + descricaoFPG + ")");
     }
 
     /**
@@ -103,7 +103,7 @@ public class NaoFiscal {
      * @throws ACBrECFException
      */
     public void suprimento(BigDecimal valor, String obs, String descricaoCNF, String descricaoFPG) throws ACBrECFException {
-        ACBrECF.comandoECF("Suprimento(" + valor + ", " + obs + ", " + descricaoCNF + "," + descricaoFPG + ")");
+        ACBrECF.comandoECF("Suprimento(" + valor + ",\"" + obs + "\"," + descricaoCNF + "," + descricaoFPG + ")");
     }
 
     /**
@@ -183,8 +183,8 @@ public class NaoFiscal {
      * ECF.SubtotalizaNaoFiscal<br>
      * ECF.SubtotalizaNaoFiscal( -1.45 ) para Desconto de R$ 1,45<br>
      * ECF.SubtotalizaNaoFiscal( 5 ) para Acréscimo de R$ 5,00<br>
-     * ECF.SubtotalizaNaoFiscal( 0, "Mensagem Linha 1|Mensagem Linha 2") para Sem
-     * desconto / acréscimo mas informando 2 linhas de mensagem para serem
+     * ECF.SubtotalizaNaoFiscal( 0, "Mensagem Linha 1|Mensagem Linha 2") para
+     * Sem desconto / acréscimo mas informando 2 linhas de mensagem para serem
      * impressas no rodapé.
      * <br>
      *
@@ -216,7 +216,7 @@ public class NaoFiscal {
      * @throws ACBrECFException
      */
     public void efetuaPagamentoNaoFiscal(String codFormaPagto, BigDecimal valor, String observacao, boolean bImprimeVinculado) throws ACBrECFException {
-        ACBrECF.comandoECF("(" + codFormaPagto + "," + valor + "," + observacao + "," + bImprimeVinculado + ")");
+        ACBrECF.comandoECF("EfetuaPagamentoNaoFiscal(" + codFormaPagto + "," + valor + "," + observacao + "," + bImprimeVinculado + ")");
     }
 
     /**

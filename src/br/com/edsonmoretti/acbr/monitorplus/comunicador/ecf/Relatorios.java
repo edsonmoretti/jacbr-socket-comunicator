@@ -5,6 +5,7 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf;
 
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.relatorios.CupomVinculadoOuCCD;
 import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
@@ -19,6 +20,15 @@ public class Relatorios {
 
     private CupomVinculadoOuCCD cupomVinculadoOuCCD;
     private br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.relatorios.RelatorioGerencial relatorioGerencial;
+    private ACBrECF ecf;
+
+    public Relatorios() {
+
+    }
+
+    public Relatorios(ACBrECF ecf) {
+        this.ecf = ecf;
+    }
 
     public br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.relatorios.RelatorioGerencial getRelatorioGerencial() {
         return relatorioGerencial == null ? relatorioGerencial = new br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.relatorios.RelatorioGerencial() : relatorioGerencial;
@@ -96,22 +106,20 @@ public class Relatorios {
     }
 
     /**
-     * Realiza o corte parcial do papel.
+     * Realiza o corte total do papel.
      *
      * @throws ACBrECFException
      */
     public void cortaPapel() throws ACBrECFException {
-        comandoECF("CortaPapel");
+        ecf.cortaPapel();
     }
 
     /**
      * Realiza o corte parcial do papel.
      *
-     * @param parcial Se informado como True efetua corte parcial do papel no
-     * ECF para equipamentos com guilhotina.
      * @throws ACBrECFException
      */
-    public void cortaPapel(boolean parcial) throws ACBrECFException {
-        comandoECF("CortaPapel(" + parcial + ")");
+    public void cortaPapelParcial() throws ACBrECFException {
+        ecf.cortaPapelParcial();
     }
 }

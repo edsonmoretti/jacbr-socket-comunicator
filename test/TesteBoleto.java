@@ -1,5 +1,18 @@
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrBOLETO;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.Aceite;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.CNAB;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.CaracTitulo;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.INDICEACBR;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.LayoutBol;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.OcorrenciaOriginal;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.RespEmis;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.Sacado;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.TipoDeSaida;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.TipoDiasProtesto;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.TipoImpressao;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.TipoPessoa;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.Titulo;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBoletoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -18,78 +31,123 @@ public class TesteBoleto {
     public static void main(String[] args) {
         ACBrBOLETO boleto = new ACBrBOLETO();
         try {
-            boleto.configurarDados(""
-                    + "[Cedente]\n"
-                    + "Nome=São João LTDA. \n"
-                    + "CNPJCPF= 10.493.367/0001-48 \n"
-                    + "Logradouro=Rua Evaristo Mendes \n"
-                    + "Numero=200 \n"
-                    + "Bairro=Centro \n"
-                    + "Cidade=Tatui \n"
-                    + "CEP=18.270-000 \n"
-                    + "Complemento=Sala 10 UF=SP \n"
-                    + "RespEmis=0 \n"
-                    + "TipoPessoa=1 \n"
-                    + "CodigoCedente=123456 \n"
-                    + "LayoutBol=1 \n"
-                    + "CaracTitulo=0  \n"
-                    + "\n"
-                    + "[Conta] \n"
-                    + "Conta=99999 \n"
-                    + "DigitoConta=9 \n"
-                    + "Agencia=9999 \n"
-                    + "DigitoAgencia=9  \n"
-                    + "\n"
-                    + "[Banco] \n"
-                    + "Numero=001 \n"
-                    + "CNAB=1 \n"
-                    + "IndiceACBr=5");
-//            boleto.limparLista();
-//            boleto.incluirTitulos("[Titulo1]\n"
-//                    + "NumeroDocumento=000010\n"
-//                    + "NossoNumero=0000001\n"
-//                    + "Carteira=20\n"
-//                    + "ValorDocumento=100,50\n"
-//                    + "Vencimento=10/09/2010\n"
-//                    + "ValorMoraJuros=0,50\n"
-//                    + "DataDocumento=10/08/2010\n"
-//                    + "DataProcessamento=10/08/2010\n"
-//                    + "DataAbatimento=05/09/2010\n"
-//                    + "DataDesconto=07/09/2010\n"
-//                    + "DataMoraJuros=12/09/2010\n"
-//                    + "DataProtesto=10/10/2010\n"
-//                    + "ValorAbatimento=5,00\n"
-//                    + "ValorDesconto=0,50\n"
-//                    + "ValorMoraJuros=0,55\n"
-//                    + "ValorIOF=3,50\n"
-//                    + "ValorOutrasDespesas=2,50\n"
-//                    + "PercentualMulta=05,00\n"
-//                    + "LocalPagamento=Pagável em qualquer agência bancária mesmo após o vencimento\n"
-//                    + "Especie=DM\n"
-//                    + "EspecieMod=R$\n"
-//                    + "Sacado.NomeSacado=Sacado Teste\n"
-//                    + "Sacado.CNPJCPF=01234567890\n"
-//                    + "Sacado.Pessoa=0\n"
-//                    + "Sacado.Logradouro=Rua Jose Rodrigues\n"
-//                    + "Sacado.Numero=100\n"
-//                    + "Sacado.Bairro=Jardim Moderno\n"
-//                    + "Sacado.Complemento=Casa\n"
-//                    + "Sacado.Cidade=Tatui\n"
-//                    + "Sacado.UF=SP\n"
-//                    + "Sacado.CEP=18277.500\n"
-//                    + "Sacado.Email=edson@g3automacao.com.br\n"
-//                    + "Mensagem=teste1|teste2\n"
-//                    + "Instrucao1=10\n"
-//                    + "Instrucao2=11\n"
-//                    + "Aceite=1\n"
-//                    + "OcorrenciaOriginal=0\n"
-//                    + "Parcela=1\n"
-//                    + "TotalParcelas=1\n"
-//                    + "SeuNumero=000020\n"
-//                    + "TipoDiasProtesto=1\n"
-//                    + "TipoImpressao=1");
-            boleto.gerarPDF();
-//            boleto.enviarEmail();
+
+            boleto.getCendente().setBairro("Indianópolis");
+            boleto.getCendente().setCEP("55010-330");
+            boleto.getCendente().setCNPJCPF("10.493.367/0001-48");
+            boleto.getCendente().setCaracTitulo(CaracTitulo.CobrancaSimples);
+            boleto.getCendente().setCidade("CARUARU");
+            boleto.getCendente().setCodigoCedente("123456");
+            boleto.getCendente().setComplemento("LOJA");
+            boleto.getCendente().setLayoutBol(LayoutBol.Padrao);
+            boleto.getCendente().setLogradouro("RUA ALFERES JORGE");
+            boleto.getCendente().setNome("GERALDO JOAO DA SILVA ME");
+            boleto.getCendente().setNumero("176");
+            boleto.getCendente().setRespEmis(RespEmis.ClienteEmite);
+            boleto.getCendente().setTipoPessoa(TipoPessoa.PessoaJuridica);
+            boleto.getCendente().setUF("PE");
+
+            boleto.getConta().setAgencia(2530);
+            boleto.getConta().setConta(4472);
+            boleto.getConta().setDigitoAgencia(0);
+            boleto.getConta().setDigitoConta(4);
+
+            boleto.getBanco().setCnab(CNAB.CNAB400);
+            boleto.getBanco().setIndiceacbr(INDICEACBR.Santander);
+            boleto.getBanco().setNumero("033");
+            //1
+            boleto.limparLista();
+            //2
+            boleto.configurarDados();
+            //3
+            Sacado sacado = new Sacado();
+            sacado.setBairro("Bairro Teste");
+            sacado.setCEP("55024-130");
+            sacado.setCNPJCPF("074.037.334-01");
+            sacado.setCidade("JATAUBA");
+            sacado.setComplemento("CASA");
+            sacado.setEmail("DANIELDANADO@G3AUTOMACAO.COM.BR");
+            sacado.setLogradouro("RUA DO TESTE");
+            sacado.setNome("DANIEL NOVAMENTE DA SILVA DE NOVO");
+            sacado.setNumero("24");
+            sacado.setTipoPessoa(TipoPessoa.PessoaFisica);
+            sacado.setUF("PE");
+
+            Titulo titulo = new Titulo();
+            titulo.setAceite(Aceite.SIM);
+            titulo.setCarteira("123");
+            titulo.setDataAbatimento("");
+            titulo.setDataDesconto("");
+            titulo.setDataDocumento("30/06/2016");
+            titulo.setDataMoraJuros("");
+            titulo.setDataProcessamento("30/06/2016");
+            titulo.setDataProtesto("");
+            titulo.setDataProtesto("");
+            titulo.setEspecie("DM");
+            titulo.setEspecieMod("R$");
+            titulo.setInstrucao1("1ª instrução");
+            titulo.setInstrucao2("2ª instrução");
+            titulo.setLocalPagamento("Pagamento apenas com Daniel");
+            titulo.setMensagem("Mensagem");
+            titulo.setNossoNumero("000001");
+            titulo.setNumeroDocumento("0123456789");
+            titulo.setOcorrenciaOriginal(OcorrenciaOriginal.RemessaRegistrar);
+            titulo.setParcela("1");
+            titulo.setPercentualMulta("0,00");
+            titulo.setSeuNumero("0001");
+            titulo.setTipoDiasProtesto(TipoDiasProtesto.DiasCorridos);
+            titulo.setTipoImpressao(TipoImpressao.Padrão);
+            titulo.setTotalParcelas("2");
+            titulo.setValorAbatimento("0,00");
+            titulo.setValorDesconto("0,00");
+            titulo.setValorDocumento("99,00");
+            titulo.setValorIOF("0,00");
+            titulo.setValorMoraJuros("0,00");
+            titulo.setValorOutrasDespesas("0,00");
+            titulo.setVencimento("30/07/2016");
+            titulo.setSacado(sacado);
+
+            Titulo t = new Titulo();
+            t.setAceite(Aceite.SIM);
+            t.setCarteira("123");
+            t.setDataAbatimento("");
+            t.setDataDesconto("");
+            t.setDataDocumento("30/06/2016");
+            t.setDataMoraJuros("");
+            t.setDataProcessamento("30/06/2016");
+            t.setDataProtesto("");
+            t.setDataProtesto("");
+            t.setEspecie("DM");
+            t.setEspecieMod("R$");
+            t.setInstrucao1("1ª instrução");
+            t.setInstrucao2("2ª instrução");
+            t.setLocalPagamento("Pagamento apenas com Daniel");
+            t.setMensagem("Mensagem");
+            t.setNossoNumero("000001");
+            t.setNumeroDocumento("0123456789");
+            t.setOcorrenciaOriginal(OcorrenciaOriginal.RemessaRegistrar);
+            t.setParcela("2");
+            t.setPercentualMulta("0,00");
+            t.setSeuNumero("0001");
+            t.setTipoDiasProtesto(TipoDiasProtesto.DiasCorridos);
+            t.setTipoImpressao(TipoImpressao.Padrão);
+            t.setTotalParcelas("2");
+            t.setValorAbatimento("0,00");
+            t.setValorDesconto("0,00");
+            t.setValorDocumento("1,00");
+            t.setValorIOF("0,00");
+            t.setValorMoraJuros("0,00");
+            t.setValorOutrasDespesas("0,00");
+            t.setVencimento("15/07/2016");
+            t.setSacado(sacado);
+
+//            boleto.incluirTitulos(TipoDeSaida.PDF, lista);
+            boleto.incluirTitulos(titulo);
+
+            boleto.incluirTitulos(t);
+
+            boleto.imprimir();
+
         } catch (ACBrBoletoException ex) {
             Logger.getLogger(TesteBoleto.class.getName()).log(Level.SEVERE, null, ex);
         }

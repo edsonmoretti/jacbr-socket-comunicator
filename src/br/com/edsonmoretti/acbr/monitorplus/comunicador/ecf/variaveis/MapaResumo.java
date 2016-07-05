@@ -90,7 +90,7 @@ public class MapaResumo {
         try {
             ReducaoZ r = new ReducaoZ();
             //dados ecf
-            r.setDataMovimento(ACBrUtils.strDataRedToDateBR(p.getProperty("DataMovimento")));
+            r.setDataMovimento(p.getProperty("DataMovimento") == null ? new Date() : ACBrUtils.strDataRedToDateBR(p.getProperty("DataMovimento")));
             r.setNumSerie(p.getProperty("NumSerie"));
             r.setNumECF(p.getProperty("NumECF"));
             r.setNumLoja(p.getProperty("NumLoja"));

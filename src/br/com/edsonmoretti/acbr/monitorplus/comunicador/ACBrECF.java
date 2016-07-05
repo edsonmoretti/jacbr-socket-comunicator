@@ -33,6 +33,7 @@ public class ACBrECF {
     private Parametros parametros;
     private Utilitarios utilitarios;
     private static final String ECF = "ECF.";
+    private boolean temGuilhotina = true;
 
     public ACBrECF(boolean ativar) throws ACBrECFException {
         this.acbrPoucoPapelListeners = new ArrayList<>();
@@ -78,7 +79,9 @@ public class ACBrECF {
      * @throws ACBrECFException
      */
     public void cortaPapelParcial() throws ACBrECFException {
-        comandoECF("CortaPapel(true)");
+        if (temGuilhotina) {
+            comandoECF("CortaPapel(true)");
+        }
     }
 
     /**
@@ -87,8 +90,19 @@ public class ACBrECF {
      * @throws ACBrECFException
      */
     public void cortaPapel() throws ACBrECFException {
-        comandoECF("CortaPapel");
+        if (temGuilhotina) {
+            comandoECF("CortaPapel");
+        }
     }
+
+    public boolean isTemGuilhotina() {
+        return temGuilhotina;
+    }
+
+    public void setTemGuilhotina(boolean temGuilhotina) {
+        this.temGuilhotina = temGuilhotina;
+    }
+
     private static int numTentativas = 1;
 
     public static String comandoECF(String s) throws ACBrECFException {
@@ -134,6 +148,7 @@ public class ACBrECF {
                         throw new ACBrECFException(ex1.getMessage());
                     }
                     numTentativas++;
+                    ArrayList a;
                     return comandoECF(s);
                 }
             }
@@ -156,7 +171,7 @@ public class ACBrECF {
     }
 
     public Relatorios getRelatorios() {
-        return relatorios == null ? relatorios = new Relatorios() : relatorios;
+        return relatorios == null ? relatorios = new Relatorios(this) : relatorios;
     }
 
     public Dispositivos getDispositivos() {

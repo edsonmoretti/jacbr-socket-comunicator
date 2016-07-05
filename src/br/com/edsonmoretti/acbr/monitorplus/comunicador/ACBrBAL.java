@@ -9,8 +9,6 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBALException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import java.math.BigDecimal;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -219,10 +217,7 @@ public class ACBrBAL {
             if (ACBr.getInstance().comandoAcbr("BAL.Modelo").equals("balNenhum")) {
                 return false;
             }
-            if (ACBr.getInstance().comandoAcbr("BAL.ModeloStr").equals("Não Definida")) {
-                return false;
-            }
-            return true;
+            return !ACBr.getInstance().comandoAcbr("BAL.ModeloStr").equals("Não Definida");
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
         }

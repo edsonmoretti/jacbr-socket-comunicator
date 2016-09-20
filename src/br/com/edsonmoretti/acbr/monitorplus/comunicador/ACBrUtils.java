@@ -25,10 +25,37 @@ import java.util.Scanner;
  */
 public class ACBrUtils {
 
+    /**
+     * "yyyy-MM-dd"
+     */
     private static SimpleDateFormat dateFormatDB;
+    /**
+     * "dd/MM/yyyy"
+     */
     private static SimpleDateFormat dateFormatBR;
+    /**
+     * "dd/MM/yyyy HH:mm:ss"
+     */
+    private static SimpleDateFormat dateTimeFormatBRAno;
+    /**
+     * "yyyy-MM-dd HH:mm:ss"
+     */
+    private static SimpleDateFormat dateTimeFormatDBAno;
+    /**
+     * "dd/MM/yy HH:mm:ss"
+     */
     private static SimpleDateFormat dateTimeFormatBRAnoReduzido;
+    /**
+     * "yy-MM-dd HH:mm:ss"
+     */
+    private static SimpleDateFormat dateTimeFormatDBAnoReduzido;
+    /**
+     * "dd/MM/yy"
+     */
     private static SimpleDateFormat dateFormatBRAnoReduzido;
+    /**
+     * "HH:mm:ss"
+     */
     private static SimpleDateFormat dateFormatHora;
 
     public static String MD5(char[] text) throws ACBrException {
@@ -96,14 +123,25 @@ public class ACBrUtils {
     }
 
     /**
-     * Converte String para Date, String no formato: dd/MM/YY HH:mm:ss
+     * Converte String para Date, String no formato: Converte String para Date,
+     * String no formato:
      *
      * @param dataHoraBRRed
      * @return
      */
-    public static Date strDataEHoraToDateBR(String dataHoraBRRed) throws ACBrException {
+    public static Date strDataEHoraToDateBR(String dataHoraBR) throws ACBrException {
         try {
-            return (dateTimeFormatBRAnoReduzido == null ? dateTimeFormatBRAnoReduzido = new SimpleDateFormat("dd/MM/yy HH:mm:ss") : dateTimeFormatBRAnoReduzido).parse(dataHoraBRRed);
+            if (dataHoraBR.matches("[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]")) {//"yyyy-MM-dd HH:mm:ss"
+                return (dateTimeFormatDBAno == null ? dateTimeFormatDBAno = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss") : dateTimeFormatDBAno).parse(dataHoraBR);
+            } else if (dataHoraBR.matches("[0-9][0-9]-[0-9][0-9]-[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]")) { // yy-MM-dd HH:mm:ss
+                return (dateTimeFormatDBAnoReduzido == null ? dateTimeFormatDBAnoReduzido = new SimpleDateFormat("yy-MM-dd HH:mm:ss") : dateTimeFormatDBAnoReduzido).parse(dataHoraBR);
+            } else if (dataHoraBR.matches("[0-9][0-9]/[0-9][0-9]/[0-9][0-9][0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]")) {//"dd/MM/yyyy HH:mm:ss"
+                return (dateTimeFormatBRAno == null ? dateTimeFormatBRAno = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss") : dateTimeFormatBRAno).parse(dataHoraBR);
+            } else if (dataHoraBR.matches("[0-9][0-9]/[0-9][0-9]/[0-9][0-9] [0-9][0-9]:[0-9][0-9]:[0-9][0-9]")) {//"dd/MM/yy HH:mm:ss"
+                return (dateTimeFormatBRAnoReduzido == null ? dateTimeFormatBRAnoReduzido = new SimpleDateFormat("dd/MM/yy HH:mm:ss") : dateTimeFormatBRAnoReduzido).parse(dataHoraBR);
+            } else {
+                throw new ParseException("Formato inválido: " + dataHoraBR, 0);
+            }
         } catch (ParseException ex) {
             throw new ACBrException("Erro ao tentar dar o parse na data. " + ex.getMessage());
         }

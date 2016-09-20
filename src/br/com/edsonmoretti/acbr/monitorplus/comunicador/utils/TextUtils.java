@@ -1,5 +1,7 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.utils;
 
+import java.text.Normalizer;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -52,6 +54,10 @@ public class TextUtils {
 
     public static String lpadZero(int tamanho, int numero) {
         return String.format("%0" + tamanho + "d", numero);
+    }
+
+    public static String normalizar(String s) {
+        return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
     }
 
     //USE APENAS PARA TESTES

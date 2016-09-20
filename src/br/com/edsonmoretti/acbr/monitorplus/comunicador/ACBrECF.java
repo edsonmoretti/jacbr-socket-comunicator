@@ -111,30 +111,30 @@ public class ACBrECF {
             numTentativas = 1;
             return retorno;
         } catch (ACBrException ex) {
-            if (ex.getMessage().contains("FIM DE PAPEL")) {//Essa mensagem sá acontece uma vez, após isso ao continuar ele retorna fora de linha, entrando no IF a baixo.
-                Object opcoes[] = {"Tentar novamente", "Cancelar"}; //0 1 2
-                int i = JOptionPane.showOptionDialog(
-                        null, "<html><b>FIM DE PAPEL</b> na Impressora Fiscal, troque a bobina.</html>", "",
-                        0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-                switch (i) {
-                    case 0:
-                        return comandoECF(s);
-                    case 1:
-                        break;
-                }
-            }
-            if (ex.getMessage().endsWith("não está em linha") && comandoECF("Ativo").equalsIgnoreCase("true")) { //Se o retorno foi não está em linha, mas o ECF está ativado no monitor...
-                Object opcoes[] = {"Tentar novamente", "Cancelar"}; //0 1 2
-                int i = JOptionPane.showOptionDialog(
-                        null, "Impressora Fiscal Não está em Linha.", "",
-                        0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
-                switch (i) {
-                    case 0:
-                        return comandoECF(s);
-                    case 1:
-                        break;
-                }
-            }
+//            if (ex.getMessage().contains("FIM DE PAPEL")) {//Essa mensagem sá acontece uma vez, após isso ao continuar ele retorna fora de linha, entrando no IF a baixo.
+//                Object opcoes[] = {"Tentar novamente", "Cancelar"}; //0 1 2
+//                int i = JOptionPane.showOptionDialog(
+//                        null, "<html><b>FIM DE PAPEL</b> na Impressora Fiscal, troque a bobina.</html>", "",
+//                        0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+//                switch (i) {
+//                    case 0:
+//                        return comandoECF(s);
+//                    case 1:
+//                        break;
+//                }
+//            }
+//            if (ex.getMessage().endsWith("não está em linha") && comandoECF("Ativo").equalsIgnoreCase("true")) { //Se o retorno foi não está em linha, mas o ECF está ativado no monitor...
+//                Object opcoes[] = {"Tentar novamente", "Cancelar"}; //0 1 2
+//                int i = JOptionPane.showOptionDialog(
+//                        null, "Impressora Fiscal Não está em Linha.", "",
+//                        0, JOptionPane.QUESTION_MESSAGE, null, opcoes, opcoes[0]);
+//                switch (i) {
+//                    case 0:
+//                        return comandoECF(s);
+//                    case 1:
+//                        break;
+//                }
+//            }
             if (ex.getMessage().contains("Connection refused: connect") || ex.getMessage().contains("Connection reset")) {
                 if (numTentativas <= 3) {
                     try {

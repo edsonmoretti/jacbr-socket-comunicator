@@ -18,6 +18,47 @@ import javax.swing.JTextField;
 public class Numeros {
 
     /**
+     * BigDecimal 100
+     */
+    public final static BigDecimal CEM = parseToBig("100");
+
+    /**
+     * BigDecimal 0,01, normalmente utilizado para calcular porcentagem: Ex:
+     * (new BigDecimal("90").multiply(new
+     * BigDecimal("10")).multiply(Numeros._0_01)); Valor 90, taxa 10, retorno 9;
+     */
+    public final static BigDecimal _0_01 = parseToBig("0.01");
+
+    /**
+     *
+     * @param valor Valor usado para base
+     * @param taxa Taxa em % para calcular
+     * @return resultado da equação: valor.multiply(taxa).multiply(_0_01); sendo
+     * _0_01 = parseToBig("100");
+     */
+    public static BigDecimal valorDeTaxa(BigDecimal valor, BigDecimal taxa) {
+        if (taxa.compareTo(BigDecimal.ZERO) == 0) {
+            return taxa; //Se a taxa for 0 retorna 0, ué!
+        }
+        return valor.multiply(taxa).multiply(_0_01);
+    }
+
+    /**
+     *
+     * @param valor Valor usado para base
+     * @param taxa Taxa em % para calcular
+     * @return resultado da equação: valor.multiply(taxa).multiply(_0_01); sendo
+     * _0_01 = parseToBig("100");
+     */
+    public static BigDecimal valorParaTaxa(BigDecimal total, BigDecimal valor) {
+        if (valor.compareTo(BigDecimal.ZERO) == 0 || total.compareTo(BigDecimal.ZERO) == 0) {
+            return valor;
+        }
+        return valor.multiply(CEM).divide(total, 6, RoundingMode.HALF_DOWN);
+
+    }
+
+    /**
      *
      * @param obj que pode ser String,Double ou Integer.
      * @return um BigDecimal na Scale(4, RoundingMode.HALF_DOWN)

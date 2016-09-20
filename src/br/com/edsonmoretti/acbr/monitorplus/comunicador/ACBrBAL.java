@@ -26,7 +26,7 @@ public class ACBrBAL {
      */
     public boolean isAtivo() throws ACBrBALException {
         try {
-            return ACBr.getInstance().comandoAcbr("Ativo").equals("true");
+            return ACBr.getInstance().comandoAcbr("BAL.Ativo").equalsIgnoreCase("True");
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
         }
@@ -54,7 +54,7 @@ public class ACBrBAL {
      */
     public void desativar() throws ACBrBALException {
         try {
-            ACBr.getInstance().comandoAcbr("Desativar");
+            ACBr.getInstance().comandoAcbr("BAL.Desativar");
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
         }
@@ -101,7 +101,7 @@ public class ACBrBAL {
      */
     public String getPorta() throws ACBrBALException {
         try {
-            return ACBr.getInstance().comandoAcbr("Porta");
+            return ACBr.getInstance().comandoAcbr("BAL.Porta");
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
         }
@@ -117,7 +117,7 @@ public class ACBrBAL {
      */
     public void setIntervalo(int intervalo) throws ACBrBALException {
         try {
-            ACBr.getInstance().comandoAcbr("SetIntervalo(" + intervalo + ")");
+            ACBr.getInstance().comandoAcbr("BAL.SetIntervalo(" + intervalo + ")");
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
         }
@@ -138,7 +138,7 @@ public class ACBrBAL {
         }
         BigDecimal b = null;
         try {
-            String r = ACBr.getInstance().comandoAcbr("LePeso");
+            String r = ACBr.getInstance().comandoAcbr("BAL.LePeso");
             b = Numeros.parseToBig(r);
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
@@ -164,7 +164,7 @@ public class ACBrBAL {
         }
         BigDecimal b = null;
         try {
-            String r = ACBr.getInstance().comandoAcbr("LePeso(" + timeOut + ")");
+            String r = ACBr.getInstance().comandoAcbr("BAL.LePeso(" + timeOut + ")");
             b = Numeros.parseToBig(r);
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
@@ -180,7 +180,7 @@ public class ACBrBAL {
      * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException
      */
     public BigDecimal getUltimoPesoLido() throws ACBrException {
-        return Numeros.parseToBig(ACBr.getInstance().comandoAcbr("UltimoPesoLido"));
+        return Numeros.parseToBig(ACBr.getInstance().comandoAcbr("BAL.UltimoPesoLido"));
     }
 
     /**
@@ -192,7 +192,7 @@ public class ACBrBAL {
      */
     public String getUltimaResposta() throws ACBrBALException {
         try {
-            return ACBr.getInstance().comandoAcbr("UltimoPesoLido");
+            return ACBr.getInstance().comandoAcbr("BAL.UltimoPesoLido");
         } catch (ACBrException ex) {
             throw new ACBrBALException();
         }
@@ -206,7 +206,7 @@ public class ACBrBAL {
      */
     public boolean isMonitorarBalanca() throws ACBrBALException {
         try {
-            return ACBr.getInstance().comandoAcbr("MonitorarBalanca").equals("true");
+            return ACBr.getInstance().comandoAcbr("BAL.MonitorarBalanca").equalsIgnoreCase("true");
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
         }
@@ -214,10 +214,10 @@ public class ACBrBAL {
 
     public boolean isTemBalancaConfigurada() throws ACBrBALException {
         try {
-            if (ACBr.getInstance().comandoAcbr("BAL.Modelo").equals("balNenhum")) {
+            if (ACBr.getInstance().comandoAcbr("BAL.Modelo").equalsIgnoreCase("balNenhum")) {
                 return false;
             }
-            return !ACBr.getInstance().comandoAcbr("BAL.ModeloStr").equals("Não Definida");
+            return !ACBr.getInstance().comandoAcbr("BAL.ModeloStr").equalsIgnoreCase("Não Definida");
         } catch (ACBrException ex) {
             throw new ACBrBALException(ex.getMessage());
         }

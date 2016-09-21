@@ -110,6 +110,10 @@ public class CupomFiscal {
         comandoECF("LegendaInMetroProximoItem");
     }
 
+    public void vendeItem(String gtin, String descricaoPdv, String ecficms, BigDecimal quantidade, BigDecimal valorUni, String unidadeProduto) throws ACBrECFException {
+        vendeItem(gtin, descricaoPdv, ecficms, quantidade.toString(), valorUni.toString(), "0.00", unidadeProduto, "", "", "0");
+    }
+
     /**
      * Realiza a venda dos itens.
      *
@@ -142,6 +146,41 @@ public class CupomFiscal {
      */
     public void vendeItem(String codigo, String descricao, Double aliquotaICMS, Double qtd, Double valorUnitario) throws ACBrECFException {
         vendeItem(codigo, descricao, String.valueOf(aliquotaICMS), String.valueOf(qtd), String.valueOf(valorUnitario));
+    }
+
+    /**
+     * Realiza a venda dos itens.
+     *
+     * @param codigo código do produto, geralmente á aceito até 13
+     * @param descricao descrição do Produto vendido. Procure não usar acentos,
+     * pois alguns ECFs não aceitam caracteres acentuados. Para imprimir
+     * Descrições "grandes" habilite a opção "Descrição Grande" no ACBrMonitor.
+     * @param aliquotaICMS representação da Alíquota do ICMS.<br>
+     * - As alíquotas podem ser informadas em Valor (mesmo sendo texto).
+     * Exemplos: "18", "2.46".<br>
+     * - Se no ECF existem alíquotas iguais para ICMS e ISS, use o sufixo "T"
+     * para informar que a alíquota é do ICMS ou "S" para alíquotas do ISS.
+     * Exemplo: "18T" = alíquota de 18% do ICMS; "2.5S" alíquota de 2,5% do ISS
+     * <br>
+     * - As alíquotas podem ser informadas em índice, de acordo com a Tabela de
+     * alíquotas do ECF, nesse caso use a letra "T", seguida da posição da
+     * Alíquota: Exemplo: "T01", "T10"<br>
+     * - Existem alíquotas internas do ECF para tratar produtos Isentos, nesse
+     * caso use: "FF" para Substituição Tributária, "NN" = Não incidência ou
+     * "II" = Isento <br>
+     * @param unidadeProduto unidade do produto, ex: UN, KG, CX, etc...
+     * @param qtd Quantidade de Produtos a Vender. Permite valores com até 3
+     * casas decimais. O ACBr verifica quantas casas decimais existem no valor
+     * informado e utiliza o comando apropriado para o ECF, otimizando a
+     * impressão para Inteiros o 2 casas decimais, sempre que possível
+     * @param valorUnitario Preço Unitário do produto vendido. Permite valores
+     * com até 3 casas decimais. O ACBr verifica quantas casas decimais existem
+     * no valor informado e utiliza o comando apropriado para o ECF, otimizando
+     * a impressão para 2 casas decimais, sempre que possível.
+     * @throws ACBrECFException
+     */
+    public void vendeItem(String codigo, String descricao, String aliquotaICMS, String unidadeProduto, String qtd, String valorUnitario) throws ACBrECFException {
+        comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ", 0.00," + unidadeProduto + ", \"$\", \"A\", 0.00)");
     }
 
     /**
@@ -244,6 +283,41 @@ public class CupomFiscal {
      */
     public void vendeItem(String codigo, String descricao, String aliquotaICMS, BigDecimal qtd, BigDecimal valorUnitario) throws ACBrECFException {
         vendeItem(codigo, descricao, aliquotaICMS, qtd.toString(), valorUnitario.toString());
+    }
+
+    /**
+     * Realiza a venda dos itens.
+     *
+     * @param codigo código do produto, geralmente á aceito até 13
+     * @param descricao descrição do Produto vendido. Procure não usar acentos,
+     * pois alguns ECFs não aceitam caracteres acentuados. Para imprimir
+     * Descrições "grandes" habilite a opção "Descrição Grande" no ACBrMonitor.
+     * @param aliquotaICMS representação da Alíquota do ICMS.<br>
+     * - As alíquotas podem ser informadas em Valor (mesmo sendo texto).
+     * Exemplos: "18", "2.46".<br>
+     * - Se no ECF existem alíquotas iguais para ICMS e ISS, use o sufixo "T"
+     * para informar que a alíquota é do ICMS ou "S" para alíquotas do ISS.
+     * Exemplo: "18T" = alíquota de 18% do ICMS; "2.5S" alíquota de 2,5% do ISS
+     * <br>
+     * - As alíquotas podem ser informadas em índice, de acordo com a Tabela de
+     * alíquotas do ECF, nesse caso use a letra "T", seguida da posição da
+     * Alíquota: Exemplo: "T01", "T10"<br>
+     * - Existem alíquotas internas do ECF para tratar produtos Isentos, nesse
+     * caso use: "FF" para Substituição Tributária, "NN" = Não incidência ou
+     * "II" = Isento <br>
+     * @param unidadeProduto unidade do produto, und, kg, cx, etc...
+     * @param qtd Quantidade de Produtos a Vender. Permite valores com até 3
+     * casas decimais. O ACBr verifica quantas casas decimais existem no valor
+     * informado e utiliza o comando apropriado para o ECF, otimizando a
+     * impressão para Inteiros o 2 casas decimais, sempre que possível
+     * @param valorUnitario Preço Unitário do produto vendido. Permite valores
+     * com até 3 casas decimais. O ACBr verifica quantas casas decimais existem
+     * no valor informado e utiliza o comando apropriado para o ECF, otimizando
+     * a impressão para 2 casas decimais, sempre que possível.
+     * @throws ACBrECFException
+     */
+    public void vendeItem(String codigo, String descricao, String aliquotaICMS, String unidadeProduto, BigDecimal qtd, BigDecimal valorUnitario) throws ACBrECFException {
+        vendeItem(codigo, descricao, aliquotaICMS, unidadeProduto, qtd.toString(), valorUnitario.toString());
     }
 
     /**
@@ -672,4 +746,5 @@ public class CupomFiscal {
     public br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal.Variaveis getVariaveis() {
         return variaveis == null ? variaveis = new br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal.Variaveis() : variaveis;
     }
+
 }

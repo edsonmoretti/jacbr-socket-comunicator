@@ -8,10 +8,8 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto;
 /**
  *
  * @author Edson
- * @deprecated Use a classe Bancos, que é igual, porém o nome é mais intuitivo
  */
-@Deprecated
-public enum INDICEACBR {
+public enum Bancos {
     BancoDoBrasil(1),
     Santander(2),
     CaixaEconomicaFederal_ConvenioSIGCB(3),
@@ -28,7 +26,7 @@ public enum INDICEACBR {
     BancoBRB(14);
     private final int codigo;
 
-    private INDICEACBR(int codigo) {
+    private Bancos(int codigo) {
         this.codigo = codigo;
     }
 

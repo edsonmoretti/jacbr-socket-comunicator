@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
+import java.nio.charset.Charset;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
@@ -304,7 +305,7 @@ public class ACBr {
                 enviaComando = new PrintWriter(acbrSocket.getOutputStream());
             }
             if (recebeComando == null) {
-                recebeComando = new BufferedReader(new InputStreamReader(acbrSocket.getInputStream(), "UTF-8"));
+                recebeComando = new BufferedReader(new InputStreamReader(acbrSocket.getInputStream(), Charset.forName("Windows-1252")));
             }
 //            try {
 //                Thread.sleep(50);

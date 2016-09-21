@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  */
 public class ACBrBAL {
 
-    private ACBrBAL() {
+    public ACBrBAL() {
     }
 
     /**

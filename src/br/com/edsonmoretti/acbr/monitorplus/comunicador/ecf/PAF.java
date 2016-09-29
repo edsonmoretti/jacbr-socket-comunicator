@@ -5,7 +5,6 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf;
 
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBr;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrUtils;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.LMFC;
@@ -56,7 +55,7 @@ public class PAF {
      * @throws ACBrECFException
      */
     public void arqMF(File arquivo) throws ACBrECFException {
-        arqMF(arquivo.toString());
+        ACBrECF.comandoECF("PafMF_ArqMF(\"" + arquivo.getAbsolutePath() + "\")");
     }
 
     /**
@@ -67,7 +66,7 @@ public class PAF {
      * @throws ACBrECFException
      */
     public void arqMF(String arquivo) throws ACBrECFException {
-        ACBrECF.comandoECF("PafMF_ArqMF(" + arquivo + ")");
+        arqMF(new File(arquivo));
     }
 
     /**
@@ -78,7 +77,7 @@ public class PAF {
      * @throws ACBrECFException
      */
     public void arqMFD(File arquivo) throws ACBrECFException {
-        arqMFD(arquivo.toString());
+        ACBrECF.comandoECF("PafMF_ArqMFD(\"" + arquivo.getAbsolutePath() + "\")");
     }
 
     /**
@@ -89,11 +88,11 @@ public class PAF {
      * @throws ACBrECFException
      */
     public void arqMFD(String arquivo) throws ACBrECFException {
-        ACBrECF.comandoECF("PafMF_ArqMFD(" + arquivo + ")");
+        arqMFD(new File(arquivo));
     }
 
     public void EAD() throws ACBrECFException {
-        throw new ACBrECFException("Ainda estamos estudando esse comando no monitor");
+        ACBrECF.comandoECF("EAD");
     }
 
     public LMFC getLmfc() {

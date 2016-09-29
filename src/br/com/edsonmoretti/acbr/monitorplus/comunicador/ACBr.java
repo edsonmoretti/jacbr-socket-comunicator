@@ -33,7 +33,7 @@ public class ACBr {
     private static final int PORTA = getConfig().getPorta();
     private static InetAddress hostName;
 
-    private ACBr() {
+    public ACBr() {
     }
 
     /**

@@ -14,7 +14,6 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.listener.ACBrEvent;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.listener.ACBrEventListener;
 import java.util.ArrayList;
 import java.util.Collection;
-import javax.swing.JOptionPane;
 
 /**
  *

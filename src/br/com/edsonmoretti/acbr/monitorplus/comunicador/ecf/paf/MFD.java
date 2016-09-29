@@ -8,6 +8,7 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrUtils;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
+import java.io.File;
 import java.util.Date;
 
 /**
@@ -41,7 +42,7 @@ public class MFD {
          * @throws ACBrECFException
          */
         public void porPeriodo(Date dataIni, Date dataFim, String caminho) throws ACBrECFException {
-            ACBrECF.comandoECF("PafMF_MFD_Espelho(" + ACBrUtils.formatDataBR(dataIni) + ", " + ACBrUtils.formatDataBR(dataFim) + "," + caminho + ")");
+            ACBrECF.comandoECF("PafMF_MFD_Espelho(" + ACBrUtils.formatDataBR(dataIni) + ", " + ACBrUtils.formatDataBR(dataFim) + ",\"" + caminho + "\")");
         }
 
         /**
@@ -55,7 +56,7 @@ public class MFD {
          * @throws ACBrECFException
          */
         public void porCRZ(int cooIni, int cooFim, String caminho) throws ACBrECFException {
-            ACBrECF.comandoECF("PafMF_MFD_Espelho(" + cooIni + ", " + cooFim + "," + caminho + ")");
+            ACBrECF.comandoECF("PafMF_MFD_Espelho(" + cooIni + ", " + cooFim + ",\"" + caminho + "\")");
         }
     }
 
@@ -74,7 +75,11 @@ public class MFD {
          * @throws ACBrECFException
          */
         public void porPeriodo(Date dataIni, Date dataFim, String caminho) throws ACBrECFException {
-            ACBrECF.comandoECF("PafMF_MFD_Cotepe1704(" + ACBrUtils.formatDataBR(dataIni) + ", " + ACBrUtils.formatDataBR(dataFim) + "," + caminho + ")");
+            porPeriodo(dataIni, dataFim, new File(caminho));
+        }
+
+        public void porPeriodo(Date dataIni, Date dataFim, File caminho) throws ACBrECFException {
+            ACBrECF.comandoECF("PafMF_MFD_Cotepe1704(" + ACBrUtils.formatDataBR(dataIni) + ", " + ACBrUtils.formatDataBR(dataFim) + ",\"" + caminho.getAbsolutePath() + "\")");
         }
 
         /**
@@ -89,7 +94,11 @@ public class MFD {
          * @throws ACBrECFException
          */
         public void porCRZ(int cooIni, int cooFim, String caminho) throws ACBrECFException {
-            ACBrECF.comandoECF("PafMF_MFD_Cotepe1704(" + cooIni + ", " + cooFim + "," + caminho + ")");
+            porCRZ(cooIni, cooFim, new File(caminho));
+        }
+
+        public void porCRZ(int cooIni, int cooFim, File caminho) throws ACBrECFException {
+            ACBrECF.comandoECF("PafMF_MFD_Cotepe1704(" + cooIni + ", " + cooFim + ",\"" + caminho.getAbsolutePath() + "\")");
         }
     }
 }

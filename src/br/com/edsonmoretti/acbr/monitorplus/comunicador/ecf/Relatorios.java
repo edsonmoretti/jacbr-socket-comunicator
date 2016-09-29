@@ -122,4 +122,5 @@ public class Relatorios {
     public void cortaPapelParcial() throws ACBrECFException {
         ecf.cortaPapelParcial();
     }
+    
 }

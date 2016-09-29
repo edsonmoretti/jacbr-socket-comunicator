@@ -32,20 +32,20 @@ public class TesteBoleto {
         ACBrBOLETO boleto = new ACBrBOLETO();
         try {
 
-            boleto.getCendente().setBairro("Indianópolis");
-            boleto.getCendente().setCEP("55010-330");
-            boleto.getCendente().setCNPJCPF("10.493.367/0001-48");
-            boleto.getCendente().setCaracTitulo(CaracTitulo.CobrancaSimples);
-            boleto.getCendente().setCidade("CARUARU");
-            boleto.getCendente().setCodigoCedente("123456");
-            boleto.getCendente().setComplemento("LOJA");
-            boleto.getCendente().setLayoutBol(LayoutBol.Padrao);
-            boleto.getCendente().setLogradouro("RUA ALFERES JORGE");
-            boleto.getCendente().setNome("GERALDO JOAO DA SILVA ME");
-            boleto.getCendente().setNumero("176");
-            boleto.getCendente().setRespEmis(RespEmis.ClienteEmite);
-            boleto.getCendente().setTipoPessoa(TipoPessoa.PessoaJuridica);
-            boleto.getCendente().setUF("PE");
+            boleto.getCedente().setBairro("Indianópolis");
+            boleto.getCedente().setCEP("55010-330");
+            boleto.getCedente().setCNPJCPF("10.493.367/0001-48");
+            boleto.getCedente().setCaracTitulo(CaracTitulo.CobrancaSimples);
+            boleto.getCedente().setCidade("CARUARU");
+            boleto.getCedente().setCodigoCedente("123456");
+            boleto.getCedente().setComplemento("LOJA");
+            boleto.getCedente().setLayoutBol(LayoutBol.Padrao);
+            boleto.getCedente().setLogradouro("RUA ALFERES JORGE");
+            boleto.getCedente().setNome("GERALDO JOAO DA SILVA ME");
+            boleto.getCedente().setNumero("176");
+            boleto.getCedente().setRespEmis(RespEmis.ClienteEmite);
+            boleto.getCedente().setTipoPessoa(TipoPessoa.PessoaJuridica);
+            boleto.getCedente().setUF("PE");
 
             boleto.getConta().setAgencia(2530);
             boleto.getConta().setConta(4472);
@@ -53,8 +53,8 @@ public class TesteBoleto {
             boleto.getConta().setDigitoConta(4);
 
             boleto.getBanco().setCnab(CNAB.CNAB400);
-            boleto.getBanco().setIndiceacbr(INDICEACBR.Santander);
-            boleto.getBanco().setNumero("033");
+            boleto.getBanco().setIndiceacbr(INDICEACBR.BancoDoNordeste);
+            boleto.getBanco().setNumero("004");
             //1
             boleto.limparLista();
             //2
@@ -73,39 +73,39 @@ public class TesteBoleto {
             sacado.setTipoPessoa(TipoPessoa.PessoaFisica);
             sacado.setUF("PE");
 
-            Titulo titulo = new Titulo();
-            titulo.setAceite(Aceite.SIM);
-            titulo.setCarteira("123");
-            titulo.setDataAbatimento("");
-            titulo.setDataDesconto("");
-            titulo.setDataDocumento("30/06/2016");
-            titulo.setDataMoraJuros("");
-            titulo.setDataProcessamento("30/06/2016");
-            titulo.setDataProtesto("");
-            titulo.setDataProtesto("");
-            titulo.setEspecie("DM");
-            titulo.setEspecieMod("R$");
-            titulo.setInstrucao1("1ª instrução");
-            titulo.setInstrucao2("2ª instrução");
-            titulo.setLocalPagamento("Pagamento apenas com Daniel");
-            titulo.setMensagem("Mensagem");
-            titulo.setNossoNumero("000001");
-            titulo.setNumeroDocumento("0123456789");
-            titulo.setOcorrenciaOriginal(OcorrenciaOriginal.RemessaRegistrar);
-            titulo.setParcela("1");
-            titulo.setPercentualMulta("0,00");
-            titulo.setSeuNumero("0001");
-            titulo.setTipoDiasProtesto(TipoDiasProtesto.DiasCorridos);
-            titulo.setTipoImpressao(TipoImpressao.Padrão);
-            titulo.setTotalParcelas("2");
-            titulo.setValorAbatimento("0,00");
-            titulo.setValorDesconto("0,00");
-            titulo.setValorDocumento("99,00");
-            titulo.setValorIOF("0,00");
-            titulo.setValorMoraJuros("0,00");
-            titulo.setValorOutrasDespesas("0,00");
-            titulo.setVencimento("30/07/2016");
-            titulo.setSacado(sacado);
+//            Titulo titulo = new Titulo();
+//            titulo.setAceite(Aceite.SIM);
+//            titulo.setCarteira("123");
+//            titulo.setDataAbatimento("");
+//            titulo.setDataDesconto("");
+//            titulo.setDataDocumento("30/06/2016");
+//            titulo.setDataMoraJuros("");
+//            titulo.setDataProcessamento("30/06/2016");
+//            titulo.setDataProtesto("");
+//            titulo.setDataProtesto("");
+//            titulo.setEspecie("DM");
+//            titulo.setEspecieMod("R$");
+//            titulo.setInstrucao1("1ª instrução");
+//            titulo.setInstrucao2("2ª instrução");
+//            titulo.setLocalPagamento("Pagamento apenas com Daniel");
+//            titulo.setMensagem("Mensagem");
+//            titulo.setNossoNumero("000001");
+//            titulo.setNumeroDocumento("0123456789");
+//            titulo.setOcorrenciaOriginal(OcorrenciaOriginal.RemessaRegistrar);
+//            titulo.setParcela("1");
+//            titulo.setPercentualMulta("0,00");
+//            titulo.setSeuNumero("0001");
+//            titulo.setTipoDiasProtesto(TipoDiasProtesto.DiasCorridos);
+//            titulo.setTipoImpressao(TipoImpressao.Padrão);
+//            titulo.setTotalParcelas("2");
+//            titulo.setValorAbatimento("0,00");
+//            titulo.setValorDesconto("0,00");
+//            titulo.setValorDocumento("99,00");
+//            titulo.setValorIOF("0,00");
+//            titulo.setValorMoraJuros("0,00");
+//            titulo.setValorOutrasDespesas("0,00");
+//            titulo.setVencimento("30/07/2016");
+//            titulo.setSacado(sacado);
 
             Titulo t = new Titulo();
             t.setAceite(Aceite.SIM);
@@ -118,33 +118,35 @@ public class TesteBoleto {
             t.setDataProtesto("");
             t.setDataProtesto("");
             t.setEspecie("DM");
+            
             t.setEspecieMod("R$");
-            t.setInstrucao1("1ª instrução");
-            t.setInstrucao2("2ª instrução");
+            t.setInstrucao1("00");
+            t.setInstrucao2("");
             t.setLocalPagamento("Pagamento apenas com Daniel");
             t.setMensagem("Mensagem");
             t.setNossoNumero("000001");
             t.setNumeroDocumento("0123456789");
             t.setOcorrenciaOriginal(OcorrenciaOriginal.RemessaRegistrar);
             t.setParcela("2");
-            t.setPercentualMulta("0,00");
+            t.setPercentualMulta("5");
             t.setSeuNumero("0001");
             t.setTipoDiasProtesto(TipoDiasProtesto.DiasCorridos);
             t.setTipoImpressao(TipoImpressao.Padrão);
             t.setTotalParcelas("2");
-            t.setValorAbatimento("0,00");
-            t.setValorDesconto("0,00");
-            t.setValorDocumento("1,00");
-            t.setValorIOF("0,00");
-            t.setValorMoraJuros("0,00");
-            t.setValorOutrasDespesas("0,00");
+            t.setValorAbatimento("1,00");
+            t.setValorDesconto("2,00");
+            t.setValorDocumento("3,00");
+            t.setValorIOF("4,00");
+            t.setValorMoraJuros("5,00");
+            t.setValorOutrasDespesas("6,00");
             t.setVencimento("15/07/2016");
             t.setSacado(sacado);
 
 //            boleto.incluirTitulos(TipoDeSaida.PDF, lista);
-            boleto.incluirTitulos(titulo);
+//            boleto.incluirTitulos(titulo);
 
             boleto.incluirTitulos(t);
+            boleto.gerarRemessa("c:\\remessa\\", 1, "0000001.rem");
 
             boleto.imprimir();
 

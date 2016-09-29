@@ -247,11 +247,11 @@ public class ACBrBOLETO {
      * @param nomeArquivo Nome do Arquivo
      */
     public void gerarRemessa(String dirArqRemessa, int numeroArquivo, String nomeArquivo) throws ACBrBoletoException {
-        comandoBoleto("GerarRemessa('" + dirArqRemessa + "'," + numeroArquivo + ", " + nomeArquivo + ")");
+        comandoBoleto("GerarRemessa(\"" + dirArqRemessa + "\"," + numeroArquivo + ", " + nomeArquivo + ")");
     }
 
     ////////GETS SETTS
-    public Cedente getCendente() {
+    public Cedente getCedente() {
         return cedente;
     }
 

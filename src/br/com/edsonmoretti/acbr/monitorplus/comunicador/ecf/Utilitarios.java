@@ -310,12 +310,13 @@ public class Utilitarios {
      * Venda Líquida VL -> 14 bytes<br>
      * Venda Bruta Diária VB -> 14 bytes<br>
      *
-     * @param registrador Registro para retornar determinada informação. Verificar no manual de programação da ECF para os registros
+     * @param registrador Registro para retornar determinada informação.
+     * Verificar no manual de programação da ECF para os registros
      * @return EX de retorno:
      * 0000000000021298160000000000000000000000000000[ETX][ACK][STX]234+0000AA[x9B][x80][x82][x80][x80]A1
      * @throws ACBrECFException
      */
-    public String retornaInfoECF(String registrador ) throws ACBrECFException {
+    public String retornaInfoECF(String registrador) throws ACBrECFException {
         return ACBrECF.comandoECF("RetornaInfoECF");
     }
 }

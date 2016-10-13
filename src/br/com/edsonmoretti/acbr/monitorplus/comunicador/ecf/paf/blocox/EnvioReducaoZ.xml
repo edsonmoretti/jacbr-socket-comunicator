@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ReducaoZ Versao="1.0">
+    <Mensagem>
+        <Estabelecimento>
+            <Ie>_IE_</Ie>
+            <Cnpj>_CNPJ_</Cnpj>
+            <NomeEmpresarial>_RAZAO_SOCIAL_</NomeEmpresarial>
+        </Estabelecimento>
+        <PafEcf>
+            <NumeroCredenciamento>_NUMERO_CREDENCIAMENTO_</NumeroCredenciamento>
+            <NomeComercial>_NOME_PAF_</NomeComercial>
+            <Versao>_VERSAO_</Versao>
+            <CnpjDesenvolvedor>_CNPJSH_</CnpjDesenvolvedor>
+            <NomeEmpresarialDesenvolvedor>_RAZAOSOCIAL_SH_</NomeEmpresarialDesenvolvedor>
+        </PafEcf>
+        <Ecf>
+            <NumeroFabricacao>UR010905000</NumeroFabricacao>
+            <Tipo>ECF-IF</Tipo>
+            <Marca>URANO</Marca>
+            <Modelo>ZPM/1EF</Modelo>
+            <Versao>5.0</Versao>
+            <Caixa>1</Caixa>
+            <DadosReducaoZ>
+                <DataReferencia>2015-07-16</DataReferencia>
+                <CRZ>1</CRZ>
+                <COO>123456</COO>
+                <CRO>123456</CRO>
+                <VendaBrutaDiaria>123456789,01</VendaBrutaDiaria>
+                <GT>123456789,01</GT>
+                _TotalizadoresParciais_
+            </DadosReducaoZ>
+        </Ecf>
+    </Mensagem>
+</ReducaoZ>

@@ -42,7 +42,22 @@ public class MFD {
          * @throws ACBrECFException
          */
         public void porPeriodo(Date dataIni, Date dataFim, String caminho) throws ACBrECFException {
-            ACBrECF.comandoECF("PafMF_MFD_Espelho(" + ACBrUtils.formatDataBR(dataIni) + ", " + ACBrUtils.formatDataBR(dataFim) + ",\"" + caminho + "\")");
+            porPeriodo(dataIni, dataFim, new File(caminho));
+        }
+
+        /**
+         * Gera arquivo do espelho da Memória de Fita Detalhe por período de
+         * Data e assina digitalmente, inserindo ao final do arquivo uma linha
+         * com o registro tipo EAD( Assinatura Digital ).
+         *
+         *
+         * @param dataIni - Data Inicial. (dd/mm/aaaa)
+         * @param dataFim - Data final. (dd/mm/aaaa)
+         * @param caminho Local onde será gerado o arquivo
+         * @throws ACBrECFException
+         */
+        public void porPeriodo(Date dataIni, Date dataFim, File caminho) throws ACBrECFException {
+            ACBrECF.comandoECF("PafMF_MFD_Espelho(" + ACBrUtils.formatDataBR(dataIni) + ", " + ACBrUtils.formatDataBR(dataFim) + ",\"" + caminho.getAbsolutePath() + "\")");
         }
 
         /**
@@ -56,7 +71,21 @@ public class MFD {
          * @throws ACBrECFException
          */
         public void porCRZ(int cooIni, int cooFim, String caminho) throws ACBrECFException {
-            ACBrECF.comandoECF("PafMF_MFD_Espelho(" + cooIni + ", " + cooFim + ",\"" + caminho + "\")");
+            porCRZ(cooIni, cooFim, new File(caminho));
+        }
+
+        /**
+         * Gera arquivo do espelho da Memória de Fita Detalhe por intervalo de
+         * COO e assina digitalmente, inserindo ao final do arquivo uma linha
+         * com o registro tipo EAD( Assinatura Digital ).
+         *
+         * @param cooIni - Redução Z inicial.
+         * @param cooFim - Redução Z final.
+         * @param caminho Local onde será gerado o arquivo
+         * @throws ACBrECFException
+         */
+        public void porCRZ(int cooIni, int cooFim, File caminho) throws ACBrECFException {
+            ACBrECF.comandoECF("PafMF_MFD_Espelho(" + cooIni + ", " + cooFim + ",\"" + caminho.getAbsolutePath() + "\")");
         }
     }
 

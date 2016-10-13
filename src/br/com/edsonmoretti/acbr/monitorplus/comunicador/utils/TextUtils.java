@@ -1,5 +1,14 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.utils;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.text.Normalizer;
 
 /*
@@ -60,30 +69,115 @@ public class TextUtils {
         return Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("[^\\p{ASCII}]", "");
     }
 
-    //USE APENAS PARA TESTES
-    public static void main(String[] args) {
-        //String ini = "[DESCRICAO]ORIENTACAO=0FONTE=2MULTIPLICADOR_H=2MULTIPLICADOR_V=2VERTICAL=19HORIZONTAL=5[GTIN]ORIENTACAO=0FONTE=1MULTIPLICADOR_H=2MULTIPLICADOR_V=30VERTICAL=13HORIZONTAL=5[R$01]ORIENTACAO=0FONTE=3MULTIPLICADOR_H=3MULTIPLICADOR_V=2VERTICAL=0HORIZONTAL=7[PRECO01]ORIENTACAO=0FONTE=3MULTIPLICADOR_H=4MULTIPLICADOR_V=3VERTICAL=0HORIZONTAL=20[R$02]ORIENTACAO=0FONTE=2MULTIPLICADOR_H=2MULTIPLICADOR_V=2VERTICAL=3HORIZONTAL=5[PRECO02]ORIENTACAO=0FONTE=3MULTIPLICADOR_H=4MULTIPLICADOR_V=3VERTICAL=0HORIZONTAL=40[AMBOSPRECOS][ATACADO]ORIENTACAO=0FONTE=2MULTIPLICADOR_H=2MULTIPLICADOR_V=2VERTICAL=10HORIZONTAL=70[PRECO02]ORIENTACAO=0FONTE=2MULTIPLICADOR_H=2MULTIPLICADOR_V=2VERTICAL=5HORIZONTAL=70";
-        String ini = "[STATUS]\n"
-                + "Versao=1.07\n"
-                + "TpAmb=2\n"
-                + "VerAplic=SP_NFE_PL_005c\n"
-                + "CStat=107\n"
-                + "XMotivo=Serviço em Operação\n"
-                + "CUF=35\n"
-                + "DhRecbto=2009-03-25T08:44:20\n"
-                + "TMed=1\n"
-                + "DhRetorno=\n"
-                + "DigVal=a8F/F3ibhYYXI5GLhCM82O8yiqc=\n"
-                + "XObs=";
-        System.out.println(lerTagIni("VeRsAo", ini));
-        System.out.println(lerTagIni("tpamb", ini));
-        System.out.println(lerTagIni("VERAPLIC", ini));
-        System.out.println(lerTagIni("DHRECBto", ini));
-//        System.out.println(lerTagIni("xmOTIVO", ini));
-        System.out.println(lerTagIni("xmOTIVO", ini, "edson"));
-        System.out.println(lerTagIni("xmOTIVO", ini, "moretti"));
-        System.out.println(lerTagIni("xmOTIVO", ini, "status"));
-        System.out.println(lerTagIni("xmOTIVO", ini));
-        System.out.println(lerTagIni("DigVal", ini));
+    private static String fd(double valor) {
+        return String.format("%.2f", valor).replace(",", ".");
+
+    }
+
+    /**
+     *
+     * @param valor
+     * @param numRepete
+     * @return Formato Zeros alinhados a esquerda, ex: numrepet = 6 , numpassado
+     * =110 retorno 000110
+     */
+    public static String formatoACBrN(double valor, int numRepete) {
+        String s = fd(valor).replace(".", "");
+        int i = s.length();
+        if (i > numRepete) {
+            return s.substring(0, i);
+        }
+        return (i < numRepete ? TextUtils.repete("0", numRepete - i) + s : s).toUpperCase();
+    }
+
+    /**
+     *
+     * @param valor
+     * @param numRepete
+     * @return Formato Zeros alinhados a esquerda, ex: numrepet = 6 , numpassado
+     * =110 retorno 000110
+     */
+    public static String formatoACBrN(String valor, int numRepete) {
+        valor = (valor == null ? "" : valor);
+        int i = valor.length();
+        if (i > numRepete) {
+            return valor.substring(0, i);
+        }
+        return (i < numRepete ? TextUtils.repete("0", numRepete - i) + valor : valor).toUpperCase();
+    }
+
+    /**
+     *
+     * @param valor
+     * @param numRepete
+     * @return Formato Zeros alinhados a direita, ex: numrepet = 6 , numpassado
+     * =110 retorno 110000
+     */
+    public static String formatoACBrX(String valor, int numRepete) {
+        valor = (valor == null ? "" : valor);
+        int i = valor.length();
+        if (i > numRepete) {
+            return valor.substring(0, i);
+        }
+        return (i < numRepete ? valor + TextUtils.repete(" ", numRepete - i) : valor).toUpperCase();
+    }
+
+    public static String repete(String string, int quantidade) {
+        StringBuilder retorno = new StringBuilder();
+        for (int j = 0; j < quantidade; j++) {
+            retorno.append(string);
+        }
+        return retorno.toString();
+    }
+
+    public static String MD5File(File f)
+            throws NoSuchAlgorithmException, FileNotFoundException {
+        MessageDigest digest = MessageDigest.getInstance("MD5");
+        InputStream is = new FileInputStream(f);
+        byte[] buffer = new byte[8192];
+        int read = 0;
+        try {
+            while ((read = is.read(buffer)) > 0) {
+                digest.update(buffer, 0, read);
+            }
+            byte[] md5sum = digest.digest();
+            BigInteger bigInt = new BigInteger(1, md5sum);
+            String output = bigInt.toString(16);
+            return output;
+        } catch (IOException e) {
+            throw new RuntimeException("Impossível processar o arquivo.", e);
+        } finally {
+            try {
+                is.close();
+            } catch (IOException e) {
+            }
+        }
+    }
+
+    public static String MD5String(String text)
+            throws NoSuchAlgorithmException, UnsupportedEncodingException {
+        MessageDigest md;
+        md = MessageDigest.getInstance("MD5");
+        byte[] md5hash = new byte[32];
+        md.update(text.getBytes("iso-8859-1"), 0, text.length());
+        md5hash = md.digest();
+        return convertToHex(md5hash);
+    }
+
+    private static String convertToHex(byte[] data) {
+        StringBuffer buf = new StringBuffer();
+        for (int i = 0; i < data.length; i++) {
+            int halfbyte = (data[i] >>> 4) & 0x0F;
+            int two_halfs = 0;
+            do {
+                if ((0 <= halfbyte) && (halfbyte <= 9)) {
+                    buf.append((char) ('0' + halfbyte));
+                } else {
+                    buf.append((char) ('a' + (halfbyte - 10)));
+                }
+                halfbyte = data[i] & 0x0F;
+            } while (two_halfs++ < 1);
+        }
+        return buf.toString();
     }
 }

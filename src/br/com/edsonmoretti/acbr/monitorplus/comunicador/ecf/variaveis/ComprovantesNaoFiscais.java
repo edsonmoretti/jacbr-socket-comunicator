@@ -56,7 +56,9 @@ public class ComprovantesNaoFiscais {
      * sempre se comunica com o ECF a fim de ler novamente todas os Comprovantes
      * não Fiscais cadastrados
      * <br><b>NOTA:</b> Esse método não traz o contadorDoDia no item
-     * @throws br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
+     *
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
     public List<ComprovanteNaoFiscal> carregaComprovantesNaoFiscais() throws ACBrECFException {
         return compNFiscal("CarregaComprovantesNaoFiscais");

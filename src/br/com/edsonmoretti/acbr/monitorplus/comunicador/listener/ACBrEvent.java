@@ -9,10 +9,10 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.listener;
  *
  * @author Edson
  */
-public class ACBrEvent extends java.util.EventObject{
-    
+public class ACBrEvent extends java.util.EventObject {
+
     public ACBrEvent(Object source) {
         super(source);
     }
-    
+
 }

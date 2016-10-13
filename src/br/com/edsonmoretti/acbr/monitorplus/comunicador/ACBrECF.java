@@ -8,6 +8,7 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Parametros;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Relatorios;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Utilitarios;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Variaveis;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrAACException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.listener.ACBrEvent;
@@ -33,6 +34,7 @@ public class ACBrECF {
     private Utilitarios utilitarios;
     private static final String ECF = "ECF.";
     private boolean temGuilhotina = true;
+    private ACBrAAC aac;
 
     public ACBrECF(boolean ativar) throws ACBrECFException {
         this.acbrPoucoPapelListeners = new ArrayList<>();
@@ -166,7 +168,7 @@ public class ACBrECF {
     }
 
     public CupomFiscal getCupomFiscal() {
-        return cupomFiscal == null ? cupomFiscal = new CupomFiscal() : cupomFiscal;
+        return cupomFiscal == null ? cupomFiscal = new CupomFiscal(aac, this) : cupomFiscal;
     }
 
     public Relatorios getRelatorios() {
@@ -223,6 +225,22 @@ public class ACBrECF {
             default:
                 return mensagem;
         }
+    }
+
+    public char getSufixoAliquota() {
+        return getCupomFiscal().getSufixoAliquota();
+    }
+
+    public void setSufixoAliquota(char sufixoAliquota) {
+        getCupomFiscal().setSufixoAliquota(sufixoAliquota);
+    }
+
+    public ACBrAAC getAac() {
+        return aac;
+    }
+
+    public void setAac(ACBrAAC aac) {
+        this.aac = aac;
     }
 
 }

@@ -12,6 +12,7 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.TipoDeSaida;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.Titulo;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBoletoException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
+import java.io.File;
 import java.util.List;
 
 /**
@@ -137,6 +138,8 @@ public class ACBrBOLETO {
     /**
      *
      * @param titulos
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBoletoException
      */
     public void incluirTitulos(List<Titulo> titulos) throws ACBrBoletoException {
         for (Titulo t : titulos) {
@@ -144,7 +147,17 @@ public class ACBrBOLETO {
         }
     }
 
+    /**
+     *
+     * @param titulo
+     * @throws ACBrBoletoException
+     * @deprecated Use o incluirtitulo()
+     */
     public void incluirTitulos(Titulo titulo) throws ACBrBoletoException {
+        comandoBoleto("IncluirTitulos(\"" + gerarStringFormatoIniTitulo(titulo) + "\")");
+    }
+
+    public void incluirTitulo(Titulo titulo) throws ACBrBoletoException {
         comandoBoleto("IncluirTitulos(\"" + gerarStringFormatoIniTitulo(titulo) + "\")");
     }
 
@@ -154,7 +167,18 @@ public class ACBrBOLETO {
         }
     }
 
+    /**
+     *
+     * @param titulo
+     * @param tipoDeSaida
+     * @throws ACBrBoletoException
+     * @deprecated Use o incluirtitulo()
+     */
     public void incluirTitulos(Titulo titulo, TipoDeSaida tipoDeSaida) throws ACBrBoletoException {
+        comandoBoleto("IncluirTitulos(\"" + gerarStringFormatoIniTitulo(titulo) + "\", " + tipoDeSaida + ")");
+    }
+
+    public void incluirTitulo(Titulo titulo, TipoDeSaida tipoDeSaida) throws ACBrBoletoException {
         comandoBoleto("IncluirTitulos(\"" + gerarStringFormatoIniTitulo(titulo) + "\", " + tipoDeSaida + ")");
     }
 
@@ -221,9 +245,34 @@ public class ACBrBOLETO {
      * diretório "C:\Remessa", com o nome formatado de acordo com o banco para o
      * qual esta sendo feita a remessa . No caso do Bradesco cb00002.rem,
      * considerando que já exista o arquivo cb00001.rem em C:\Remessa.
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBoletoException
      */
     public void gerarRemessa(String dirArqRemessa, int numeroArquivo) throws ACBrBoletoException {
-        comandoBoleto("GerarRemessa('" + dirArqRemessa + "'," + numeroArquivo + ")");
+        gerarRemessa(new File(dirArqRemessa), numeroArquivo);
+    }
+
+    /**
+     *
+     * @param dirArqRemessa Diretório onde deverá ser gravado o arquivo de
+     * Remessa.
+     * @param numeroArquivo Numero do arquivo que deve ser gerado, utilizado
+     * pelo Bradesco, funciona como um contador de arquivos remessa já enviados.
+     * Exemplos:
+     *
+     * BOLETO.GerarRemessa("c:\remessa\",1,000001.rem ) – Irá gerar o arquivo de
+     * remessa no diretório "C:\Remessa", com o nome formatado de acordo com o
+     * banco para o qual esta sendo feita a remessa .000001.rem
+     *
+     * BOLETO.GerarRemessa("c:\remessa\" ) – Irá gerar o arquivo de remessa no
+     * diretório "C:\Remessa", com o nome formatado de acordo com o banco para o
+     * qual esta sendo feita a remessa . No caso do Bradesco cb00002.rem,
+     * considerando que já exista o arquivo cb00001.rem em C:\Remessa.
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBoletoException
+     */
+    public void gerarRemessa(File dirArqRemessa, int numeroArquivo) throws ACBrBoletoException {
+        comandoBoleto("GerarRemessa(\"" + dirArqRemessa.getAbsolutePath() + "\"," + numeroArquivo + ")");
     }
 
     /**
@@ -245,9 +294,37 @@ public class ACBrBOLETO {
      *
      *
      * @param nomeArquivo Nome do Arquivo
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBoletoException
+     */
+    public void gerarRemessa(File dirArqRemessa, int numeroArquivo, String nomeArquivo) throws ACBrBoletoException {
+        comandoBoleto("GerarRemessa(\"" + dirArqRemessa.getAbsolutePath() + "\"," + numeroArquivo + ", " + nomeArquivo + ")");
+    }
+
+    /**
+     *
+     * @param dirArqRemessa Diretório onde deverá ser gravado o arquivo de
+     * Remessa.
+     * @param numeroArquivo Numero do arquivo que deve ser gerado, utilizado
+     * pelo Bradesco, funciona como um contador de arquivos remessa já enviados.
+     * Exemplos:
+     *
+     * BOLETO.GerarRemessa("c:\remessa\",1,000001.rem ) – Irá gerar o arquivo de
+     * remessa no diretório "C:\Remessa", com o nome formatado de acordo com o
+     * banco para o qual esta sendo feita a remessa .000001.rem
+     *
+     * BOLETO.GerarRemessa("c:\remessa\" ) – Irá gerar o arquivo de remessa no
+     * diretório "C:\Remessa", com o nome formatado de acordo com o banco para o
+     * qual esta sendo feita a remessa . No caso do Bradesco cb00002.rem,
+     * considerando que já exista o arquivo cb00001.rem em C:\Remessa.
+     *
+     *
+     * @param nomeArquivo Nome do Arquivo
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBoletoException
      */
     public void gerarRemessa(String dirArqRemessa, int numeroArquivo, String nomeArquivo) throws ACBrBoletoException {
-        comandoBoleto("GerarRemessa(\"" + dirArqRemessa + "\"," + numeroArquivo + ", " + nomeArquivo + ")");
+        gerarRemessa(new File(dirArqRemessa), numeroArquivo, nomeArquivo);
     }
 
     ////////GETS SETTS

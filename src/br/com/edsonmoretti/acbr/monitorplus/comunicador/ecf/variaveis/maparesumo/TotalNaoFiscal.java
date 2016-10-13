@@ -29,7 +29,7 @@ public class TotalNaoFiscal {
     /**
      * Retorna Total de Cancelamentos Operações Não Fiscal.
      *
-     * @return 
+     * @return
      * @throws ACBrECFException
      */
     public BigDecimal getTotalCancelamentosOPNF() throws ACBrECFException {

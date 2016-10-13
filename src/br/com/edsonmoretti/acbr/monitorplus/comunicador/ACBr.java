@@ -417,6 +417,18 @@ public class ACBr {
         public void setPorta(int porta) {
             this.porta = porta;
         }
+    }
 
+    public static void main(String[] args) throws ACBrException {
+        System.out.println("Projeto ACBr: http://www.projetoacbr.com.br/");
+        System.out.println("ACBrMonitorPlus: http://www.projetoacbr.com.br/forum/forum/54-acbrmonitor-plus/");
+        System.out.println("ACBrMonitorPlus Comunicador: http://edsonmoretti.github.io/ACBrMonitorPlus-Comunicador/");
+        System.out.println("Saiba mais: http://www.edsonmoretti.com.br");
+        System.out.println("Lembre-se, use os parametros dentro de aspas. EX: \"ECF.NumSerie\"");
+        System.out.println("#######################################################################################");
+        for (String arg : args) {
+            System.out.println("Rodando comando: ");
+            System.out.println(ACBr.getInstance().comandoAcbr(arg));
+        }
     }
 }

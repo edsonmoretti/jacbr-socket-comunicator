@@ -26,7 +26,7 @@ public class Gaveta {
     /**
      * Retorna “True” se a gaveta de dinheiro está aberta.
      *
-     * @return 
+     * @return
      * @throws ACBrECFException
      */
     public boolean isGavetaAberta() throws ACBrECFException {

@@ -5,10 +5,15 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf;
 
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrAAC;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
 import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrAACException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.math.BigDecimal;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -16,7 +21,19 @@ import java.math.BigDecimal;
  */
 public class CupomFiscal {
 
+    private char sufixoAliquota = 'T';
     private br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal.Variaveis variaveis;
+    private ACBrAAC aac;
+    private ACBrECF ecf;
+
+    public CupomFiscal(ACBrAAC aac, ACBrECF ecf) {
+        this.aac = aac;
+        this.ecf = ecf;
+
+    }
+
+    public CupomFiscal() {
+    }
 
     /**
      * Realiza o teste com o estado da ECF se está livre para emissão de Cupom
@@ -81,7 +98,16 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void abreCupom(String documento, String nome, String endereco) throws ACBrECFException {
-        comandoECF("AbreCupom (" + documento + ", " + nome + ", \"" + endereco + "\")");
+        if (aac != null) {
+            try {
+                aac.getArquivoCriptografado().isEcfAutorizado(ecf);
+                comandoECF("AbreCupom (" + documento + ", " + nome + ", \"" + endereco + "\")");
+            } catch (ACBrAACException ex) {
+                Logger.getLogger(CupomFiscal.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } else {
+            comandoECF("AbreCupom (" + documento + ", " + nome + ", \"" + endereco + "\")");
+        }
     }
 
     /**
@@ -143,6 +169,8 @@ public class CupomFiscal {
      * no valor informado e utiliza o comando apropriado para o ECF, otimizando
      * a impressão para 2 casas decimais, sempre que possível.
      * @throws ACBrECFException
+     * @deprecated melhor não usar valor como aliquota, pois podem vir II, NN,
+     * FF
      */
     public void vendeItem(String codigo, String descricao, Double aliquotaICMS, Double qtd, Double valorUnitario) throws ACBrECFException {
         vendeItem(codigo, descricao, String.valueOf(aliquotaICMS), String.valueOf(qtd), String.valueOf(valorUnitario));
@@ -180,7 +208,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void vendeItem(String codigo, String descricao, String aliquotaICMS, String unidadeProduto, String qtd, String valorUnitario) throws ACBrECFException {
-        comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ", 0.00," + unidadeProduto + ", \"$\", \"A\", 0.00)");
+        comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + sufixoAliquota + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ", 0.00," + unidadeProduto + ", \"$\", \"A\", 0.00)");
     }
 
     /**
@@ -214,7 +242,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void vendeItem(String codigo, String descricao, String aliquotaICMS, String qtd, String valorUnitario) throws ACBrECFException {
-        comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ")");
+        comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + sufixoAliquota + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ")");
     }
 
     /**
@@ -412,6 +440,8 @@ public class CupomFiscal {
      * @param ehDescontoOuAcrescimo Informar "A" para acréscimo ou "D" para
      * desconto.Se parâmetro omitido será considerado Desconto "D"
      * @param codDepartamento Código de departamento.
+     * @deprecated Não é bom usar aliquotaICMS como numero, pode levantar
+     * parseexception devido NN, FF e II
      * @throws ACBrECFException
      */
     public void vendeItem(String codigo, String descricao, BigDecimal aliquotaICMS, BigDecimal qtd, BigDecimal valorUnitario,
@@ -419,7 +449,7 @@ public class CupomFiscal {
         ehDescontoOuAcrescimo = String.valueOf(ehDescontoOuAcrescimo).toUpperCase().charAt(0);
         if (tipoDescontoAcrescimo == '%' || tipoDescontoAcrescimo == '$') {
             if (ehDescontoOuAcrescimo == 'D' || ehDescontoOuAcrescimo == 'A') {
-                comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + ", " + qtd + ", " + valorUnitario + ","
+                comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + (sufixoAliquota) + ", " + qtd + ", " + valorUnitario + ","
                         + "" + valorDescontoAcrescimo + "," + unidade + ",\"" + tipoDescontoAcrescimo + "\",\"" + ehDescontoOuAcrescimo + "\"," + codDepartamento + ")");
             } else {
                 throw new ACBrECFException("Informação sobre ser desconto ou acrescimo invalido. Possíveis: D - Desconto ou A - Acrescimo");
@@ -745,6 +775,14 @@ public class CupomFiscal {
      */
     public br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal.Variaveis getVariaveis() {
         return variaveis == null ? variaveis = new br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal.Variaveis() : variaveis;
+    }
+
+    public char getSufixoAliquota() {
+        return sufixoAliquota;
+    }
+
+    public void setSufixoAliquota(char sufixoAliquota) {
+        this.sufixoAliquota = sufixoAliquota;
     }
 
 }

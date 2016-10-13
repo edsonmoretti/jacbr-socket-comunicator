@@ -64,7 +64,7 @@ public class FormasDePagamento {
         for (String s : comandoECF(tipo).split("\\|")) {
             s = s.trim();
             FormaDePagamento f = new FormaDePagamento();
-            f.setIndice(Integer.parseInt(s.substring(0, 2)));
+            f.setIndice(Integer.parseInt(s.substring(0, 2).replaceAll("\\D", "")));
             if (tipo.equals("LerTotaisFormaPagamento")) {
                 f.setTotal(Numeros.parseToBig(s.substring(2)));
                 for (FormaDePagamento formaDePagamento : getFormasPagamento()) {
@@ -94,7 +94,7 @@ public class FormasDePagamento {
     public FormaDePagamento achaFPGDescricao(String descricao) throws ACBrECFException {
         String s = comandoECF("AchaFPGDescricao(" + descricao + ")").trim();
         FormaDePagamento f = new FormaDePagamento();
-        f.setIndice(Integer.parseInt(s.substring(0, 2)));
+        f.setIndice(Integer.parseInt(s.substring(0, 2).replaceAll("\\D", "")));
         f.setImprimeVinculado(s.charAt(2) == 'V' || s.charAt(3) == 'v');
         f.setDescricao(s.substring(3).trim());
         return f;

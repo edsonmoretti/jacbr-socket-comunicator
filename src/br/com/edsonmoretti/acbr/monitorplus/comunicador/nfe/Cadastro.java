@@ -218,6 +218,6 @@ public class Cadastro {
         public String getCEP() {
             return CEP;
         }
-        
+
     }
 }

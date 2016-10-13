@@ -76,7 +76,8 @@ public class ACBrETQ {
      * Retorna a Porta utilizada para a comunicação serial / paralela.
      *
      * @return EX: "COM4";
-     * @throws br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
     public String getPorta() throws ACBrECFException {
         return comandoEtq("Porta");
@@ -86,7 +87,8 @@ public class ACBrETQ {
      * Altera a getPorta de comunicação com a impressora de etiqueta.
      *
      * @param porta Valor da getPorta, ex: COM3
-     * @throws br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
     public void setPorta(String porta) throws ACBrECFException {
         comandoEtq("SetAvanco(" + porta + ")");
@@ -96,7 +98,8 @@ public class ACBrETQ {
      * Retorna a Temperatura da Impressora.
      *
      * @return EX: "10";
-     * @throws br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
     public int getTemperatura() throws ACBrECFException {
         return Integer.parseInt(comandoEtq("Temperatura"));
@@ -106,7 +109,8 @@ public class ACBrETQ {
      * Altera a getTemperatura da Impressora.
      *
      * @param valor Valor da getTemperatura. ex: 15
-     * @throws br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
     public void setTemperatura(int valor) throws ACBrECFException {
         comandoEtq("SetTemperatura(" + valor + ")");
@@ -116,7 +120,8 @@ public class ACBrETQ {
      * Retorna o número de avanços.
      *
      * @return EX: "0";
-     * @throws br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
     public int getAvanco() throws ACBrECFException {
         return Integer.parseInt(comandoEtq("Avanco"));
@@ -126,7 +131,8 @@ public class ACBrETQ {
      * Altera o valor de avanço da Impressora.
      *
      * @param valor Valor do avanço. Ex: 3
-     * @throws br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException
      */
     public void setAvanco(int valor) throws ACBrECFException {
         comandoEtq("SetAvanco(" + valor + ")");

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Estoque Versao="1.0">
+    <Mensagem>
+        <Estabelecimento>
+            <Ie>_IE_</Ie>
+            <Cnpj>_CNPJ_</Cnpj>
+            <NomeEmpresarial>_RAZAO_SOCIAL_</NomeEmpresarial>
+        </Estabelecimento>
+        <PafEcf>
+            <NumeroCredenciamento>_NUMERO_CREDENCIAMENTO_</NumeroCredenciamento>
+            <NomeComercial>_NOME_PAF_</NomeComercial>
+            <Versao>_VERSAO_</Versao>
+            <CnpjDesenvolvedor>_CNPJSH_</CnpjDesenvolvedor>
+            <NomeEmpresarialDesenvolvedor>_RAZAOSOCIAL_SH_</NomeEmpresarialDesenvolvedor>
+        </PafEcf>
+        <DadosEstoque>
+            <DataReferenciaInicial>_DATA_REFERENCIA_INICIAL_</DataReferenciaInicial>
+            <DataReferenciaFinal>_DATA_REFERENCIA_FINAL_</DataReferenciaFinal>
+            <Produtos>
+                _PRODUTOS_
+            </Produtos>
+        </DadosEstoque>
+    </Mensagem>
+</Estoque>

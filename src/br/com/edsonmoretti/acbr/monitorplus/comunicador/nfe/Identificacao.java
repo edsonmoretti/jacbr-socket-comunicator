@@ -33,7 +33,7 @@ public class Identificacao {
     private final String dhCont;
     private final String xJust;
 
-    public Identificacao(String cUF, String cNF, String natOp, String indPag, String mod, String serie, String nNF, String dhEmi, String dhSaiEnt, String tpNF, String idDest,String cMunFG, String tpImp, String tpEmis, String finNFe, String indFinal, String indPres, String procEmi, String verProc, String dhCont, String xJust) {
+    public Identificacao(String cUF, String cNF, String natOp, String indPag, String mod, String serie, String nNF, String dhEmi, String dhSaiEnt, String tpNF, String idDest, String cMunFG, String tpImp, String tpEmis, String finNFe, String indFinal, String indPres, String procEmi, String verProc, String dhCont, String xJust) {
         this.cUF = cUF;
         this.cNF = cNF;
         this.natOp = natOp;

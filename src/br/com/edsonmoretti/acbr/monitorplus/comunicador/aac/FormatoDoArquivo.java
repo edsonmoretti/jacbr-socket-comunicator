@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.edsonmoretti.acbr.monitorplus.comunicador.listener;
+package br.com.edsonmoretti.acbr.monitorplus.comunicador.aac;
 
 /**
  *
  * @author Edson
  */
-public class ACBrAdapter implements ACBrEventListener {
-
-    @Override
-    public void msgPoucoPapel(ACBrEvent e) {
-
-    }
-
+public enum FormatoDoArquivo {
+    XML, TXT;
 }

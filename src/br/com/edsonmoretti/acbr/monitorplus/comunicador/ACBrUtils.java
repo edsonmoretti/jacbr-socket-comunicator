@@ -8,7 +8,6 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
@@ -17,7 +16,6 @@ import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Scanner;
 
 /**
  *

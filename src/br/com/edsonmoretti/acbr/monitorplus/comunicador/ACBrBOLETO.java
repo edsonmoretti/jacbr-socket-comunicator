@@ -118,8 +118,6 @@ public class ACBrBOLETO {
      * 3 - Cobrança Descontada<br>
      * 4 - Cobrança Vendor<br>
      *
-     * @param config conteúdo do arquivo ini, contendo os dados do
-     * cedente(Informações do cedente, conta, banco).
      * @throws ACBrBoletoException
      */
     public void configurarDados() throws ACBrBoletoException {
@@ -127,10 +125,10 @@ public class ACBrBOLETO {
             throw new ACBrBoletoException("NullPointerException: Objeto banco não pode ser null, informe um banco.");
         }
         if (conta == null) {
-            throw new ACBrBoletoException("NullPointerException: Objeto conta não pode ser null, informe um banco.");
+            throw new ACBrBoletoException("NullPointerException: Objeto conta não pode ser null, informe uma conta.");
         }
         if (cedente == null) {
-            throw new ACBrBoletoException("NullPointerException: Objeto cendente não pode ser null, informe um banco.");
+            throw new ACBrBoletoException("NullPointerException: Objeto cedente não pode ser null, informe um cedente.");
         }
         comandoBoleto("ConfigurarDados(\"" + gerarStringFormatoIniConfig() + "\")");
     }

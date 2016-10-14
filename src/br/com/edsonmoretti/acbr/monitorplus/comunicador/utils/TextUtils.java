@@ -10,6 +10,10 @@ import java.math.BigInteger;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.text.Normalizer;
+import java.util.TreeMap;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -22,21 +26,44 @@ import java.text.Normalizer;
  */
 public class TextUtils {
 
-    public static String lerTagIni(String ler, String deOnde, String chaveTitulo) {
-        if (chaveTitulo.endsWith("]") && chaveTitulo.startsWith("[")) {
-            chaveTitulo = chaveTitulo.toLowerCase(); //deixando minuscula pra ignorar o case e adicionado o =
+    public static void main(String[] args) {
+        
+    }
+
+    public static TreeMap<String, String> extrarSecaoesDeIni(String deOnde) {
+        TreeMap<String, String> t = new TreeMap<>();
+        Pattern pattern = Pattern.compile("\\[[\\w]+\\]");
+        Matcher matcher = pattern.matcher(deOnde);
+        while (matcher.find()) {
+            String secao = matcher.group(0);
+            String ini = deOnde.split("\\" + secao)[1];
+            try {
+                ini = ini.substring(0, ini.indexOf("["));
+            } catch (java.lang.StringIndexOutOfBoundsException e) {
+                //nada tentou achar index of [ e não achou, presumi-se fim de leitura já que a string tem q ta no formato ini
+            }
+            if (!ini.isEmpty()) {
+                t.put(secao, ini.trim());
+            }
+        }
+        return t;
+    }
+
+    public static String lerTagIni(String chave, String deOnde, String secao) {
+        if (secao.endsWith("]") && secao.startsWith("[")) {
+            secao = secao.toLowerCase(); //deixando minuscula pra ignorar o case e adicionado o =
         } else {
-            chaveTitulo = "[" + chaveTitulo.toLowerCase() + "]"; //deixando minuscula pra ignorar o case e adicionado o =
+            secao = "[" + secao.toLowerCase() + "]"; //deixando minuscula pra ignorar o case e adicionado o =
         }
         String original = deOnde; //guarando a string deOnde original para pegar os dados no formato normal
         deOnde = deOnde.toLowerCase() + "\n"; //deixando minuscula o conteudo do ini pra poder usar a tag minuscula e dando um enter no final para pegar a ultima tag caso n tenha \n, pois o char \n eh usado para saber o final da tag ini
-        original = deOnde = original.substring(deOnde.indexOf(chaveTitulo) + 1);
+        original = deOnde = original.substring(deOnde.indexOf(secao) + 1);
         try {
             original = "[" + original.substring(0, deOnde.indexOf("\n["));
         } catch (Exception e) {
 
         }
-        return lerTagIni(ler, original);
+        return lerTagIni(chave, original);
     }
 
     public static String lerTagIni(String ler, String deOnde) {

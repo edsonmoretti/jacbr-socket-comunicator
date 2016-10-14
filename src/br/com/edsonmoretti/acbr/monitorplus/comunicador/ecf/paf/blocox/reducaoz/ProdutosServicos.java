@@ -14,24 +14,24 @@ import java.util.List;
  */
 public class ProdutosServicos {
 
-    private final List<Produto> produtos = new ArrayList<>();
-    private final List<Servico> servicos = new ArrayList<>();
+    private final List<ProdutoReducaoZ> produtos = new ArrayList<>();
+    private final List<ServicoReducaoZ> servicos = new ArrayList<>();
 
-    public List<Produto> getProdutos() {
+    public List<ProdutoReducaoZ> getProdutos() {
         return produtos;
     }
 
-    public List<Servico> getServicos() {
+    public List<ServicoReducaoZ> getServicos() {
         return servicos;
     }
 
     @Override
     public String toString() {
         String xml = "<ProdutosServicos>\n";
-        for (Produto produto : produtos) {
+        for (ProdutoReducaoZ produto : produtos) {
             xml += produto.toString() + "\n";
         }
-        for (Servico servico : servicos) {
+        for (ServicoReducaoZ servico : servicos) {
             xml += servico.toString() + "\n";
         }
         xml += "</ProdutosServicos>";

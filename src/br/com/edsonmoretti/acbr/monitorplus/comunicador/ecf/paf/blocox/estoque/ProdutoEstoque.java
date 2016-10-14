@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  *
  * @author Edson
  */
-public class Produto {
+public class ProdutoEstoque {
 
     private String descricao;
     private String codigo;

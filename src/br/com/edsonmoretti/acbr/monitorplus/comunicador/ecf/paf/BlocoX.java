@@ -112,7 +112,14 @@ public class BlocoX {
     private String razaoSocialEmpresarialDesenvolvedora = "";
 
     public String getXMLDadozDaReducaoZ() {
-        return "";
+        return dadosEstoque.toString().replace("_IE_", inscricaoEstadualEstabelecimento)
+                .replace("_CNPJ_", cnpjEstabelecimento)
+                .replace("_RAZAO_SOCIAL_", razaoSocialEstabelecimento)
+                .replace("_NUMERO_CREDENCIAMENTO_", numeroDoCredenciamentoPafEcf)
+                .replace("_NOME_PAF_", nomeDoPafEcf)
+                .replace("_VERSAO_", versaoDoPafEcf)
+                .replace("_CNPJSH_", cnpjEmpresaDesenvolvedora)
+                .replace("_RAZAOSOCIAL_SH_", razaoSocialEmpresarialDesenvolvedora);
     }
 
     public String getXMLEstoque() {

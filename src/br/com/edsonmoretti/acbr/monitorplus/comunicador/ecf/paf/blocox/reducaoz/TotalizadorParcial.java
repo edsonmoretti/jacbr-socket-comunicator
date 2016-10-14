@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 public class TotalizadorParcial {
 
     private String nome;
-    private String valor;
+    private BigDecimal valor;
     private final ProdutosServicos produtosServicos = new ProdutosServicos();
 
     public String getNome() {
@@ -26,12 +26,12 @@ public class TotalizadorParcial {
         this.nome = Nome;
     }
 
-    public String getValor() {
+    public BigDecimal getValor() {
         return valor;
     }
 
-    public void setValor(String Valor) {
-        this.valor = Valor;
+    public void setValor(BigDecimal valor) {
+        this.valor = valor;
     }
 
     public ProdutosServicos getProdutosServicos() {

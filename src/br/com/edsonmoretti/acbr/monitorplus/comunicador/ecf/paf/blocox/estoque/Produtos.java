@@ -9,12 +9,12 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.blocox.estoque;
  *
  * @author Edson
  */
-public class Produtos extends java.util.ArrayList<Produto> {
+public class Produtos extends java.util.ArrayList<ProdutoEstoque> {
 
     @Override
     public String toString() {
         String s = "";
-        for (br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.blocox.estoque.Produto thi : this) {
+        for (br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.blocox.estoque.ProdutoEstoque thi : this) {
             s += thi + "\n";
         }
         return s.substring(0, s.length() - 1);

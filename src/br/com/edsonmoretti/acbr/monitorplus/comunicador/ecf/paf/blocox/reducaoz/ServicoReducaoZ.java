@@ -11,7 +11,7 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
  *
  * @author Edson
  */
-public class Servico extends Produto {
+public class ServicoReducaoZ extends ProdutoReducaoZ {
 
     @Override
     public String toString() {

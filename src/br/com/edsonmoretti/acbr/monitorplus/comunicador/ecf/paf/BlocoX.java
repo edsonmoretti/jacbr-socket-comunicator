@@ -5,6 +5,7 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf;
 
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.blocox.XML;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.blocox.estoque.DadosEstoque;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.blocox.reducaoz.DadosDaReducaoZ;
 
@@ -110,27 +111,27 @@ public class BlocoX {
     private String versaoDoPafEcf = "";
     private String cnpjEmpresaDesenvolvedora = "";
     private String razaoSocialEmpresarialDesenvolvedora = "";
-
-    public String getXMLDadozDaReducaoZ() {
-        return dadosEstoque.toString().replace("_IE_", inscricaoEstadualEstabelecimento)
+    
+    public XML getNewXMLDadozDaReducaoZ() {
+        return new XML(dadosDaReducaoZ.toString().replace("_IE_", inscricaoEstadualEstabelecimento)
                 .replace("_CNPJ_", cnpjEstabelecimento)
                 .replace("_RAZAO_SOCIAL_", razaoSocialEstabelecimento)
                 .replace("_NUMERO_CREDENCIAMENTO_", numeroDoCredenciamentoPafEcf)
                 .replace("_NOME_PAF_", nomeDoPafEcf)
                 .replace("_VERSAO_", versaoDoPafEcf)
                 .replace("_CNPJSH_", cnpjEmpresaDesenvolvedora)
-                .replace("_RAZAOSOCIAL_SH_", razaoSocialEmpresarialDesenvolvedora);
+                .replace("_RAZAOSOCIAL_SH_", razaoSocialEmpresarialDesenvolvedora));
     }
 
-    public String getXMLEstoque() {
-        return dadosEstoque.toString().replace("_IE_", inscricaoEstadualEstabelecimento)
+    public XML getNewXMLDadosEstoque() {
+        return new XML(dadosEstoque.toString().replace("_IE_", inscricaoEstadualEstabelecimento)
                 .replace("_CNPJ_", cnpjEstabelecimento)
                 .replace("_RAZAO_SOCIAL_", razaoSocialEstabelecimento)
                 .replace("_NUMERO_CREDENCIAMENTO_", numeroDoCredenciamentoPafEcf)
                 .replace("_NOME_PAF_", nomeDoPafEcf)
                 .replace("_VERSAO_", versaoDoPafEcf)
                 .replace("_CNPJSH_", cnpjEmpresaDesenvolvedora)
-                .replace("_RAZAOSOCIAL_SH_", razaoSocialEmpresarialDesenvolvedora);
+                .replace("_RAZAOSOCIAL_SH_", razaoSocialEmpresarialDesenvolvedora));
     }
 
     public String getInscricaoEstadualEstabelecimento() {

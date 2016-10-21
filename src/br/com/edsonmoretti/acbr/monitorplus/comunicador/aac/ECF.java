@@ -57,7 +57,7 @@ public class ECF {
     }
 
     public BigDecimal getTotalizadorGeral() {
-        return grandeTotal.setScale(4, RoundingMode.HALF_DOWN);
+        return (grandeTotal == null ? BigDecimal.ZERO : grandeTotal).setScale(4, RoundingMode.HALF_DOWN);
     }
 
     public void setTotalizadorGeral(BigDecimal grandeTotal) {

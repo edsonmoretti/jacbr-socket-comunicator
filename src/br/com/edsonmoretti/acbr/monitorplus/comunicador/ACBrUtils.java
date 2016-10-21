@@ -27,6 +27,11 @@ public class ACBrUtils {
      * "yyyy-MM-dd"
      */
     private static SimpleDateFormat dateFormatDB;
+
+    /**
+     * "ddMMyyyy"
+     */
+    private static SimpleDateFormat dateFormatParaibaLegal;
     /**
      * "dd/MM/yyyy"
      */
@@ -191,5 +196,9 @@ public class ACBrUtils {
         }
         PrintWriter pw = new PrintWriter(file);
         pw.println(linha);
+    }
+
+    public static String formatDataParaibaLegal(Date date) {
+        return (dateFormatParaibaLegal == null ? dateFormatParaibaLegal = new SimpleDateFormat("ddMMyyyy") : dateFormatParaibaLegal).format(date);
     }
 }

@@ -8,12 +8,9 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrAAC;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
 import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrAACException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.math.BigDecimal;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -23,14 +20,6 @@ public class CupomFiscal {
 
     private char sufixoAliquota = 'T';
     private br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal.Variaveis variaveis;
-    private ACBrAAC aac;
-    private ACBrECF ecf;
-
-    public CupomFiscal(ACBrAAC aac, ACBrECF ecf) {
-        this.aac = aac;
-        this.ecf = ecf;
-
-    }
 
     public CupomFiscal() {
     }
@@ -98,16 +87,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void abreCupom(String documento, String nome, String endereco) throws ACBrECFException {
-        if (aac != null) {
-            try {
-                aac.getArquivoCriptografado().isEcfAutorizado(ecf);
-                comandoECF("AbreCupom (" + documento + ", " + nome + ", \"" + endereco + "\")");
-            } catch (ACBrAACException ex) {
-                Logger.getLogger(CupomFiscal.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        } else {
-            comandoECF("AbreCupom (" + documento + ", " + nome + ", \"" + endereco + "\")");
-        }
+        comandoECF("AbreCupom (" + documento + ", " + nome + ", \"" + endereco + "\")");
     }
 
     /**

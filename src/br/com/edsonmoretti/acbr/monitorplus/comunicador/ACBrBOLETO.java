@@ -275,6 +275,27 @@ public class ACBrBOLETO {
 
     /**
      *
+     * @param dirArqRetorno
+     * @param nomeArquivo
+     * @return
+     * @throws ACBrBoletoException cDirArqRetorno - Diretório onde está o
+     * arquivo de Retorno.
+     *
+     * cNomeArquivo - Nome do arquivo de retorno, pode ser informado o path
+     * completo do arquivo ou somente o nome. *
+     *
+     * Exemplos:
+     *
+     * BOLETO.GerarLerRetorno("c:\retorno\","00001.ret" ) – Irá buscar o arquivo
+     * de retorno no diretório "C:\Retorno". *
+     *
+     */
+    public void gerarLerRetorno(File dirArqRetorno, String nomeArquivo) throws ACBrBoletoException {
+        comandoBoleto("LerRetorno(\"" + dirArqRetorno.getAbsolutePath() + "\",\"" + nomeArquivo + "\")");
+    }
+
+    /**
+     *
      * @param dirArqRemessa Diretório onde deverá ser gravado o arquivo de
      * Remessa.
      * @param numeroArquivo Numero do arquivo que deve ser gerado, utilizado

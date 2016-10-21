@@ -5,7 +5,6 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.aac;
 
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrUtils;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
 
 /**
@@ -19,6 +18,9 @@ public class EmpresaDesenvolvedora {
     private String inscricaoEstadual;
     private String inscricaoMunicipal;
     private String razaoSocial;
+    private String enderecoCompleto;
+    private String telefone;
+    private String contato;
 
     public String getCnpj() {
         return cnpj;
@@ -54,6 +56,30 @@ public class EmpresaDesenvolvedora {
 
     public String getTipoDeRegistro() {
         return tipoDeRegistro;
+    }
+
+    public String getEnderecoCompleto() {
+        return enderecoCompleto;
+    }
+
+    public void setEnderecoCompleto(String enderecoCompleto) {
+        this.enderecoCompleto = enderecoCompleto;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getContato() {
+        return contato;
+    }
+
+    public void setContato(String contato) {
+        this.contato = contato;
     }
 
     @Override

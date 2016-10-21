@@ -66,7 +66,7 @@ public class TotalizadorParcial {
                  */
                 + produtosServicos
                 + "             </TotalizadorParcial>";
-        return super.toString(); //To change body of generated methods, choose Tools | Templates.
+        return xml; //To change body of generated methods, choose Tools | Templates.
     }
 
 }

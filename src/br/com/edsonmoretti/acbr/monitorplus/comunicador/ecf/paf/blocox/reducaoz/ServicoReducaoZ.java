@@ -15,14 +15,15 @@ public class ServicoReducaoZ extends ProdutoReducaoZ {
 
     @Override
     public String toString() {
-        return "<Servico>\n"
-                + "                                <Descricao>" + getDescricao() + "</Descricao>\n"
-                + "                                <Codigo>" + getCodigo() + "</Codigo>\n"
-                + "                                <CodigoTipo>" + getCodigoTipo() + "</CodigoTipo>\n"
-                + "                                <Quantidade>" + Numeros.fmtBig(getQuantidade(), 2) + "</Quantidade>\n"
-                + "                                <Unidade>" + getUnidade() + "</Unidade>\n"
-                + "                                <ValorUnitario>" + Numeros.fmtBig(getValorUnitario(), 2) + "</ValorUnitario>\n"
-                + "                            </Servico>";
+        return super.toString().replace("<Produto>", "<Servico>").replace("</Produto>", "</Servico>");
+//        return "<Servico>\n"
+//                + "                                <Descricao>" + getDescricao() + "</Descricao>\n"
+//                + "                                <Codigo>" + getCodigo() + "</Codigo>\n"
+//                + "                                <CodigoTipo>" + getCodigoTipo() + "</CodigoTipo>\n"
+//                + "                                <Quantidade>" + Numeros.fmtBig(getQuantidade(), 2) + "</Quantidade>\n"
+//                + "                                <Unidade>" + getUnidade() + "</Unidade>\n"
+//                + "                                <ValorUnitario>" + Numeros.fmtBig(getValorUnitario(), 2) + "</ValorUnitario>\n"
+//                + "                            </Servico>";
     }
 
 }

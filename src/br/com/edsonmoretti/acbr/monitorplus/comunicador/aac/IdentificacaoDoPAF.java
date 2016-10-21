@@ -6,6 +6,7 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.aac;
 
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
+import java.io.File;
 
 /**
  *
@@ -17,6 +18,7 @@ public class IdentificacaoDoPAF {
     private String laudoDoPafEcf;
     private String nomeDoPafEcf;
     private String versaoDoPafEcf;
+    private File principalExecutavel;
 
     public String getLaudoDoPafEcf() {
         return laudoDoPafEcf;
@@ -44,6 +46,14 @@ public class IdentificacaoDoPAF {
 
     public String getTipoDeRegistro() {
         return tipoDeRegistro;
+    }
+
+    public File getPrincipalExecutavel() {
+        return principalExecutavel;
+    }
+
+    public void setPrincipalExecutavel(File principalExecutavel) {
+        this.principalExecutavel = principalExecutavel;
     }
 
     @Override

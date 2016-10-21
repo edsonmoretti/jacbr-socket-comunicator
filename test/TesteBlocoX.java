@@ -29,18 +29,6 @@ public class TesteBlocoX {
         x.getDadosEstoque().setDataReferenciaFinal(new Date());
         x.getDadosEstoque().setDataReferenciaInicial(new Date());
 
-        //dados paf-ecf
-        x.setCnpjEmpresaDesenvolvedora("10493367000148");
-        x.setRazaoSocialEmpresarialDesenvolvedora("geraldo joao");
-        x.setVersaoDoPafEcf("2.04");
-        x.setNumeroDoCredenciamentoPafEcf("3216546");
-        x.setNomeDoPafEcf("GTECH-PAF++");
-
-        //dados empresa
-        x.setCnpjEstabelecimento("10493367000148");
-        x.setInscricaoEstadualEstabelecimento("123458798");
-        x.setRazaoSocialEstabelecimento("razao social esta");
-
         ProdutoEstoque p = new ProdutoEstoque();
         p.setAliquota(BigDecimal.ZERO);
         p.setCodigo("12456789");
@@ -70,7 +58,7 @@ public class TesteBlocoX {
         x.getDadosEstoque().getProdutos().add(p2);
 
         System.out.println("####### XML ESTOQUE #########");
-        System.out.println(x.getXMLEstoque());
+        System.out.println(x.getNewXMLDadosEstoque());
 
         System.out.println("####### XML Dados Z #########");
         x.getDadosDaReducaoZ().setCOO("0");
@@ -84,15 +72,15 @@ public class TesteBlocoX {
         x.getDadosDaReducaoZ().setNumeroFabricacaoECF("DR00154s4f65466654654");
         x.getDadosDaReducaoZ().setTipoECF("ECF-IF");
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < 3; i++) {
             TotalizadorParcial tp = new TotalizadorParcial();
-            tp.setNome("F");
+            tp.setNome("F"+i);
             tp.setValor(BigDecimal.ONE);
-            for (int j = 0; j < 2; j++) {
+            for (int j = 0; j < 3; j++) {
                 ServicoReducaoZ s = new ServicoReducaoZ();
-                s.setCodigo("123");
+                s.setCodigo("123_" + i + "" + j);
                 s.setCodigoTipo(CodigoTipo.GTIN);
-                s.setDescricao("descricao");
+                s.setDescricao("descricao" + i + "" + j);
                 s.setQuantidade(BigDecimal.ONE);
                 s.setUnidade("UND");
                 s.setValorUnitario(BigDecimal.TEN);
@@ -105,6 +93,6 @@ public class TesteBlocoX {
         x.getDadosDaReducaoZ().setVendaBrutaDiaria(BigDecimal.TEN);
         x.getDadosDaReducaoZ().setVersaoECF("1.01");
 
-        System.out.println(x.getXMLDadozDaReducaoZ());
+        System.out.println(x.getNewXMLDadozDaReducaoZ());
     }
 }

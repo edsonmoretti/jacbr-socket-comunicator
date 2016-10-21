@@ -8,7 +8,6 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Parametros;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Relatorios;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Utilitarios;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.Variaveis;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrAACException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.listener.ACBrEvent;
@@ -168,7 +167,7 @@ public class ACBrECF {
     }
 
     public CupomFiscal getCupomFiscal() {
-        return cupomFiscal == null ? cupomFiscal = new CupomFiscal(aac, this) : cupomFiscal;
+        return cupomFiscal == null ? cupomFiscal = new CupomFiscal() : cupomFiscal;
     }
 
     public Relatorios getRelatorios() {

@@ -156,6 +156,7 @@ public class ArquivoCriptografado {
 
     public void recomporGT(ACBrECF ecf, String croDoBanco, String crzDoBanco) throws ACBrAACException {
         try {
+            carregarArquivo();
             //Requisito XXIV, se CRO foi incrementado (teve intervencao) em 1, recomponhe GT
             boolean achou = false;
             String keyGt = "";
@@ -283,5 +284,46 @@ public class ArquivoCriptografado {
             cript += md5.toCharArray()[i];
         }
         return cript;
+    }
+
+    public void atualizaGT(ACBrECF ecf) throws ACBrAACException {
+        try {
+            carregarArquivo();
+            //Requisito XXIV, se CRO foi incrementado (teve intervencao) em 1, recomponhe GT
+            boolean achou = false;
+            String keyGt = "";
+            String cnpj = ecf.getVariaveis().getEquipamento().getCnpj().replaceAll("[^0-9]", "");
+            for (Object object : properties.keySet()) {
+                String p = (String) object;
+                if (p.startsWith("ECF")) {
+                    String serieComCNPJ = properties.getProperty(p);
+                    try {
+                        achou = inserirCNPJemMD5(TextUtils.MD5String(ecf.getVariaveis().getEquipamento().getNumSerie()), cnpj).equals(serieComCNPJ);
+                        if (achou) {
+                            keyGt = "GT" + p.substring(p.length() - 1);
+                            break;
+                        }
+                    } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+                        throw new ACBrAACException(ex.getMessage());
+                    }
+                }
+            }
+
+            if (!keyGt.isEmpty()) {
+                properties.setProperty(keyGt, TextUtils.MD5String(cnpj + ecf.getVariaveis().getMapaResumo().getGrandeTotal()));
+            }
+
+            if (formatoDoArquivo == FormatoDoArquivo.TXT) {
+                properties.store(new FileOutputStream(arquivo), comentarioDoArquivo);
+            } else if (formatoDoArquivo == FormatoDoArquivo.XML) {
+                properties.storeToXML(new FileOutputStream(arquivo), comentarioDoArquivo);
+            }
+        } catch (ACBrECFException | NoSuchAlgorithmException | UnsupportedEncodingException ex) {
+            throw new ACBrAACException(ex.getMessage());
+        } catch (FileNotFoundException ex) {
+            throw new ACBrAACException(ex.getMessage());
+        } catch (IOException ex) {
+            throw new ACBrAACException(ex.getMessage());
+        }
     }
 }

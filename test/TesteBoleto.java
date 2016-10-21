@@ -8,13 +8,11 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.LayoutBol;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.OcorrenciaOriginal;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.RespEmis;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.Sacado;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.TipoDeSaida;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.TipoDiasProtesto;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.TipoImpressao;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.TipoPessoa;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.boleto.Titulo;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrBoletoException;
-import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 

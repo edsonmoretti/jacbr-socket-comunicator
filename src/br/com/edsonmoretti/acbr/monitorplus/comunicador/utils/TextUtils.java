@@ -27,7 +27,7 @@ import java.util.regex.Pattern;
 public class TextUtils {
 
     public static void main(String[] args) {
-        
+
     }
 
     public static TreeMap<String, String> extrarSecaoesDeIni(String deOnde) {

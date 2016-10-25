@@ -74,7 +74,7 @@ public class TesteBlocoX {
 
         for (int i = 0; i < 3; i++) {
             TotalizadorParcial tp = new TotalizadorParcial();
-            tp.setNome("F"+i);
+            tp.setNome("F" + i);
             tp.setValor(BigDecimal.ONE);
             for (int j = 0; j < 3; j++) {
                 ServicoReducaoZ s = new ServicoReducaoZ();

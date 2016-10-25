@@ -30,6 +30,7 @@ public class ArquivoCriptografado {
     private FormatoDoArquivo formatoDoArquivo = FormatoDoArquivo.XML;
     private Properties properties;
     private String comentarioDoArquivo = "";
+    private String MD5Principal;
 
     public ArquivoCriptografado() {
         arquivo = new File("arquivo_criptografado");
@@ -85,6 +86,14 @@ public class ArquivoCriptografado {
 
     public void setComentarioDoArquivo(String comentarioDoArquivo) {
         this.comentarioDoArquivo = comentarioDoArquivo;
+    }
+
+    public void setMD5Principal(String MD5Principal) {
+        this.MD5Principal = MD5Principal;
+    }
+
+    public String getMD5Principal() {
+        return MD5Principal;
     }
 
     public boolean isEcfAutorizado(ACBrECF ecf) throws ACBrAACException {
@@ -238,6 +247,7 @@ public class ArquivoCriptografado {
         try {
             cnpjDaEmpresaCadastradaNoECF = cnpjDaEmpresaCadastradaNoECF.replaceAll("[^0-9]", "");
             properties = new Properties();
+            properties.setProperty("MD-5", MD5Principal);
             for (int i = 1; i <= ecfs.size(); i++) {//<= pq estou iniciando do 1 para salvar cont ECF1, ECF2... e no get de ecfs eu uso i-1 para o index começar do 0
                 properties.setProperty("ECF" + i, inserirCNPJemMD5(TextUtils.MD5String(ecfs.get(i - 1).getSerieEcf()), cnpjDaEmpresaCadastradaNoECF));
                 properties.setProperty("GT" + i, TextUtils.MD5String(cnpjDaEmpresaCadastradaNoECF + ecfs.get(i - 1).getTotalizadorGeral()));

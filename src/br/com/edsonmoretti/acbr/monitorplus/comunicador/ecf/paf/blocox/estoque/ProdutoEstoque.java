@@ -1,4 +1,5 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.blocox.estoque;
+
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.BlocoX.CodigoTipo;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.BlocoX.IAT;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.BlocoX.IPPT;

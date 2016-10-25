@@ -31,8 +31,8 @@ public class TesteBoleto {
         ACBrBOLETO boleto = new ACBrBOLETO();
         try {
             boleto.getCedente().setBairro("Indianópolis");
-            boleto.getCedente().setCEP("55010-330");
-            boleto.getCedente().setCNPJCPF("10.493.367/0001-48");
+            boleto.getCedente().setCEP("55010330");
+            boleto.getCedente().setCNPJCPF("10493367000148");
             boleto.getCedente().setCaracTitulo(CaracTitulo.CobrancaSimples);
             boleto.getCedente().setCidade("CARUARU");
             boleto.getCedente().setCodigoCedente("123456");
@@ -53,33 +53,47 @@ public class TesteBoleto {
             boleto.getBanco().setCnab(CNAB.CNAB400);
             boleto.getBanco().setIndiceacbr(INDICEACBR.BancoDoNordeste);
             boleto.getBanco().setNumero("004");
-            //1
-            boleto.limparLista();
-            //2
-            boleto.configurarDados();
-            //3
-            Sacado sacado = new Sacado();
-            sacado.setBairro("Bairro Teste");
-            sacado.setCEP("55024-130");
-            sacado.setCNPJCPF("074.037.334-01");
-            sacado.setCidade("JATAUBA");
-            sacado.setComplemento("CASA");
-            sacado.setEmail("DANIELDANADO@G3AUTOMACAO.COM.BR");
-            sacado.setLogradouro("RUA DO TESTE");
-            sacado.setNome("DANIEL NOVAMENTE DA SILVA DE NOVO");
-            sacado.setNumero("24");
-            sacado.setTipoPessoa(TipoPessoa.PessoaFisica);
-            sacado.setUF("PE");
 
 //            Titulo titulo = new Titulo();
 //            titulo.setAceite(Aceite.SIM);
 //            titulo.setCarteira("123");
 //            titulo.setDataAbatimento("");
 //            titulo.setDataDesconto("");
+//            titulo.setDataDocumento("29/09/2016");
+//            titulo.setDataMoraJuros("");
+//            titulo.setDataProcessamento("29/09/2016");
+//            titulo.setVencimento("30/09/2016");
+//            titulo.setDataProtesto("01/10/2016");
+//            titulo.setEspecie("DM");
+//            titulo.setEspecieMod("R$");
+//            titulo.setInstrucao1("1ª instrução");
+//            titulo.setInstrucao2("2ª instrução");
+//            titulo.setLocalPagamento("Pagamento apenas com Daniel");
+//            titulo.setMensagem("Mensagem");
+//            titulo.setNossoNumero("000001");
+//            titulo.setNumeroDocumento("0123456789");
+//            titulo.setOcorrenciaOriginal(OcorrenciaOriginal.RemessaCancelarDesconto);
+//            titulo.setParcela("1");
+//            titulo.setPercentualMulta("0,00");
+//            titulo.setSeuNumero("0001");
+//            titulo.setTipoDiasProtesto(TipoDiasProtesto.DiasCorridos);
+//            titulo.setTipoImpressao(TipoImpressao.Padrão);
+//            titulo.setTotalParcelas("2");
+//            titulo.setValorAbatimento("0,00");
+//            titulo.setValorDesconto("0,00");
+//            titulo.setValorDocumento("99,00");
+//            titulo.setValorIOF("0,00");
+//            titulo.setValorMoraJuros("0,00");
+//            titulo.setValorOutrasDespesas("0,00");
+//            titulo.setSacado(sacado);
+//            Titulo titulo = new Titulo();
+//            titulo.setAceite(Aceite.NAO);
+//            titulo.setCarteira("4");
+//            titulo.setDataAbatimento("");
+//            titulo.setDataDesconto("");
 //            titulo.setDataDocumento("30/06/2016");
 //            titulo.setDataMoraJuros("");
 //            titulo.setDataProcessamento("30/06/2016");
-//            titulo.setDataProtesto("");
 //            titulo.setDataProtesto("");
 //            titulo.setEspecie("DM");
 //            titulo.setEspecieMod("R$");
@@ -105,6 +119,7 @@ public class TesteBoleto {
 //            titulo.setVencimento("30/07/2016");
 //            titulo.setSacado(sacado);
             Titulo t = new Titulo();
+            t.setNumeroDocumento("0123456789");
             t.setAceite(Aceite.SIM);
             t.setCarteira("123");
             t.setEspecie("DM");
@@ -115,6 +130,17 @@ public class TesteBoleto {
             t.setMensagem("Mensagem");
             t.setNossoNumero("222222");
             t.setNumeroDocumento("1123456789");
+            t.setNossoNumero("0000001");
+            t.setCarteira("4");
+            t.setValorDocumento("3,00");
+            t.setVencimento("30/09/2016");
+            t.setValorMoraJuros("5,00");
+            t.setDataDocumento("29/09/2016");
+            t.setDataProcessamento("29/09/2016");
+            t.setDataAbatimento("");
+            t.setDataDesconto("");
+            t.setDataMoraJuros("");
+            t.setDataProtesto("01/10/2016");
             t.setParcela("2");
             t.setPercentualMulta("5");
             t.setSeuNumero("3333");
@@ -122,29 +148,48 @@ public class TesteBoleto {
             t.setTotalParcelas("2");
             t.setValorAbatimento("1,00");
             t.setValorDesconto("2,00");
-            t.setValorDocumento("3,00");
             t.setValorIOF("4,00");
-            t.setValorMoraJuros("5,00");
             t.setValorOutrasDespesas("6,00");
+            t.setPercentualMulta("5");
+            t.setLocalPagamento("Pagamento apenas com Daniel");
+            t.setEspecie("DM");
+            t.setEspecieMod("R$");
 
-            t.setOcorrenciaOriginal(OcorrenciaOriginal.RemessaProtestar);
+            Sacado sacado = new Sacado();
+            sacado.setNome("DANIEL NOVAMENTE DA SILVA DE NOVO");
+            sacado.setCNPJCPF("074.037.334-01");
+            sacado.setTipoPessoa(TipoPessoa.PessoaFisica);
+            sacado.setLogradouro("RUA DO TESTE");
+            sacado.setNumero("24");
+            sacado.setBairro("Bairro Teste");
+            sacado.setComplemento("CASA");
+            sacado.setCidade("JATAUBA");
+            sacado.setUF("PE");
+            sacado.setCEP("55024-130");
+            sacado.setEmail("DANIELDANADO@G3AUTOMACAO.COM.BR");
+
+            t.setMensagem("Mensagem");
+            t.setInstrucao1("10");
+            t.setInstrucao2("11");
+            t.setAceite(Aceite.NAO);
+            t.setOcorrenciaOriginal(OcorrenciaOriginal.RemessaRegistrar);
+            t.setParcela("1");
+            t.setTotalParcelas("1");
+            t.setSeuNumero("0001");
+            t.setTipoImpressao(TipoImpressao.Padrão);
             t.setTipoDiasProtesto(TipoDiasProtesto.DiasUteis);
-            t.setDataDocumento("10/08/2010");
-            t.setDataProcessamento("10/08/2010");
-            t.setDataAbatimento("05/09/2010");
-            t.setDataDesconto("07/09/2010");
-            t.setDataMoraJuros("12/09/2010");
-            t.setVencimento("1/10/2010");
-            t.setDataProtesto("10/10/2010");
             t.setSacado(sacado);
 
 //            boleto.incluirTitulos(TipoDeSaida.PDF, lista);
 //            boleto.incluirTitulos(titulo);
+            //1
+            boleto.limparLista();
+            //2
+            boleto.configurarDados();
             boleto.incluirTitulos(t);
-            boleto.gerarRemessa("c:\\remessa\\", 1, "0000001.rem");
+            boleto.gerarRemessa("C:\\remessa", 1);
 
-            boleto.imprimir();
-
+//            boleto.imprimir();
         } catch (ACBrBoletoException ex) {
             Logger.getLogger(TesteBoleto.class.getName()).log(Level.SEVERE, null, ex);
         }

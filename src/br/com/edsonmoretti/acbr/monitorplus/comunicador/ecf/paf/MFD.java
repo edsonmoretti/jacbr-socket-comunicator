@@ -70,8 +70,8 @@ public class MFD {
          * @param caminho Local onde será gerado o arquivo
          * @throws ACBrECFException
          */
-        public void porCRZ(int cooIni, int cooFim, String caminho) throws ACBrECFException {
-            porCRZ(cooIni, cooFim, new File(caminho));
+        public void porCOO(int cooIni, int cooFim, String caminho) throws ACBrECFException {
+            Espelho.this.porCOO(cooIni, cooFim, new File(caminho));
         }
 
         /**
@@ -84,7 +84,7 @@ public class MFD {
          * @param caminho Local onde será gerado o arquivo
          * @throws ACBrECFException
          */
-        public void porCRZ(int cooIni, int cooFim, File caminho) throws ACBrECFException {
+        public void porCOO(int cooIni, int cooFim, File caminho) throws ACBrECFException {
             ACBrECF.comandoECF("PafMF_MFD_Espelho(" + cooIni + ", " + cooFim + ",\"" + caminho.getAbsolutePath() + "\")");
         }
     }
@@ -122,11 +122,11 @@ public class MFD {
          * @param caminho Local onde será gerado o arquivo
          * @throws ACBrECFException
          */
-        public void porCRZ(int cooIni, int cooFim, String caminho) throws ACBrECFException {
-            porCRZ(cooIni, cooFim, new File(caminho));
+        public void porCOO(int cooIni, int cooFim, String caminho) throws ACBrECFException {
+            Cotepe1704.this.porCOO(cooIni, cooFim, new File(caminho));
         }
 
-        public void porCRZ(int cooIni, int cooFim, File caminho) throws ACBrECFException {
+        public void porCOO(int cooIni, int cooFim, File caminho) throws ACBrECFException {
             ACBrECF.comandoECF("PafMF_MFD_Cotepe1704(" + cooIni + ", " + cooFim + ",\"" + caminho.getAbsolutePath() + "\")");
         }
     }

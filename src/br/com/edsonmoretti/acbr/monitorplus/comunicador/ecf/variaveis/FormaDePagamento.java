@@ -13,17 +13,17 @@ import java.math.BigDecimal;
  */
 public class FormaDePagamento {
 
-    private int indice;
+    private String codigo;
     private String descricao;
     boolean imprimeVinculado;
     private BigDecimal total;
 
-    public int getIndice() {
-        return indice;
+    public String getCodigo() {
+        return codigo;
     }
 
-    protected void setIndice(int indice) {
-        this.indice = indice;
+    protected void setCodigo(String codigo) {
+        this.codigo = codigo;
     }
 
     public String getDescricao() {
@@ -55,7 +55,7 @@ public class FormaDePagamento {
 
     @Override
     public String toString() {
-        return String.format("%02d", indice) + (imprimeVinculado ? "V" : "") + " " + descricao + (total == null ? "" : " T" + total);
+        return String.format("%02d", codigo) + (imprimeVinculado ? "V" : "") + " " + descricao + (total == null ? "" : " T" + total);
     }
 
 }

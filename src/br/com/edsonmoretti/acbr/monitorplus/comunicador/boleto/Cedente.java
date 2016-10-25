@@ -157,7 +157,7 @@ public class Cedente {
      */
     @Override
     public String toString() {
-        return "[Cendente]\n"
+        return "[Cedente]\n"
                 + "" + "Nome=" + nome + "\n"
                 + "CNPJCPF=" + CNPJCPF + "\n"
                 + "Logradouro=" + logradouro + "\n"

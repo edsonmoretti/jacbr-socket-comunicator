@@ -15,7 +15,7 @@ import java.math.RoundingMode;
 public class ECF {
 
     private String serieEcf;
-    private String numCaixa;
+    private Integer numCaixa;
     private BigDecimal grandeTotal;
     private String crzAtual;
     private String croAtual;
@@ -28,11 +28,11 @@ public class ECF {
         this.serieEcf = serieEcf;
     }
 
-    public String getNumCaixa() {
+    public Integer getNumCaixa() {
         return numCaixa;
     }
 
-    public void setNumCaixa(String numCaixa) {
+    public void setNumCaixa(Integer numCaixa) {
         this.numCaixa = numCaixa;
     }
 

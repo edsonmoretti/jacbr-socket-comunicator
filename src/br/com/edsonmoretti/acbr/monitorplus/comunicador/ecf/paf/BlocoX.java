@@ -111,7 +111,7 @@ public class BlocoX {
     private String versaoDoPafEcf = "";
     private String cnpjEmpresaDesenvolvedora = "";
     private String razaoSocialEmpresarialDesenvolvedora = "";
-    
+
     public XML getNewXMLDadozDaReducaoZ() {
         return new XML(dadosDaReducaoZ.toString().replace("_IE_", inscricaoEstadualEstabelecimento)
                 .replace("_CNPJ_", cnpjEstabelecimento)

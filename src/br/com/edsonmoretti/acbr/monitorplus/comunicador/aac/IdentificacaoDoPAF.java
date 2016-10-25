@@ -18,6 +18,7 @@ public class IdentificacaoDoPAF {
     private String laudoDoPafEcf;
     private String nomeDoPafEcf;
     private String versaoDoPafEcf;
+    private String versaoDaEr;
     private File principalExecutavel;
 
     public String getLaudoDoPafEcf() {
@@ -54,6 +55,14 @@ public class IdentificacaoDoPAF {
 
     public void setPrincipalExecutavel(File principalExecutavel) {
         this.principalExecutavel = principalExecutavel;
+    }
+
+    public String getVersaoDaEr() {
+        return versaoDaEr;
+    }
+
+    public void setVersaoDaEr(String versaoDaEr) {
+        this.versaoDaEr = versaoDaEr;
     }
 
     @Override

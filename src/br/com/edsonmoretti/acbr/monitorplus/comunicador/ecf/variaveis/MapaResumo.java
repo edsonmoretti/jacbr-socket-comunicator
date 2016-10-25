@@ -17,8 +17,6 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Properties;
@@ -51,10 +49,9 @@ public class MapaResumo {
     }
 
     public Date getDataMovimento() throws ACBrECFException {
-        SimpleDateFormat s = new SimpleDateFormat("dd/MM/YY");
         try {
-            return s.parse(comandoECF("DataMovimento"));
-        } catch (ParseException ex) {
+            return ACBrUtils.strDataRedToDateBR(comandoECF("DataMovimento"));
+        } catch (ACBrException ex) {
             throw new ACBrECFException(ex.getMessage());
         }
     }

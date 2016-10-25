@@ -166,7 +166,7 @@ public class ACBrUtils {
     }
 
     /**
-     * Converte String para Date, String no formato: dd/MM/YY
+     * Converte String para Date, String no formato: dd/MM/yy
      *
      * @param dataBRRed
      * @throws ACBrException

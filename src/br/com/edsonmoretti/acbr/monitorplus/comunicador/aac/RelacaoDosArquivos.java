@@ -37,7 +37,6 @@ public class RelacaoDosArquivos extends ArrayList<File> {
                 Logger.getLogger(RelacaoDosArquivos.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return tmp.substring(0, tmp.length() - 1);
+        return tmp.isEmpty() ? "" : tmp.substring(0, tmp.length() - 1);
     }
-
 }

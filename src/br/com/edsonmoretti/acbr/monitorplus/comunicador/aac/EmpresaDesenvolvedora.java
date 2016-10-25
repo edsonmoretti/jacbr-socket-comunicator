@@ -87,7 +87,7 @@ public class EmpresaDesenvolvedora {
         return TextUtils.formatoACBrX(tipoDeRegistro, 2)
                 + TextUtils.formatoACBrN(cnpj, 14)
                 + TextUtils.formatoACBrX(inscricaoEstadual, 14)
-                + TextUtils.formatoACBrX(inscricaoMunicipal, 14)
+                + TextUtils.formatoACBrX(inscricaoMunicipal == null ? "" : inscricaoMunicipal, 14)
                 + TextUtils.formatoACBrX(razaoSocial, 50);
     }
 

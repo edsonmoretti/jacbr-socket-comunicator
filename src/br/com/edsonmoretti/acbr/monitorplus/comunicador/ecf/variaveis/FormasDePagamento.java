@@ -64,7 +64,7 @@ public class FormasDePagamento {
         for (String s : comandoECF(tipo).split("\\|")) {
             s = s.trim();
             FormaDePagamento f = new FormaDePagamento();
-            f.setCodigo(s.substring(0, 2).trim());
+            f.setCodigo(s.substring(0, 2).replaceAll("[^\\-+(0-9)]", ""));
             if (tipo.equals("LerTotaisFormaPagamento")) {
                 f.setTotal(Numeros.parseToBig(s.substring(2)));
                 for (FormaDePagamento formaDePagamento : getFormasPagamento()) {
@@ -75,8 +75,8 @@ public class FormasDePagamento {
                     }
                 }
             } else {
-                f.setImprimeVinculado(s.charAt(2) == 'V' || s.charAt(3) == 'v');
-                f.setDescricao(s.substring(3).trim());
+                f.setImprimeVinculado(s.charAt(0) == 'V' || s.charAt(0) == 'v' || s.charAt(1) == 'V' || s.charAt(1) == 'v' || s.charAt(2) == 'V' || s.charAt(2) == 'v');
+                f.setDescricao(s.substring(4).trim());
             }
             lista.add(f);
         }
@@ -94,9 +94,9 @@ public class FormasDePagamento {
     public FormaDePagamento achaFPGDescricao(String descricao) throws ACBrECFException {
         String s = comandoECF("AchaFPGDescricao(" + descricao + ")").trim();
         FormaDePagamento f = new FormaDePagamento();
-        f.setCodigo(s.substring(0, 2).trim());
-        f.setImprimeVinculado(s.charAt(2) == 'V' || s.charAt(3) == 'v');
-        f.setDescricao(s.substring(3).trim());
+        f.setCodigo(s.substring(0, 2).replaceAll("[^\\-+(0-9)]", ""));
+        f.setImprimeVinculado(s.charAt(0) == 'V' || s.charAt(0) == 'v' || s.charAt(1) == 'V' || s.charAt(1) == 'v' || s.charAt(2) == 'V' || s.charAt(2) == 'v');
+        f.setDescricao(s.substring(4).trim());
         return f;
     }
 }

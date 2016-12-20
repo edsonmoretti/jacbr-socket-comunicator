@@ -17,6 +17,6 @@ public class Produtos extends java.util.ArrayList<ProdutoEstoque> {
         for (br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.blocox.estoque.ProdutoEstoque thi : this) {
             s += thi + "\n";
         }
-        return s.substring(0, s.length() - 1);
+        return s.substring(0, s.trim().isEmpty() ? 0 : s.length() - 1);
     }
 }

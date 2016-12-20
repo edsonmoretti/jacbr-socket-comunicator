@@ -97,7 +97,7 @@ public class TextUtils {
     }
 
     private static String fd(double valor) {
-        return String.format("%.2f", valor).replace(",", ".");
+        return Numeros.fmtBig(valor, 2);
 
     }
 

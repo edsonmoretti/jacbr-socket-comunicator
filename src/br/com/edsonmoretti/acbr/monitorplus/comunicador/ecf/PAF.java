@@ -10,6 +10,7 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrUtils;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.LMFC;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.LMFS;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.MFD;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.paf.blocox.XML;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import java.io.File;
 import java.util.Date;
@@ -107,4 +108,21 @@ public class PAF {
         return mfd == null ? mfd = new MFD() : mfd;
     }
 
+    public XML assinarBlocoXEstoque(XML xml) throws ACBrECFException {
+        xml = new XML(ACBrECF.comandoECF("AssinarBlocoXEstoque(\"" + xml.getXml() + "\")"));
+        return xml;
+    }
+
+    public void assinarBlocoXEstoque(File xml) throws ACBrECFException {
+        ACBrECF.comandoECF("AssinarBlocoXEstoque(\"" + xml.getAbsolutePath() + "\")");
+    }
+
+    public XML assinarBlocoXReducaoZ(XML xml) throws ACBrECFException {
+        xml = new XML(ACBrECF.comandoECF("AssinarBlocoXReducaoZ(\"" + xml.getXml() + "\")"));
+        return xml;
+    }
+
+    public void assinarBlocoXReducaoZ(File xml) throws ACBrECFException {
+        ACBrECF.comandoECF("AssinarBlocoXReducaoZ(\"" + xml.getAbsolutePath() + "\")");
+    }
 }

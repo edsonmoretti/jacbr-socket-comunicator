@@ -324,7 +324,7 @@ public class ACBr {
                 }
                 System.out.println("Leitura: " + leitura);
             }
-            comando = comando.toUpperCase();
+            //   comando = comando.toUpperCase();
 //        enviaComando.println(comando);
             enviaComando.print(comando + '\r' + '\n' + "." + '\r' + '\n');
             enviaComando.flush();
@@ -426,9 +426,11 @@ public class ACBr {
         System.out.println("Saiba mais: http://www.edsonmoretti.com.br");
         System.out.println("Lembre-se, use os parametros dentro de aspas. EX: \"ECF.NumSerie\"");
         System.out.println("#######################################################################################");
+        String comando = "";
         for (String arg : args) {
-            System.out.println("Rodando comando: ");
-            System.out.println(ACBr.getInstance().comandoAcbr(arg));
+            comando += arg + " ";
         }
+        System.out.println("Rodando comando: " + (comando = comando.trim().replace("  ", " ")));
+        System.out.println(ACBr.getInstance().comandoAcbr(comando));
     }
 }

@@ -215,10 +215,12 @@ public class Utilitarios {
     }
 
     /**
-     * Programa Relatórios Gerenciais conforme os dados informados nos
-     * parâmetros.
+     * Se a ECF não esta em horário de verão , o relógio da ECF é reajustado
+     * Início de horário de verão ao contrário é reajustado para fim de horário
+     * de verão.
      *
-     * @param horarioVerao Descrição do Relatório Gerencial
+     * @param horarioVerao Mudar horário de verão "true" ou "false". Pode ser
+     * omitido, nesse caso assume "True"
      * @throws ACBrECFException
      */
     public void mudaHorarioVerao(boolean horarioVerao) throws ACBrECFException {
@@ -226,32 +228,15 @@ public class Utilitarios {
     }
 
     /**
-     * Verifica o estado atual do ECF e efetua as operações necessárias para
-     * deixar o ECF no estado livre. Portanto esse método tenta fechar ou
-     * cancelar qualquer documento que esteja aberto. Em alguns ECFs comandos
-     * adicionais são enviados para tentar “desbloquear” o ECF de alguma
-     * condição de erro que impeça a impressão de novos documentos.
+     * Permite mudar o arredondamento da ECF. Exemplos:
+     * ECF.MudaArredondamento(true) Nota: Comando disponível apenas para Daruma,
+     * Urano e Bematech
      *
-     * @param b Parâmetro opcional. Se necessário emitir a redução Z "True" ou
-     * "False", se parâmetro for omitido será considerado TRUE..
+     * @param b Mudar Arredondamento da ECF "true" ou "false".
      * @throws ACBrECFException
      */
     public void mudaArredondamento(boolean b) throws ACBrECFException {
         ACBrECF.comandoECF("MudaHorarioVerao (" + b + ")");
-    }
-
-    /**
-     * Verifica o estado atual do ECF e efetua as operações necessárias para
-     * deixar o ECF no estado livre. Portanto esse método tenta fechar ou
-     * cancelar qualquer documento que esteja aberto. Em alguns ECFs comandos
-     * adicionais são enviados para tentar “desbloquear” o ECF de alguma
-     * condição de erro que impeça a impressão de novos documentos. Se e emite a
-     * redução Z
-     *
-     * @throws ACBrECFException
-     */
-    public void mudaArredondamento() throws ACBrECFException {
-        ACBrECF.comandoECF("MudaHorarioVerao");
     }
 
     /**

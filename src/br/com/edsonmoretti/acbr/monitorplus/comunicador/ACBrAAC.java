@@ -39,8 +39,10 @@ public class ACBrAAC {
     public ArquivoCriptografado getArquivoCriptografado() {
         try {
             if (arquivoCriptografado.getMD5Principal() == null || arquivoCriptografado.getMD5Principal().isEmpty()) {
-                arquivoCriptografado.setMD5Principal(MD5Principal == null || MD5Principal.isEmpty() //se não foi setado manualmente o MD5, ele gera do arquivo.
+                setMD5Principal(MD5Principal == null || MD5Principal.isEmpty() //se não foi setado manualmente o MD5, ele gera do arquivo.
+                        ? this.getArquivosAutenticados().getArquivoQueContemAListaDeArquivosAutenticados().exists()
                         ? TextUtils.MD5File(this.getArquivosAutenticados().getArquivoQueContemAListaDeArquivosAutenticados())
+                        : ""
                         : MD5Principal);
             }
         } catch (NoSuchAlgorithmException ex) {
@@ -83,17 +85,25 @@ public class ACBrAAC {
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>IDENTIFICACAO DO PAF-ECF</n>");
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial(TextUtils.repete("=", 48));
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>NOME COMERCIAL</n>..: " + this.getArquivosAutenticados().getIdentificacaoDoPAF().getNomeDoPafEcf());
-            ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>VERSAO</n>..: " + this.getArquivosAutenticados().getIdentificacaoDoPAF().getVersaoDoPafEcf());
+            ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>VERSAO SW</n>.......: " + this.getArquivosAutenticados().getIdentificacaoDoPAF().getVersaoDoPafEcf());
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>PRICIPAL EXE</n>....: " + this.getArquivosAutenticados().getIdentificacaoDoPAF().getPrincipalExecutavel().getName());
+            if (this.getArquivosAutenticados().getIdentificacaoDoPAF().getPrincipalExecutavel().exists()) {
+                ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>MD5 DO PRICIPAL EXE</n>:\n        " + TextUtils.MD5File(this.getArquivosAutenticados().getIdentificacaoDoPAF().getPrincipalExecutavel()));
+            }
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>NOME DO ARQUIVO AAC.</n>:\n        " + this.getArquivosAutenticados().getArquivoQueContemAListaDeArquivosAutenticados().getName());
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>MD-5 LISTA AAC</n>..:\n        " + ((MD5Principal == null || MD5Principal.isEmpty()) /*se não foi setado manualmente o MD5, ele gera do arquivo.          */ ? MD5Principal = TextUtils.MD5File(this.getArquivosAutenticados().getArquivoQueContemAListaDeArquivosAutenticados()) : MD5Principal));
+            ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>VERSAO DA ER</n>..: 02.04");
             ecf.getRelatorios().pulaLinha();
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial(TextUtils.repete("=", 48));
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>RELACAO DE ARQUIVOS UTILIZADOS E RESPECTIVOS MD-5</n>\n");
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial(TextUtils.repete("=", 48));
+            if (this.getArquivosAutenticados().getIdentificacaoDoPAF().getPrincipalExecutavel().exists()) {
+                ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>" + this.getArquivosAutenticados().getIdentificacaoDoPAF().getPrincipalExecutavel().getName() + "</n>\n" + TextUtils.MD5File(this.getArquivosAutenticados().getIdentificacaoDoPAF().getPrincipalExecutavel()));
+            }
             for (File arqAut : this.getArquivosAutenticados().getRelacaoDosArquivos()) {
                 ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>" + arqAut.getName() + "</n>\n" + TextUtils.MD5File(arqAut));
             }
+
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial(TextUtils.repete("=", 48));
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial("<n>RELACAO DE NUMERO DE FABRICACAO DOS ECF</n>");
             ecf.getRelatorios().getRelatorioGerencial().linhaRelatorioGerencial(TextUtils.repete("=", 48));

@@ -5,14 +5,22 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.Avulsa;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.Destinatario;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.Emitente;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.Entrega;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.Identificacao;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.Retirada;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.cte.CTe;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.Cadastro;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoCancelamento;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoConsulta;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoEvento;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoInutilizar;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoStatusDoServico;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrCTeException;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.cte.Cadastro;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.cte.InfCTe;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.cte.XMotivoCancelamento;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.cte.XMotivoConsulta;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.cte.XMotivoEvento;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.cte.XMotivoInutilizar;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.cte.XMotivoStatusDoServico;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
 import java.io.File;
 import java.util.Date;
@@ -21,26 +29,31 @@ import java.util.Date;
  *
  * @author Edson Moretti - www.edsonmoretti.com.br
  */
-public class ACBrNFe {
+public class ACBrCTe extends CTe {
 
-    private static String NFE = "NFE.";
+    private static String CTE = "CTE.";
 
-    public ACBrNFe() {
+    public ACBrCTe(InfCTe infCTe, Identificacao Identificacao, Emitente Emitente, Avulsa Avulsa, Destinatario Destinatario, Retirada Retirada, Entrega Entrega) {
+        super(infCTe, Identificacao, Emitente, Avulsa, Destinatario, Retirada, Entrega);
     }
 
-    public static String comandoNFe(String s) throws ACBrNFeException {
+    public ACBrCTe() {
+        super();
+    }
+
+    public static String comandoCTe(String s) throws ACBrCTeException {
         String retorno = null;
         try {
-            retorno = (ACBr.getInstance().comandoAcbr(NFE + s));
+            retorno = (ACBr.getInstance().comandoAcbr(CTE + s));
             return retorno;
         } catch (ACBrException ex) {
             System.out.println(retorno);
-            throw new ACBrNFeException(ex);
+            throw new ACBrCTeException(ex);
         }
     }
 
-    private String enviarEvento(String iniEvento) throws ACBrNFeException {
-        return comandoNFe("EnviarEvento(\"" + iniEvento + "\")");
+    private String enviarEvento(String iniEvento) throws ACBrCTeException {
+        return comandoCTe("EnviarEvento(\"" + iniEvento + "\")");
     }
 
     /**
@@ -48,11 +61,11 @@ public class ACBrNFe {
      *
      * @return String com resultado no formato INI
      * @throws
-     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrCTeException
      *
      */
-    public XMotivoStatusDoServico getStatusServico() throws ACBrNFeException {
-        String re = comandoNFe("StatusServico");
+    public XMotivoStatusDoServico getStatusServico() throws ACBrCTeException {
+        String re = comandoCTe("StatusServico");
         XMotivoStatusDoServico sds = new XMotivoStatusDoServico(re);
 
         sds.setTMed(TextUtils.lerTagIni("TMed", re));
@@ -60,66 +73,67 @@ public class ACBrNFe {
     }
 
     /**
-     * Valida arquivo da NFe. Arquivo deve estar assinado.
-     *
-     * @param arquivo Caminho do arquivo a ser validado.
-     * @throws br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException
-
-     */
-    public void validarNFe(String arquivo) throws ACBrNFeException {
-        comandoNFe("ValidarNFe(\"" + arquivo + "\")");
-    }
-
-    /**
-     * Valida arquivo da NFe. Arquivo deve estar assinado.
+     * Valida arquivo da CTe. Arquivo deve estar assinado.
      *
      * @param arquivo Caminho do arquivo a ser validado.
      * @throws
-     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrCTeException
      *
      */
-    public void validarNFe(File arquivo) throws ACBrNFeException {
-        comandoNFe("ValidarNFe(\"" + arquivo + "\")");
+    public void validarCTe(String arquivo) throws ACBrCTeException {
+        comandoCTe("ValidarCTe(\"" + arquivo + "\")");
     }
 
     /**
-     * Assina uma NFe. Arquivo assinado será salvo na pasta configurada na aba
+     * Valida arquivo da CTe. Arquivo deve estar assinado.
+     *
+     * @param arquivo Caminho do arquivo a ser validado.
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrCTeException
+     *
+     */
+    public void validarCTe(File arquivo) throws ACBrCTeException {
+        comandoCTe("ValidarCTe(\"" + arquivo + "\")");
+    }
+
+    /**
+     * Assina uma CTe. Arquivo assinado será salvo na pasta configurada na aba
      * WebService na opção "Salvar Arquivos de Envio e Resposta".
      *
      * @param arquivo Caminho do arquivo a ser assinado.
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      */
-    public void assinarNFe(String arquivo) throws ACBrNFeException {
-        comandoNFe("AssinarNFe(\"" + arquivo + "\")");
+    public void assinarCTe(String arquivo) throws ACBrCTeException {
+        comandoCTe("AssinarCTe(\"" + arquivo + "\")");
     }
 
     /**
-     * Assina uma NFe. Arquivo assinado será salvo na pasta configurada na aba
+     * Assina uma CTe. Arquivo assinado será salvo na pasta configurada na aba
      * WebService na opção "Salvar Arquivos de Envio e Resposta".
      *
      * @param arquivo Caminho do arquivo a ser assinado.
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      */
-    public void assinarNFe(File arquivo) throws ACBrNFeException {
-        comandoNFe("AssinarNFe(\"" + arquivo + "\")");
+    public void assinarCTe(File arquivo) throws ACBrCTeException {
+        comandoCTe("AssinarCTe(\"" + arquivo + "\")");
     }
 
     /**
-     * Cria XML da NFe baseado em um arquivo INI. <br>
-     * NFe.CriarNFe(cIniNFe,[bRetornaXML])<br>
+     * Cria XML da CTe baseado em um arquivo INI. <br>
+     * CTe.CriarCTe(cIniCTe,[bRetornaXML])<br>
      *
-     * @param iniNFe Texto no formato de arquivo INI com informações da NFe.
-     * @param betornaXML Coloque o valor 1 se quiser que o ACBrNFeMonitor
+     * @param iniCTe Texto no formato de arquivo INI com informações da CTe.
+     * @param betornaXML Coloque o valor 1 se quiser que o ACBrCTeMonitor
      * retorne além do Path de onde o arquivo foi criado, o XML gerado. Por
      * default não retorna o XML.
      * @return
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      * @deprecated Mudar para HashMap<File,String> com File e String XML, por
-     * enquanto use o criarNFe(String iniNFe) retorno File.<br><br>
+     * enquanto use o criarCTe(String iniCTe) retorno File.<br><br>
      * <b>Observações</b><br>
      * A maioria dos campos utiliza a nomenclatura do manual disponibilizado
      * pelo SEFAZ apenas os grupos(o que está entre []) segue a nomenclatura
-     * interna do ACBrNFeMonitor. A literal XXX indica grupos que podem ocorrer
+     * interna do ACBrCTeMonitor. A literal XXX indica grupos que podem ocorrer
      * mais de uma vez(produtos por exemplo) e quando existir YYY ou KKK indica
      * grupos que são filhos de grupos com mais de uma ocorrência. Por exemplo,
      * no caso da Declaração de Importação podemos ter 0-100 ocorrências e cada
@@ -130,11 +144,11 @@ public class ACBrNFe {
      * existirão uma chave Produto001 e Produto002 e assim sucessivamente. As
      * chaves de imposto (ICMS,IPI,COFINS, etc) devem ter o memo número do
      * produto, ou seja, o ICMS da chave Produto0002 deve ser ICMS002.<br>
-     * - Acentos podem causar problemas na criação do NFe. Ao tentar criar uma
-     * NFe, caso receba o erro "Unable to Parse" verifique se não existem
+     * - Acentos podem causar problemas na criação do CTe. Ao tentar criar uma
+     * CTe, caso receba o erro "Unable to Parse" verifique se não existem
      * caracteres acentuados nos campos.<br><br>
-     * O conteúdo do parâmetro cIniNFe, deve possuir o seguinte formato:<br><br>
-     * <b>[infNFe]</b><br>
+     * O conteúdo do parâmetro cIniCTe, deve possuir o seguinte formato:<br><br>
+     * <b>[infCTe]</b><br>
      * versao=<br>3.10<br><br>
      * <b>[Identificacao]</b><br>
      * cNF=<br>
@@ -149,7 +163,7 @@ public class ACBrNFe {
      * idDest=<br>
      * tpImp=<br>
      * tpEmis=<br>
-     * finNFe=<br>
+     * finCTe=<br>
      * indFinal=<br>
      * indPres=<br>
      * procEmi=<br>
@@ -158,7 +172,7 @@ public class ACBrNFe {
      * xJust=<br><br>
      * <b>[NFRefXXX]</b><br>
      * Tipo=<br>
-     * refNFe=<br>
+     * refCTe=<br>
      * cUF=<br>
      * AAMM=<br>
      * CNPJ=<br>
@@ -295,7 +309,7 @@ public class ACBrNFe {
      * <b>[detExportXXXYYY]</b><br>
      * nDraw=<br>
      * nRE=<br>
-     * chNFe=<br>
+     * chCTe=<br>
      * qExport=<br><br>
      * <b>[impostoDevolXXX]</b><br>
      * pDevol=<br>
@@ -569,21 +583,21 @@ public class ACBrNFe {
      * xDed=<br>
      * vDed=<br>
      */
-    public /*HashMap<File,String>*/ String criarNFeXML(String iniNFe, boolean betornaXML) throws ACBrNFeException {
-        return comandoNFe("CriarNFe(\"" + iniNFe + "\"," + betornaXML + ")");
+    public /*HashMap<File,String>*/ String criarCTeXML(String iniCTe, boolean betornaXML) throws ACBrCTeException {
+        return comandoCTe("CriarCTe(\"" + iniCTe + "\"," + betornaXML + ")");
     }
 
     /**
-     * Cria XML da NFe baseado em um arquivo INI. <br>
-     * NFe.CriarNFe(cIniNFe,[bRetornaXML])<br>
+     * Cria XML da CTe baseado em um arquivo INI. <br>
+     * CTe.CriarCTe(cIniCTe,[bRetornaXML])<br>
      *
-     * @param iniNFe Texto no formato de arquivo INI com informações da NFe.
+     * @param iniCTe Texto no formato de arquivo INI com informações da CTe.
      * @return
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      * <b>Observações</b><br>
      * A maioria dos campos utiliza a nomenclatura do manual disponibilizado
      * pelo SEFAZ apenas os grupos(o que está entre []) segue a nomenclatura
-     * interna do ACBrNFeMonitor. A literal XXX indica grupos que podem ocorrer
+     * interna do ACBrCTeMonitor. A literal XXX indica grupos que podem ocorrer
      * mais de uma vez(produtos por exemplo) e quando existir YYY ou KKK indica
      * grupos que são filhos de grupos com mais de uma ocorrência. Por exemplo,
      * no caso da Declaração de Importação podemos ter 0-100 ocorrências e cada
@@ -594,13 +608,14 @@ public class ACBrNFe {
      * existirão uma chave Produto001 e Produto002 e assim sucessivamente. As
      * chaves de imposto (ICMS,IPI,COFINS, etc) devem ter o memo número do
      * produto, ou seja, o ICMS da chave Produto0002 deve ser ICMS002.<br>
-     * - Acentos podem causar problemas na criação do NFe. Ao tentar criar uma
-     * NFe, caso receba o erro "Unable to Parse" verifique se não existem
+     * - Acentos podem causar problemas na criação do CTe. Ao tentar criar uma
+     * CTe, caso receba o erro "Unable to Parse" verifique se não existem
      * caracteres acentuados nos campos.<br>
-     * <b>Exemplo de Resposta</b>: OK: NFe criada em:
-     * C:\ACBrNFeMonitor\logs\35XXXXXXXXXXXXXXXX550010000000190000000193-nfe.xml<br><br>
-     * O conteúdo do parâmetro cIniNFe, deve possuir o seguinte formato:<br><br>
-     * <b>[infNFe]</b><br>
+     * <b>Exemplo de Resposta</b>: OK: CTe criada em:
+     * C:\ACBrCTeMonitor\logs\35XXXXXXXXXXXXXXXX550010000000190000000193-nfe.xml
+     * <br><br>
+     * O conteúdo do parâmetro cIniCTe, deve possuir o seguinte formato:<br><br>
+     * <b>[infCTe]</b><br>
      * versao=<br>3.10<br><br>
      * <b>[Identificacao]</b><br>
      * cNF=<br>
@@ -615,7 +630,7 @@ public class ACBrNFe {
      * idDest=<br>
      * tpImp=<br>
      * tpEmis=<br>
-     * finNFe=<br>
+     * finCTe=<br>
      * indFinal=<br>
      * indPres=<br>
      * procEmi=<br>
@@ -624,7 +639,7 @@ public class ACBrNFe {
      * xJust=<br><br>
      * <b>[NFRefXXX]</b><br>
      * Tipo=<br>
-     * refNFe=<br>
+     * refCTe=<br>
      * cUF=<br>
      * AAMM=<br>
      * CNPJ=<br>
@@ -761,7 +776,7 @@ public class ACBrNFe {
      * <b>[detExportXXXYYY]</b><br>
      * nDraw=<br>
      * nRE=<br>
-     * chNFe=<br>
+     * chCTe=<br>
      * qExport=<br><br>
      * <b>[impostoDevolXXX]</b><br>
      * pDevol=<br>
@@ -1035,13 +1050,13 @@ public class ACBrNFe {
      * xDed=<br>
      * vDed=<br>
      */
-    public File criarNFe(String iniNFe) throws ACBrNFeException {
-        String r = comandoNFe("CriarNFe(\"" + iniNFe + "\")");
+    public File criarCTe() throws ACBrCTeException {
+        String r = comandoCTe("CriarCTe(\"" + toString() + "\")");
         return new File(r.substring(r.indexOf(":\\") - 1));
     }
 
     /**
-     * Envia NFe. <br>
+     * Envia CTe. <br>
      * <b>Exemplo:</b><br>
      * ENVIARNFE("c:\35XXXXXXXXXXXXXXXX550010000000050000000058-nfe.xml",1,1,1,1)<br>
      *
@@ -1049,27 +1064,27 @@ public class ACBrNFe {
      * @param lote Número do Lote
      * @param assina Coloque 0 se não quiser que o componente assine o arquivo.
      * - Parâmetro Opcional
-     * @param imprime Coloque 1 se quiser que o DANFe seja impresso logo após a
+     * @param imprime Coloque 1 se quiser que o DACTe seja impresso logo após a
      * autorização - Parâmetro Opcional
      * @param impressora
      * @param sincrono Coloque 1 para indicar modo síncrono e 0 para modo
      * assíncrono.
      * @return XMotivoConsulta
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      */
-    public XMotivoConsulta enviarNFe(String arqXML, int lote, boolean assina, boolean imprime, String impressora, boolean sincrono) throws ACBrNFeException {
-        String re = comandoNFe("EnviarNFe(\"" + arqXML + "\"," + lote + "," + assina + "," + imprime + "," + impressora + "," + sincrono + ")");
+    public XMotivoConsulta enviarCTe(String arqXML, int lote, boolean assina, boolean imprime, String impressora, boolean sincrono) throws ACBrCTeException {
+        String re = comandoCTe("EnviarCTe(\"" + arqXML + "\"," + lote + "," + assina + "," + imprime + "," + impressora + "," + sincrono + ")");
         XMotivoConsulta consulta = new XMotivoConsulta(re);
         consulta.setCStat(TextUtils.lerTagIni("cStat", re, "[RETORNO]"));
         consulta.setXMotivo(TextUtils.lerTagIni("xMotivo", re, "[RETORNO]"));
-        consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
+        consulta.setChCTe(TextUtils.lerTagIni("ChCTe", re));
         consulta.setNProt(TextUtils.lerTagIni("NProt", re));
         consulta.setDigVal(TextUtils.lerTagIni("DigVal", re));
         return consulta;
     }
 
     /**
-     * Envia NFe. <br>
+     * Envia CTe. <br>
      * <b>Exemplo:</b><br>
      * ENVIARNFE("c:\35XXXXXXXXXXXXXXXX550010000000050000000058-nfe.xml",1,1,1,1)<br>
      *
@@ -1077,115 +1092,115 @@ public class ACBrNFe {
      * @param lote Número do Lote
      * @param assina Coloque 0 se não quiser que o componente assine o arquivo.
      * - Parâmetro Opcional
-     * @param imprime Coloque 1 se quiser que o DANFe seja impresso logo após a
+     * @param imprime Coloque 1 se quiser que o DACTe seja impresso logo após a
      * autorização - Parâmetro Opcional
      * @param impressora
      * @param sincrono Coloque 1 para indicar modo síncrono e 0 para modo
      * assíncrono.
      * @return XMotivoConsulta
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      */
-    public XMotivoConsulta enviarNFe(File arqXML, int lote, boolean assina, boolean imprime, String impressora, boolean sincrono) throws ACBrNFeException {
-        String re = comandoNFe("EnviarNFe(\"" + arqXML + "\"," + lote + "," + assina + "," + imprime + "," + impressora + "," + sincrono + ")");
+    public XMotivoConsulta enviarCTe(File arqXML, int lote, boolean assina, boolean imprime, String impressora, boolean sincrono) throws ACBrCTeException {
+        String re = comandoCTe("EnviarCTe(\"" + arqXML + "\"," + lote + "," + assina + "," + imprime + "," + impressora + "," + sincrono + ")");
         XMotivoConsulta consulta = new XMotivoConsulta(re);
         consulta.setCStat(TextUtils.lerTagIni("cStat", re, "[RETORNO]"));
         consulta.setXMotivo(TextUtils.lerTagIni("xMotivo", re, "[RETORNO]"));
-        consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
+        consulta.setChCTe(TextUtils.lerTagIni("ChCTe", re));
         consulta.setNProt(TextUtils.lerTagIni("NProt", re));
         consulta.setDigVal(TextUtils.lerTagIni("DigVal", re));
         return consulta;
     }
 
     /**
-     * Envia NFe. <br>
+     * Envia CTe. <br>
      * <b>Exemplo:</b><br>
      * ENVIARNFE("c:\35XXXXXXXXXXXXXXXX550010000000050000000058-nfe.xml",1,1,1,1)<br>
      *
      * @param arqXML Caminho do arquivo a ser enviado.
      * @param lote Número do Lote
      * @return XMotivoConsulta
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      */
-    public XMotivoConsulta enviarNFe(String arqXML, int lote) throws ACBrNFeException {
-        String re = comandoNFe("EnviarNFe(\"" + arqXML + "\"," + lote + ")");
+    public XMotivoConsulta enviarCTe(String arqXML, int lote) throws ACBrCTeException {
+        String re = comandoCTe("EnviarCTe(\"" + arqXML + "\"," + lote + ")");
         XMotivoConsulta consulta = new XMotivoConsulta(re);
         consulta.setCStat(TextUtils.lerTagIni("cStat", re, "[RETORNO]"));
         consulta.setXMotivo(TextUtils.lerTagIni("xMotivo", re, "[RETORNO]"));
-        consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
+        consulta.setChCTe(TextUtils.lerTagIni("ChCTe", re));
         consulta.setNProt(TextUtils.lerTagIni("NProt", re));
         consulta.setDigVal(TextUtils.lerTagIni("DigVal", re));
         return consulta;
     }
 
     /**
-     * Envia NFe. <br>
+     * Envia CTe. <br>
      * <b>Exemplo:</b><br>
      * ENVIARNFE("c:\35XXXXXXXXXXXXXXXX550010000000050000000058-nfe.xml",1,1,1,1)<br>
      *
      * @param arqXML Caminho do arquivo a ser enviado.
      * @param lote Número do Lote
      * @return XMotivoConsulta
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      */
-    public XMotivoConsulta enviarNFe(File arqXML, int lote) throws ACBrNFeException {
-        String re = comandoNFe("EnviarNFe(" + arqXML + "," + lote + ")");
+    public XMotivoConsulta enviarCTe(File arqXML, int lote) throws ACBrCTeException {
+        String re = comandoCTe("EnviarCTe(" + arqXML + "," + lote + ")");
         XMotivoConsulta consulta = new XMotivoConsulta(re);
         consulta.setCStat(TextUtils.lerTagIni("cStat", re, "[RETORNO]"));
         consulta.setXMotivo(TextUtils.lerTagIni("xMotivo", re, "[RETORNO]"));
-        consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
+        consulta.setChCTe(TextUtils.lerTagIni("ChCTe", re));
         consulta.setNProt(TextUtils.lerTagIni("NProt", re));
         consulta.setDigVal(TextUtils.lerTagIni("DigVal", re));
         return consulta;
     }
 
     /**
-     * Consulta uma NFe.<br><br>
+     * Consulta uma CTe.<br><br>
      * <b>Exemplo:</b><br>
      * CONSULTARNFE("c:\35XXXXXXXXXXXXXXXX550010000000050000000058-nfe.xml")
      *
      * @param arquivo Caminho do arquivo a ser consultado.
      * @return
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      */
-    public XMotivoConsulta consultarNFe(String arquivo) throws ACBrNFeException {
-        String re = comandoNFe("ConsultarNFe(\"" + arquivo + "\")");
+    public XMotivoConsulta consultarCTe(String arquivo) throws ACBrCTeException {
+        String re = comandoCTe("ConsultarCTe(\"" + arquivo + "\")");
         XMotivoConsulta consulta = new XMotivoConsulta(re);
-        consulta.setChNFe(TextUtils.lerTagIni("ChNFe", re));
+        consulta.setChCTe(TextUtils.lerTagIni("ChCTe", re));
         consulta.setNProt(TextUtils.lerTagIni("NProt", re));
         consulta.setDigVal(TextUtils.lerTagIni("DigVal", re));
         return consulta;
     }
 
 //    /**
-//     * Consulta uma NFe.<br><br>
+//     * Consulta uma CTe.<br><br>
 //     * <b>Exemplo:</b><br>
 //     * CONSULTARNFE("c:\35XXXXXXXXXXXXXXXX550010000000050000000058-nfe.xml")
 //     *
 //     * @param arquivo Caminho do arquivo a ser consultado.
 //     * @return
-//     * @throws ACBrNFeException
+//     * @throws ACBrCTeException
 //     */
-//    public XMotivoConsulta consultarNFe(File arquivo) throws ACBrNFeException {
-//        return consultarNFe(arquivo.toString());
+//    public XMotivoConsulta consultarCTe(File arquivo) throws ACBrCTeException {
+//        return consultarCTe(arquivo.toString());
 //    }
     /**
-     * Cancela um NFe já autorizada.
+     * Cancela um CTe já autorizada.
      * <br>
      * <b>Exemplo:</b>
      * NFE.CANCELARNFE("35XXXXXXXXXXXXXXXX550010000000050000000058","Teste de
      * Cancelamento,99999999000191")
      *
-     * @param chaveNFe
+     * @param chaveCTe
      * @param justificativa
      * @param CNPJ
      * @param evento
      * @return
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      */
-    public XMotivoCancelamento cancelarNFe(String chaveNFe, String justificativa, String CNPJ, String evento) throws ACBrNFeException {
-        String re = comandoNFe("CancelarNFe(" + chaveNFe + ",\"" + justificativa + "\"," + CNPJ + ",\"" + evento + "\")");
+    public XMotivoCancelamento cancelarCTe(String chaveCTe, String justificativa, String CNPJ, String evento) throws ACBrCTeException {
+        String re = comandoCTe("CancelarCTe(" + chaveCTe + ",\"" + justificativa + "\"," + CNPJ + ",\"" + evento + "\")");
         XMotivoCancelamento c = new XMotivoCancelamento(re);
-        c.setChNFe(TextUtils.lerTagIni("ChNFe", re));
+        c.setChCTe(TextUtils.lerTagIni("ChCTe", re));
         c.setNProt(TextUtils.lerTagIni("NProt", re));
         c.setTpEvento(TextUtils.lerTagIni("TpEvento", re));
         c.setxEvento(TextUtils.lerTagIni("xEvento", re));
@@ -1202,12 +1217,12 @@ public class ACBrNFe {
      * @param documento
      * @param IE
      * @return
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      * @deprecated Em desenvolvimento, não usar pois esta retornando
-     * ACBrNFeException: URL não definida para: TNFeConsultaCadastro
+     * ACBrCTeException: URL não definida para: TCTeConsultaCadastro
      */
-    public Cadastro consultaCadastro(String UF, String documento, String IE) throws ACBrNFeException {
-        return new Cadastro(comandoNFe("ConsultaCadastro(" + UF + "," + documento + "," + IE + ")"));
+    public Cadastro consultaCadastro(String UF, String documento, String IE) throws ACBrCTeException {
+        return new Cadastro(comandoCTe("ConsultaCadastro(" + UF + "," + documento + "," + IE + ")"));
     }
 
     /**
@@ -1215,16 +1230,16 @@ public class ACBrNFe {
      * @param UF
      * @param documento
      * @return
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      * @deprecated Em desenvolvimento, não usar pois esta retornando
-     * ACBrNFeException: URL não definida para: TNFeConsultaCadastro
+     * ACBrCTeException: URL não definida para: TCTeConsultaCadastro
      */
-    public Cadastro consultaCadastro(String UF, String documento) throws ACBrNFeException {
-        return new Cadastro(comandoNFe("ConsultaCadastro(" + UF + "," + documento + ")"));
+    public Cadastro consultaCadastro(String UF, String documento) throws ACBrCTeException {
+        return new Cadastro(comandoCTe("ConsultaCadastro(" + UF + "," + documento + ")"));
     }
 
     /**
-     * Inutiliza uma faixa de numeração de NFe.
+     * Inutiliza uma faixa de numeração de CTe.
      *
      * @param CNPJ CNPJ do contribuinte
      * @param justificativa Justificativa para inutilização
@@ -1234,22 +1249,22 @@ public class ACBrNFe {
      * @param numInicial Número Inicial a ser inutilizado
      * @param numFinal Número Final a ser inutilizado
      * @return
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      */
-    public XMotivoInutilizar inutilizarNFe(String CNPJ, String justificativa, String ano, String modelo, String serie, String numInicial, String numFinal) throws ACBrNFeException {
-        String re = comandoNFe("InutilizarNFe(" + CNPJ + ",\"" + justificativa + "\"," + ano + "," + modelo + "," + serie + "," + numInicial + "," + numFinal + ")");
+    public XMotivoInutilizar inutilizarCTe(String CNPJ, String justificativa, String ano, String modelo, String serie, String numInicial, String numFinal) throws ACBrCTeException {
+        String re = comandoCTe("InutilizarCTe(" + CNPJ + ",\"" + justificativa + "\"," + ano + "," + modelo + "," + serie + "," + numInicial + "," + numFinal + ")");
         XMotivoInutilizar c = new XMotivoInutilizar(re);
         c.setNProt(TextUtils.lerTagIni("NProt", re));
         return c;
     }
 
-    public XMotivoEvento enviarCartaDeCorrecao(String idLote, String chNFe, String ccOrgao,
+    public XMotivoEvento enviarCartaDeCorrecao(String idLote, String chCTe, String ccOrgao,
             String cCNPJ, String cdhEvento, String cnSeqEvento,
-            String cversaoEvento, String cxCorrecao, String cxCondUso) throws ACBrNFeException {
+            String cversaoEvento, String cxCorrecao, String cxCondUso) throws ACBrCTeException {
         String evt = "[CCE]\n"
                 + "idLote=" + idLote + "\n"
                 + "[EVENTO001]\n"
-                + "chNFe=" + chNFe + "\n"
+                + "chCTe=" + chCTe + "\n"
                 + "cOrgao=" + ccOrgao + "\n"
                 + "CNPJ=" + cCNPJ + "\n"
                 + "dhEvento=" + cdhEvento + "\n"
@@ -1260,7 +1275,7 @@ public class ACBrNFe {
         XMotivoEvento c = new XMotivoEvento(re);
         c.setXMotivo(TextUtils.lerTagIni("xMotivo", re, "[EVENTO001]"));
         c.setCStat(TextUtils.lerTagIni("cStat", re, "[EVENTO001]"));
-        c.setChNFe(TextUtils.lerTagIni("ChNFe", re, "[EVENTO001]"));
+        c.setChCTe(TextUtils.lerTagIni("ChCTe", re, "[EVENTO001]"));
         c.setNProt(TextUtils.lerTagIni("NProt", re));
         c.setTpEvento(TextUtils.lerTagIni("TpEvento", re));
         c.setDhRecbto(TextUtils.lerTagIni("dhRegEvento", re));
@@ -1274,16 +1289,16 @@ public class ACBrNFe {
 
     /**
      * Retorna a data de vencimento do certificado configurado no
-     * ACBrNFeMonitor(funciona apenas na versão CAPICOM).
+     * ACBrCTeMonitor(funciona apenas na versão CAPICOM).
      *
      * @return
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      */
-    public Date getDataVencimentoCertificado() throws ACBrNFeException {
+    public Date getDataVencimentoCertificado() throws ACBrCTeException {
         try {
-            return ACBrUtils.strDataRedToDateBR(comandoNFe("CertificadoDataVencimento"));
+            return ACBrUtils.strDataRedToDateBR(comandoCTe("CertificadoDataVencimento"));
         } catch (ACBrException ex) {
-            throw new ACBrNFeException(ex);
+            throw new ACBrCTeException(ex);
         }
     }
 
@@ -1291,9 +1306,14 @@ public class ACBrNFe {
      * Retorna o CNPJ do Certificado Configurado
      *
      * @return
-     * @throws ACBrNFeException
+     * @throws ACBrCTeException
      */
-    public String getCNPJDoCertificado() throws ACBrNFeException {
-        return comandoNFe("CNPJCertificado");
+    public String getCNPJDoCertificado() throws ACBrCTeException {
+        return comandoCTe("CNPJCertificado");
+    }
+
+    @Override
+    public String toString() {
+        return super.toString(); //To change body of generated methods, choose Tools | Templates.
     }
 }

@@ -5,8 +5,6 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf;
 
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrAAC;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF;
 import static br.com.edsonmoretti.acbr.monitorplus.comunicador.ACBrECF.comandoECF;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrECFException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;

@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
+import javax.swing.JFormattedTextField;
 import javax.swing.JTextField;
 
 /**
@@ -88,6 +89,8 @@ public class Numeros {
             str = ((Float) obj).toString();
         } else if (obj.getClass() == JTextField.class) {
             return parseToBig(((JTextField) obj).getText());
+        } else if (obj.getClass() == JFormattedTextField.class) {
+            return parseToBig(((JFormattedTextField) obj).getText());
         } else if (obj.getClass() == Long.class) {
             return parseToBig(((Long) obj).toString());
         } else {

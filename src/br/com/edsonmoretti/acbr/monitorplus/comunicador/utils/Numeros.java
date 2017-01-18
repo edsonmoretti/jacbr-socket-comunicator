@@ -66,10 +66,18 @@ public class Numeros {
      * @throws NumberFormatException
      */
     public static BigDecimal parseToBig(Object obj) throws NumberFormatException {
-        return parseToBig(obj, 4);
+        return parseToBig(obj, false);
+    }
+
+    public static BigDecimal parseToBig(Object obj, boolean seStringRemoverLetrasEcaracteresEspeciais) throws NumberFormatException {
+        return parseToBig(obj, 4, seStringRemoverLetrasEcaracteresEspeciais);
     }
 
     public static BigDecimal parseToBig(Object obj, int scl) throws NumberFormatException {
+        return parseToBig(obj, scl, false);
+    }
+
+    public static BigDecimal parseToBig(Object obj, int scl, boolean seStringRemoverLetrasEcaracteresEspeciais) throws NumberFormatException {
         String str;
         if (obj == null) {
             obj = BigDecimal.ZERO;
@@ -101,6 +109,9 @@ public class Numeros {
             str = BigDecimal.ZERO.toString();
         }
         str = (str.contains(",") ? str.replace(".", "").replace(",", ".") : str);
+        if (seStringRemoverLetrasEcaracteresEspeciais) {
+            str = str.replaceAll("[^0-9.]", "");
+        }
         return new BigDecimal(str).setScale(scl, RoundingMode.HALF_DOWN);
     }
 

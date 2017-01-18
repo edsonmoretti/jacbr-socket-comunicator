@@ -16,7 +16,7 @@ import java.math.BigDecimal;
  */
 public class CupomFiscal {
 
-    private char sufixoAliquota = 'T';
+//    private char sufixoAliquota = 'T';
     private br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal.Variaveis variaveis;
 
     public CupomFiscal() {
@@ -114,8 +114,8 @@ public class CupomFiscal {
         comandoECF("LegendaInMetroProximoItem");
     }
 
-    public void vendeItem(String gtin, String descricaoPdv, String ecficms, BigDecimal quantidade, BigDecimal valorUni, String unidadeProduto) throws ACBrECFException {
-        vendeItem(gtin, descricaoPdv, ecficms, quantidade.toString(), valorUni.toString(), "0.00", unidadeProduto, "", "", "0");
+    public void vendeItem(String gtin, String descricaoPdv, String ecficms, BigDecimal quantidade, BigDecimal valorUni, String unidadeProduto, char tributadoICMSouISS) throws ACBrECFException {
+        vendeItem(gtin, descricaoPdv, ecficms, quantidade.toString(), valorUni.toString(), "0.00", unidadeProduto, "", "", "0", tributadoICMSouISS);
     }
 
     /**
@@ -150,8 +150,8 @@ public class CupomFiscal {
      * @deprecated melhor não usar valor como aliquota, pois podem vir II, NN,
      * FF
      */
-    public void vendeItem(String codigo, String descricao, Double aliquotaICMS, Double qtd, Double valorUnitario) throws ACBrECFException {
-        vendeItem(codigo, descricao, String.valueOf(aliquotaICMS), String.valueOf(qtd), String.valueOf(valorUnitario));
+    public void vendeItem(String codigo, String descricao, Double aliquotaICMS, Double qtd, Double valorUnitario, char tributadoICMSouISS) throws ACBrECFException {
+        vendeItem(codigo, descricao, String.valueOf(aliquotaICMS), String.valueOf(qtd), String.valueOf(valorUnitario), tributadoICMSouISS);
     }
 
     /**
@@ -185,8 +185,8 @@ public class CupomFiscal {
      * a impressão para 2 casas decimais, sempre que possível.
      * @throws ACBrECFException
      */
-    public void vendeItem(String codigo, String descricao, String aliquotaICMS, String unidadeProduto, String qtd, String valorUnitario) throws ACBrECFException {
-        comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + sufixoAliquota + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ", 0.00," + unidadeProduto + ", \"$\", \"A\", 0.00)");
+    public void vendeItem(String codigo, String descricao, String aliquotaICMS, String unidadeProduto, String qtd, String valorUnitario, char tributadoICMSouISS) throws ACBrECFException {
+        comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + tributadoICMSouISS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ", 0.00," + unidadeProduto + ", \"$\", \"A\", 0.00)");
     }
 
     /**
@@ -219,8 +219,8 @@ public class CupomFiscal {
      * a impressão para 2 casas decimais, sempre que possível.
      * @throws ACBrECFException
      */
-    public void vendeItem(String codigo, String descricao, String aliquotaICMS, String qtd, String valorUnitario) throws ACBrECFException {
-        comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + sufixoAliquota + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ")");
+    public void vendeItem(String codigo, String descricao, String aliquotaICMS, String qtd, String valorUnitario, char tributadoICMSouISS) throws ACBrECFException {
+        comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + tributadoICMSouISS + ", " + qtd + ", " + Numeros.parseToBig(valorUnitario).toString() + ")");
     }
 
     /**
@@ -253,8 +253,8 @@ public class CupomFiscal {
      * a impressão para 2 casas decimais, sempre que possível.
      * @throws ACBrECFException
      */
-    public void vendeItem(String codigo, String descricao, BigDecimal aliquotaICMS, BigDecimal qtd, BigDecimal valorUnitario) throws ACBrECFException {
-        vendeItem(codigo, descricao, aliquotaICMS.toString(), qtd.toString(), valorUnitario.toString());
+    public void vendeItem(String codigo, String descricao, BigDecimal aliquotaICMS, BigDecimal qtd, BigDecimal valorUnitario, char tributadoICMSouISS) throws ACBrECFException {
+        vendeItem(codigo, descricao, aliquotaICMS.toString(), qtd.toString(), valorUnitario.toString(), tributadoICMSouISS);
     }
 
     /**
@@ -287,8 +287,8 @@ public class CupomFiscal {
      * a impressão para 2 casas decimais, sempre que possível.
      * @throws ACBrECFException
      */
-    public void vendeItem(String codigo, String descricao, String aliquotaICMS, BigDecimal qtd, BigDecimal valorUnitario) throws ACBrECFException {
-        vendeItem(codigo, descricao, aliquotaICMS, qtd.toString(), valorUnitario.toString());
+    public void vendeItem(String codigo, String descricao, String aliquotaICMS, BigDecimal qtd, BigDecimal valorUnitario, char tributadoICMSouISS) throws ACBrECFException {
+        vendeItem(codigo, descricao, aliquotaICMS, qtd.toString(), valorUnitario.toString(), tributadoICMSouISS);
     }
 
     /**
@@ -322,8 +322,8 @@ public class CupomFiscal {
      * a impressão para 2 casas decimais, sempre que possível.
      * @throws ACBrECFException
      */
-    public void vendeItem(String codigo, String descricao, String aliquotaICMS, String unidadeProduto, BigDecimal qtd, BigDecimal valorUnitario) throws ACBrECFException {
-        vendeItem(codigo, descricao, aliquotaICMS, unidadeProduto, qtd.toString(), valorUnitario.toString());
+    public void vendeItem(String codigo, String descricao, String aliquotaICMS, String unidadeProduto, BigDecimal qtd, BigDecimal valorUnitario, char tributadoICMSouISS) throws ACBrECFException {
+        vendeItem(codigo, descricao, aliquotaICMS, unidadeProduto, qtd.toString(), valorUnitario.toString(),tributadoICMSouISS);
     }
 
     /**
@@ -371,9 +371,9 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void vendeItem(String codigo, String descricao, String aliquotaICMS, String qtd, String valorUnitario,
-            String valorDescontoAcrescimo, String unidade, String tipoDescontoAcrescimo, String ehDescontoOuAcrescimo, String codDepartamento) throws ACBrECFException {
+            String valorDescontoAcrescimo, String unidade, String tipoDescontoAcrescimo, String ehDescontoOuAcrescimo, String codDepartamento, char tributadoICMSouISS) throws ACBrECFException {
         vendeItem(codigo, descricao, Numeros.parseToBig(aliquotaICMS), Numeros.parseToBig(qtd), Numeros.parseToBig(valorUnitario),
-                Numeros.parseToBig(valorDescontoAcrescimo), unidade, tipoDescontoAcrescimo.charAt(0), ehDescontoOuAcrescimo.charAt(0), Integer.parseInt(codDepartamento));
+                Numeros.parseToBig(valorDescontoAcrescimo), unidade, tipoDescontoAcrescimo.charAt(0), ehDescontoOuAcrescimo.charAt(0), Integer.parseInt(codDepartamento), tributadoICMSouISS);
     }
 
     /**
@@ -423,11 +423,12 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void vendeItem(String codigo, String descricao, BigDecimal aliquotaICMS, BigDecimal qtd, BigDecimal valorUnitario,
-            BigDecimal valorDescontoAcrescimo, String unidade, char tipoDescontoAcrescimo, char ehDescontoOuAcrescimo, int codDepartamento) throws ACBrECFException {
+            BigDecimal valorDescontoAcrescimo, String unidade, char tipoDescontoAcrescimo, char ehDescontoOuAcrescimo, int codDepartamento, char tributadoICMSouISS
+    ) throws ACBrECFException {
         ehDescontoOuAcrescimo = String.valueOf(ehDescontoOuAcrescimo).toUpperCase().charAt(0);
         if (tipoDescontoAcrescimo == '%' || tipoDescontoAcrescimo == '$') {
             if (ehDescontoOuAcrescimo == 'D' || ehDescontoOuAcrescimo == 'A') {
-                comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + (sufixoAliquota) + ", " + qtd + ", " + valorUnitario + ","
+                comandoECF("VendeItem(\"" + codigo + "\", \"" + descricao + "\", " + aliquotaICMS + (tributadoICMSouISS) + ", " + qtd + ", " + valorUnitario + ","
                         + "" + valorDescontoAcrescimo + "," + unidade + ",\"" + tipoDescontoAcrescimo + "\",\"" + ehDescontoOuAcrescimo + "\"," + codDepartamento + ")");
             } else {
                 throw new ACBrECFException("Informação sobre ser desconto ou acrescimo invalido. Possíveis: D - Desconto ou A - Acrescimo");
@@ -755,12 +756,12 @@ public class CupomFiscal {
         return variaveis == null ? variaveis = new br.com.edsonmoretti.acbr.monitorplus.comunicador.ecf.cupomfiscal.Variaveis() : variaveis;
     }
 
-    public char getSufixoAliquota() {
-        return sufixoAliquota;
-    }
-
-    public void setSufixoAliquota(char sufixoAliquota) {
-        this.sufixoAliquota = sufixoAliquota;
-    }
+//    public char getSufixoAliquota() {
+//        return sufixoAliquota;
+//    }
+//
+//    public void setSufixoAliquota(char sufixoAliquota) {
+//        this.sufixoAliquota = sufixoAliquota;
+//    }
 
 }

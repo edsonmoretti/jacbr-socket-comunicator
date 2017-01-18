@@ -19,7 +19,7 @@ public class Aliquota {
     private BigDecimal total;
 
     public String getTotalizador() {
-        return indice + String.valueOf(tipo) + (percentualImposto.compareTo(BigDecimal.TEN) == -1 ? "0" : "") + String.format("%.2f", percentualImposto).replace(",", "");//Será que vai existi
+        return indice + String.valueOf(tipo) + (percentualImposto.compareTo(BigDecimal.TEN) == -1 ? "0" : "") + String.format("%.2f", percentualImposto).replace(",", "");//Será que vai existir
     }
 
     /**

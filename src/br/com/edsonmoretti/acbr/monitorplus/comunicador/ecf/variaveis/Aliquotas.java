@@ -6,6 +6,8 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.Numeros;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -35,7 +37,8 @@ public class Aliquotas {
      * @throws ACBrECFException
      */
     public List<Aliquota> getAliquotas() throws ACBrECFException {
-        return listaAliquotas("Aliquotas");
+        return listaAliquotas();
+//        return listaAliquotas("Aliquotas");
     }
 
     /**
@@ -52,7 +55,7 @@ public class Aliquotas {
      * @throws ACBrECFException
      */
     public List<Aliquota> carregaAliquotas() throws ACBrECFException {
-        return listaAliquotas("CarregaAliquotas");
+        return listaAliquotas();
     }
 
     /**
@@ -70,33 +73,74 @@ public class Aliquotas {
      * @throws ACBrECFException
      */
     public List<Aliquota> lerTotaisAliquota() throws ACBrECFException {
-        return listaAliquotas("LerTotaisAliquota");
+//        return listaAliquotas("LerTotaisAliquota");
+        return listaAliquotas();
     }
 
-    private List<Aliquota> listaAliquotas(String tipo) throws ACBrECFException {
+    private List<Aliquota> listaAliquotas() throws ACBrECFException {
+
+        boolean ecfElgin = comandoECF("ModeloStr").trim().toLowerCase().contains("elgin");
+
         List<Aliquota> lista = new ArrayList<>();
-        for (String s : comandoECF(tipo).split("\\|")) {
-            s = s.trim();
-            Aliquota aliq = new Aliquota();
-            aliq.setTipo(s.charAt(2));
-            aliq.setIndice(s.substring(0, 2));
-            if (tipo.endsWith("LerTotaisAliquota")) {
-                for (Aliquota aliqForDentro : getAliquotas()) {
-                    if (aliqForDentro.getIndice().equals(aliq.getIndice())) {
-                        aliq.setTipo(aliqForDentro.getTipo());
-                        aliq.setPercentualImposto(aliqForDentro.getPercentualImposto());
-                        break;
-                    }
-                }
-                aliq.setTotal(Numeros.parseToBig(s.substring(2)));
-            } else {
-                aliq.setPercentualImposto(Numeros.parseToBig(s.substring(3)));
-            }
-            lista.add(aliq);
+
+        String[] aliquotas = comandoECF("Aliquotas").split("\\|");
+        String[] totaisAliqs = comandoECF("LerTotaisAliquota").split("\\|");
+
+        for (int i = 0; i < aliquotas.length; i++) {
+            String aliq = aliquotas[i];
+            Aliquota aliquota = new Aliquota();
+            aliquota.setIndice(String.format("%02d", Integer.parseInt(aliq.split("T")[0].trim())));
+            aliquota.setPercentualImposto(Numeros.parseToBig(aliq.split("T")[1]));
+            aliquota.setTotal(Numeros.parseToBig(!ecfElgin ? totaisAliqs[i].substring(2) : totaisAliqs[i]));
+            aliquota.setTipo('T');
+            lista.add(aliquota);
         }
+
+//        for (String s : ) {
+//            s = s.trim();
+//            Aliquota aliq = new Aliquota();
+//            aliq.setTipo(s.charAt(2));
+//            aliq.setIndice(s.substring(0, 2));
+//            if (tipo.endsWith("LerTotaisAliquota")) {
+//                for (Aliquota aliqForDentro : getAliquotas()) {
+//                    if (aliqForDentro.getIndice().equals(aliq.getIndice())) {
+//                        aliq.setTipo(aliqForDentro.getTipo());
+//                        aliq.setPercentualImposto(aliqForDentro.getPercentualImposto());
+//                        break;
+//                    }
+//                }
+//                aliq.setTotal(Numeros.parseToBig(s.substring(2)));
+//            } else {
+//                aliq.setPercentualImposto(Numeros.parseToBig(s.substring(3)));
+//            }
+//            lista.add(aliq);
+//        }
         return lista;
     }
 
+//    private List<Aliquota> listaAliquotas(String tipo) throws ACBrECFException {
+//        List<Aliquota> lista = new ArrayList<>();
+//        for (String s : comandoECF(tipo).split("\\|")) {
+//            s = s.trim();
+//            Aliquota aliq = new Aliquota();
+//            aliq.setTipo(s.charAt(2));
+//            aliq.setIndice(s.substring(0, 2));
+//            if (tipo.endsWith("LerTotaisAliquota")) {
+//                for (Aliquota aliqForDentro : getAliquotas()) {
+//                    if (aliqForDentro.getIndice().equals(aliq.getIndice())) {
+//                        aliq.setTipo(aliqForDentro.getTipo());
+//                        aliq.setPercentualImposto(aliqForDentro.getPercentualImposto());
+//                        break;
+//                    }
+//                }
+//                aliq.setTotal(Numeros.parseToBig(s.substring(2)));
+//            } else {
+//                aliq.setPercentualImposto(Numeros.parseToBig(s.substring(3)));
+//            }
+//            lista.add(aliq);
+//        }
+//        return lista;
+//    }
     /**
      * Procura Alíquota no ECF pelo valor informado e retorna o índice da
      * alíquota.
@@ -178,5 +222,16 @@ public class Aliquotas {
         a.setTipo(r.charAt(0));
         a.setPercentualImposto(Numeros.parseToBig(r.substring(4)));
         return a;
+    }
+
+    public static void main(String[] args) {
+        try {
+            Aliquotas al = new Aliquotas();
+            for (Aliquota a : al.listaAliquotas()) {
+                System.out.println(a);
+            }
+        } catch (ACBrECFException ex) {
+            Logger.getLogger(Aliquotas.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }

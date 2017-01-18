@@ -226,14 +226,6 @@ public class ACBrECF {
         }
     }
 
-    public char getSufixoAliquota() {
-        return getCupomFiscal().getSufixoAliquota();
-    }
-
-    public void setSufixoAliquota(char sufixoAliquota) {
-        getCupomFiscal().setSufixoAliquota(sufixoAliquota);
-    }
-
     public ACBrAAC getAac() {
         return aac;
     }

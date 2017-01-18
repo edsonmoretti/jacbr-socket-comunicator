@@ -49,23 +49,23 @@ public class TesteECF {
 //                e.getCupomFiscal().identificaConsumidor("07900648470");
                 try {
                     e.getCupomFiscal().abreCupom();
-                    e.getCupomFiscal().vendeItem("001", "descricao item 1", Numeros.parseToBig("18"), new BigDecimal("5"), Numeros.parseToBig("5,00"));
-                    e.getCupomFiscal().vendeItem("002", "descricao item 2", "17", "2", "1,02");
-                    e.getCupomFiscal().vendeItem("003", "descricao item 3", Double.parseDouble("18"), Double.parseDouble("2"), Double.parseDouble("1.02"));
+                    e.getCupomFiscal().vendeItem("001", "descricao item 1", Numeros.parseToBig("18"), new BigDecimal("5"), Numeros.parseToBig("5,00"), 'T');
+                    e.getCupomFiscal().vendeItem("002", "descricao item 2", "17", "2", "1,02", 'T');
+                    e.getCupomFiscal().vendeItem("003", "descricao item 3", Double.parseDouble("18"), Double.parseDouble("2"), Double.parseDouble("1.02"), 'T');
                     if (e.getVariaveis().getEquipamento().getMarcaStr().toLowerCase().contains("daruma")) {
-                        e.getCupomFiscal().vendeItem("004", "descricao item 4", Numeros.parseToBig("17"), new BigDecimal("20"), BigDecimal.ONE, BigDecimal.TEN, "UND", '$', 'A', 1);
+                        e.getCupomFiscal().vendeItem("004", "descricao item 4", Numeros.parseToBig("17"), new BigDecimal("20"), BigDecimal.ONE, BigDecimal.TEN, "UND", '$', 'A', 1, 'T');
                     }
                     e.getCupomFiscal().cancelaItemVendido(2);
-                    e.getCupomFiscal().vendeItem("005", "descricao item 5", "17", "4", "1,02");
+                    e.getCupomFiscal().vendeItem("005", "descricao item 5", "17", "4", "1,02", 'T');
                     e.getCupomFiscal().cancelaItemVendido(4);
                     if (e.getVariaveis().getEquipamento().getMarcaStr().toLowerCase().contains("daruma")) {
                         e.getCupomFiscal().cancelaItemVendidoParcial(1, "1,5");
                     }
-                    e.getCupomFiscal().vendeItem("006", "descricao item 6 - aplicar desc", "FF", "6", "1,00");
+                    e.getCupomFiscal().vendeItem("006", "descricao item 6 - aplicar desc", "FF", "6", "1,00", 'T');
                     e.getCupomFiscal().descontoItemAnterior(BigDecimal.ONE, '%');
-                    e.getCupomFiscal().vendeItem("007", "descricao item 7 - aplicar acres", "12", BigDecimal.TEN, BigDecimal.ONE);
+                    e.getCupomFiscal().vendeItem("007", "descricao item 7 - aplicar acres", "12", BigDecimal.TEN, BigDecimal.ONE, 'T');
                     e.getCupomFiscal().acrescimoItemAnterior(BigDecimal.ONE, '%');
-                    e.getCupomFiscal().vendeItem("008", "descricao item 8 - aplicar desc item", "II", BigDecimal.TEN, BigDecimal.ONE);
+                    e.getCupomFiscal().vendeItem("008", "descricao item 8 - aplicar desc item", "II", BigDecimal.TEN, BigDecimal.ONE, 'T');
                     e.getCupomFiscal().descontoAcrescimoItem(BigDecimal.ONE, 'D', '$', 8);
                     System.out.println("Numero Cupom: " + e.getCupomFiscal().getVariaveis().getNumCupom());
                     System.out.println("Numero ultimo item: " + e.getCupomFiscal().getVariaveis().getNumUltItem());

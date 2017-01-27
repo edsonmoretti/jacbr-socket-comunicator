@@ -53,7 +53,7 @@ public class TesteECF {
                     e.getCupomFiscal().vendeItem("002", "descricao item 2", "17", "2", "1,02", 'T');
                     e.getCupomFiscal().vendeItem("003", "descricao item 3", Double.parseDouble("18"), Double.parseDouble("2"), Double.parseDouble("1.02"), 'T');
                     if (e.getVariaveis().getEquipamento().getMarcaStr().toLowerCase().contains("daruma")) {
-                        e.getCupomFiscal().vendeItem("004", "descricao item 4", Numeros.parseToBig("17"), new BigDecimal("20"), BigDecimal.ONE, BigDecimal.TEN, "UND", '$', 'A', 1, 'T');
+//                        e.getCupomFiscal().vendeItem("004", "descricao item 4", Numeros.parseToBig("17"), new BigDecimal("20"), BigDecimal.ONE, BigDecimal.TEN, "UND", '$', 'A', 1, 'T');
                     }
                     e.getCupomFiscal().cancelaItemVendido(2);
                     e.getCupomFiscal().vendeItem("005", "descricao item 5", "17", "4", "1,02", 'T');

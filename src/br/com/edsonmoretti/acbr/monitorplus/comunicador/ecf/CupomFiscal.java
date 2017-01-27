@@ -323,7 +323,7 @@ public class CupomFiscal {
      * @throws ACBrECFException
      */
     public void vendeItem(String codigo, String descricao, String aliquotaICMS, String unidadeProduto, BigDecimal qtd, BigDecimal valorUnitario, char tributadoICMSouISS) throws ACBrECFException {
-        vendeItem(codigo, descricao, aliquotaICMS, unidadeProduto, qtd.toString(), valorUnitario.toString(),tributadoICMSouISS);
+        vendeItem(codigo, descricao, aliquotaICMS, unidadeProduto, qtd.toString(), valorUnitario.toString(), tributadoICMSouISS);
     }
 
     /**
@@ -372,7 +372,8 @@ public class CupomFiscal {
      */
     public void vendeItem(String codigo, String descricao, String aliquotaICMS, String qtd, String valorUnitario,
             String valorDescontoAcrescimo, String unidade, String tipoDescontoAcrescimo, String ehDescontoOuAcrescimo, String codDepartamento, char tributadoICMSouISS) throws ACBrECFException {
-        vendeItem(codigo, descricao, Numeros.parseToBig(aliquotaICMS), Numeros.parseToBig(qtd), Numeros.parseToBig(valorUnitario),
+
+        vendeItem(codigo, descricao, aliquotaICMS, Numeros.parseToBig(qtd), Numeros.parseToBig(valorUnitario),
                 Numeros.parseToBig(valorDescontoAcrescimo), unidade, tipoDescontoAcrescimo.charAt(0), ehDescontoOuAcrescimo.charAt(0), Integer.parseInt(codDepartamento), tributadoICMSouISS);
     }
 
@@ -418,11 +419,10 @@ public class CupomFiscal {
      * @param ehDescontoOuAcrescimo Informar "A" para acréscimo ou "D" para
      * desconto.Se parâmetro omitido será considerado Desconto "D"
      * @param codDepartamento Código de departamento.
-     * @deprecated Não é bom usar aliquotaICMS como numero, pode levantar
-     * parseexception devido NN, FF e II
+     *
      * @throws ACBrECFException
      */
-    public void vendeItem(String codigo, String descricao, BigDecimal aliquotaICMS, BigDecimal qtd, BigDecimal valorUnitario,
+    public void vendeItem(String codigo, String descricao, String aliquotaICMS, BigDecimal qtd, BigDecimal valorUnitario,
             BigDecimal valorDescontoAcrescimo, String unidade, char tipoDescontoAcrescimo, char ehDescontoOuAcrescimo, int codDepartamento, char tributadoICMSouISS
     ) throws ACBrECFException {
         ehDescontoOuAcrescimo = String.valueOf(ehDescontoOuAcrescimo).toUpperCase().charAt(0);
@@ -763,5 +763,4 @@ public class CupomFiscal {
 //    public void setSufixoAliquota(char sufixoAliquota) {
 //        this.sufixoAliquota = sufixoAliquota;
 //    }
-
 }

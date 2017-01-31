@@ -219,6 +219,15 @@ public class ACBrESCPOS {
     public void imprimirEAN13(String ean13) throws ACBrESCPOSException {
         imprimir("<ean13>" + ean13 + "</ean13>");
     }
+    /**
+     * Imprime Código de Barra Code128
+     *
+     * @param code128
+     * @throws ACBrESCPOSException
+     */
+    public void imprimirCode128(String code128) throws ACBrESCPOSException {
+        imprimir("<code128>" + code128 + "</code128>");
+    }
 
     /**
      * Imprime Código de Barra EAN8

@@ -84,7 +84,7 @@ public class Aliquotas {
         List<Aliquota> lista = new ArrayList<>();
 
         String[] aliquotas = comandoECF("Aliquotas").split("\\|");
-        String[] totaisAliqs = comandoECF("LerTotaisAliquota").split("\\|");
+        String[] totaisAliqs = comandoECF("LerTotaisAliquota").replace(" ", "").split("\\|");
 
         for (int i = 0; i < aliquotas.length; i++) {
             String aliq = aliquotas[i];

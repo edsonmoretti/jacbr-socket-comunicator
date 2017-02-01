@@ -137,9 +137,9 @@ public class MapaResumo {
             //Aliquotas
             retorno = retorno.substring(retorno.indexOf("[Aliquotas]") + "[Aliquotas]".length(), retorno.indexOf("[OutrasICMS]")).trim().replace("\n", "=");
             String ret[] = retorno.split("=");
+            
             HashMap<String, BigDecimal> h = new HashMap<>();
-            for (int i = 0;
-                    i < ret.length;) {
+            for (int i = 0; i < ret.length;) {
                 h.put(ret[i++].trim(), Numeros.parseToBig(ret[i++]));
             }
             r.setTotaisAliquotas(h);

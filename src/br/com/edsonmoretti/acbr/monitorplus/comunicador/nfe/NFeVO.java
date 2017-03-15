@@ -23,6 +23,49 @@ public class NFeVO {
     private ListVO<AautXML> listAutXML;
     private ListVO<Produto> listProduto;
 
+    public enum Modelo {
+
+        /**
+         * Modelo 55
+         */
+        NFe(55),
+        /**
+         * Modelo 65
+         */
+        NFCe(65),
+        /**
+         * Modelo 55
+         *
+         * @deprecated
+         */
+        NFe_55("55"),
+        /**
+         * Modelo 65
+         *
+         * @deprecated
+         */
+        NFCe_65("65");
+
+        Integer modelo;
+
+        Modelo(int modelo) {
+            this.modelo = modelo;
+        }
+
+        /**
+         * @deprecated @param modelo
+         */
+        Modelo(String modelo) {
+            this.modelo = Integer.parseInt(modelo);
+        }
+
+        @Override
+        public String toString() {
+            return modelo.toString();
+        }
+
+    }
+
     public NFeVO(InfNfe infNfe, Identificacao Identificacao, Emitente Emitente, Avulsa Avulsa, Destinatario Destinatario, Retirada Retirada, Entrega Entrega) {
         this.infNfe = infNfe;
         this.identificacao = Identificacao;

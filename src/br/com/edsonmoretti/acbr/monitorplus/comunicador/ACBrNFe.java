@@ -13,6 +13,7 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoConsulta;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoEvento;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoInutilizar;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoStatusDoServico;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.NFeVO;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
 import java.io.File;
 import java.util.Date;
@@ -63,8 +64,9 @@ public class ACBrNFe {
      * Valida arquivo da NFe. Arquivo deve estar assinado.
      *
      * @param arquivo Caminho do arquivo a ser validado.
-     * @throws br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException
-
+     * @throws
+     * br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException
+     *
      */
     public void validarNFe(String arquivo) throws ACBrNFeException {
         comandoNFe("ValidarNFe(\"" + arquivo + "\")");
@@ -1295,5 +1297,30 @@ public class ACBrNFe {
      */
     public String getCNPJDoCertificado() throws ACBrNFeException {
         return comandoNFe("CNPJCertificado");
+    }
+
+    /**
+     * Muda o tipo de documento que será criado. Aceita os valores 55 e 65,
+     * sendo 55 - NFe e 65 NFC-e;
+     *
+     * @param modelo
+     * @throws ACBrNFeException
+     */
+    public void setModeloDF(NFeVO.Modelo modelo) throws ACBrNFeException {
+        comandoNFe("SetModeloDF(\"" + modelo + "\")");
+    }
+
+    /**
+     * Muda a versão do documento que será usado no ACBrNFeMonitor, aceitas os
+     * seguintes valores: 2.00 - 3.00 - 3.10.
+     *
+     * A versão 3.00 funciona apenas para NFC-e para empresas que participam dos
+     * projetos pilotos em alguns estados;
+     *
+     * @param modelo
+     * @throws ACBrNFeException
+     */
+    public void setVersaoDF(NFeVO.Modelo modelo) throws ACBrNFeException {
+        comandoNFe("SetVersaoDF(\"" + modelo + "\")");
     }
 }

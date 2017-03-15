@@ -29,11 +29,11 @@ public class ACBr {
     private static BufferedReader recebeComando;
     private static PrintWriter enviaComando;
     private static Socket acbrSocket;
-    private static final String NAMEHOST = getConfig().getNameHost();
-    private static final int PORTA = getConfig().getPorta();
+    public Config configuracaoAcbr;
     private static InetAddress hostName;
 
     public ACBr() {
+        configuracaoAcbr = getConfig();
     }
 
     /**
@@ -294,12 +294,12 @@ public class ACBr {
     private static String writeToReadFromSocket(String comando) throws ACBrException {
         try {
             if (hostName == null) {
-                hostName = InetAddress.getByName(NAMEHOST);
+                hostName = InetAddress.getByName(getInstance().getConfiguracaoACBr().getNameHost());
             }
             boolean primeiraInstancia = false;
             if (acbrSocket == null) {
                 primeiraInstancia = true;
-                acbrSocket = new Socket(hostName, PORTA);
+                acbrSocket = new Socket(hostName, getInstance().getConfiguracaoACBr().getPorta());
             }
             if (enviaComando == null) {
                 enviaComando = new PrintWriter(acbrSocket.getOutputStream());
@@ -363,6 +363,45 @@ public class ACBr {
         recebeComando = null;
     }
 
+    /**
+     * Se não der o SetConfiguracaoACBr ele vai considerar a configuração que
+     * foi salva no arquivo acbr.config Caso contrário vai usar a configuração
+     * setada Aqui.
+     *
+     * @param configuracaoAcbr Configuração nova para Conexão,
+     * @param resetarConexão Se true, reseta a conexão, se false continua com a
+     * nova até o reset ser realizado manualmente, através do
+     * ACBr.getInstance().resetarConexao()
+     */
+    public void setConfiguracaoACBr(Config configuracaoAcbr, boolean resetarConexão) {
+        this.configuracaoAcbr = configuracaoAcbr;
+        if (resetarConexão) {
+            resetarConexao();
+        }
+    }
+
+    /**
+     * Se não der o SetConfiguracaoACBr ele vai considerar a configuração que
+     * foi salva no arquivo acbr.config Caso contrário vai usar a configuração
+     * setada Aqui.
+     * <b>OBS:</b> Esse método automáticamente reseta a conexão, setando para os
+     * novos dados de conexão.
+     *
+     * @param configuracaoAcbr Configuração nova para Conexão,
+     */
+    public void setConfiguracaoACBr(Config configuracaoAcbr) {
+        setConfiguracaoACBr(configuracaoAcbr, true);
+    }
+
+    /**
+     * Retorna o Objeto com as Configurações do ACBr
+     *
+     * @return
+     */
+    public Config getConfiguracaoACBr() {
+        return configuracaoAcbr;
+    }
+
     private static Config getConfig() {
         String c = "config.acbr";
         try {
@@ -397,10 +436,19 @@ public class ACBr {
         private static final ACBr INSTANCE = new ACBr();
     }
 
-    private static class Config implements Serializable {
+    public static class Config implements Serializable {
 
         private String nameHost;
         private int porta;
+
+        public Config() {
+
+        }
+
+        public Config(String nameHost, int porta) {
+            this.nameHost = nameHost;
+            this.porta = porta;
+        }
 
         public String getNameHost() {
             return nameHost;

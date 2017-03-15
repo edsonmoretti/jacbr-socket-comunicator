@@ -181,7 +181,7 @@ public class ReducaoZ {
 
     public HashMap<String, BigDecimal> getTotaisAliquotas() {
         return totaisAliquotas;
-    }
+    } 
 
     protected void setTotaisAliquotas(HashMap<String, BigDecimal> totaisAliquotas) {
         this.totaisAliquotas = totaisAliquotas;

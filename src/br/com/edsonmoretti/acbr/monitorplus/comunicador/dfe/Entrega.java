@@ -11,14 +11,14 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe;
  */
 public class Entrega {
 
-    private final String CNPJCPF;
-    private final String xLgr;
-    private final String nro;
-    private final String xCpl;
-    private final String xBairro;
-    private final String cMun;
-    private final String xMun;
-    private final String UF;
+    private String CNPJCPF;
+    private String xLgr;
+    private String nro;
+    private String xCpl;
+    private String xBairro;
+    private String cMun;
+    private String xMun;
+    private String UF;
 
     public Entrega(String CNPJCPF, String xLgr, String nro, String xCpl, String xBairro, String cMun, String xMun, String UF) {
         this.CNPJCPF = CNPJCPF;
@@ -28,6 +28,41 @@ public class Entrega {
         this.xBairro = xBairro;
         this.cMun = cMun;
         this.xMun = xMun;
+        this.UF = UF;
+    }
+
+    public Entrega() {
+    }
+
+    public void setCNPJCPF(String CNPJCPF) {
+        this.CNPJCPF = CNPJCPF;
+    }
+
+    public void setxLgr(String xLgr) {
+        this.xLgr = xLgr;
+    }
+
+    public void setNro(String nro) {
+        this.nro = nro;
+    }
+
+    public void setxCpl(String xCpl) {
+        this.xCpl = xCpl;
+    }
+
+    public void setxBairro(String xBairro) {
+        this.xBairro = xBairro;
+    }
+
+    public void setcMun(String cMun) {
+        this.cMun = cMun;
+    }
+
+    public void setxMun(String xMun) {
+        this.xMun = xMun;
+    }
+
+    public void setUF(String UF) {
         this.UF = UF;
     }
 

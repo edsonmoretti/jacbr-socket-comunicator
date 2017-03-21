@@ -11,24 +11,24 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe;
  */
 public class Destinatario {
 
-    private final String idEstrangeiro;
-    private final String CNPJCPF;
-    private final String xNome;
-    private final String indIEDest;
-    private final String IE;
-    private final String ISUF;
-    private final String Email;
-    private final String xLgr;
-    private final String nro;
-    private final String xCpl;
-    private final String xBairro;
-    private final String cMun;
-    private final String xMun;
-    private final String UF;
-    private final String CEP;
-    private final String cPais;
-    private final String xPais;
-    private final String Fone;
+    private String idEstrangeiro;
+    private String CNPJCPF;
+    private String xNome;
+    private String indIEDest;
+    private String IE;
+    private String ISUF;
+    private String Email;
+    private String xLgr;
+    private String nro;
+    private String xCpl;
+    private String xBairro;
+    private String cMun;
+    private String xMun;
+    private String UF;
+    private String CEP;
+    private String cPais;
+    private String xPais;
+    private String Fone;
 
     public Destinatario(String idEstrangeiro, String CNPJCPF, String xNome, String indIEDest, String IE, String ISUF, String Email, String xLgr, String nro, String xCpl, String xBairro, String cMun, String xMun, String UF, String CEP, String cPais, String xPais, String Fone) {
         this.idEstrangeiro = idEstrangeiro;
@@ -49,6 +49,10 @@ public class Destinatario {
         this.cPais = cPais;
         this.xPais = xPais;
         this.Fone = Fone;
+    }
+
+    public Destinatario() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getIdEstrangeiro() {
@@ -121,6 +125,78 @@ public class Destinatario {
 
     public String getFone() {
         return Fone;
+    }
+
+    public void setIdEstrangeiro(String idEstrangeiro) {
+        this.idEstrangeiro = idEstrangeiro;
+    }
+
+    public void setCNPJCPF(String CNPJCPF) {
+        this.CNPJCPF = CNPJCPF;
+    }
+
+    public void setxNome(String xNome) {
+        this.xNome = xNome;
+    }
+
+    public void setIndIEDest(String indIEDest) {
+        this.indIEDest = indIEDest;
+    }
+
+    public void setIE(String IE) {
+        this.IE = IE;
+    }
+
+    public void setISUF(String ISUF) {
+        this.ISUF = ISUF;
+    }
+
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
+    public void setxLgr(String xLgr) {
+        this.xLgr = xLgr;
+    }
+
+    public void setNro(String nro) {
+        this.nro = nro;
+    }
+
+    public void setxCpl(String xCpl) {
+        this.xCpl = xCpl;
+    }
+
+    public void setxBairro(String xBairro) {
+        this.xBairro = xBairro;
+    }
+
+    public void setcMun(String cMun) {
+        this.cMun = cMun;
+    }
+
+    public void setxMun(String xMun) {
+        this.xMun = xMun;
+    }
+
+    public void setUF(String UF) {
+        this.UF = UF;
+    }
+
+    public void setCEP(String CEP) {
+        this.CEP = CEP;
+    }
+
+    public void setcPais(String cPais) {
+        this.cPais = cPais;
+    }
+
+    public void setxPais(String xPais) {
+        this.xPais = xPais;
+    }
+
+    public void setFone(String Fone) {
+        this.Fone = Fone;
     }
 
     @Override

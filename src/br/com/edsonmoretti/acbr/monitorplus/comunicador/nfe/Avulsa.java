@@ -11,17 +11,17 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe;
  */
 public class Avulsa {
 
-    private final String CNPJ;
-    private final String xOrgao;
-    private final String matr;
-    private final String xAgente;
-    private final String fone;
-    private final String UF;
-    private final String nDAR;
-    private final String dEmi;
-    private final String vDAR;
-    private final String repEmi;
-    private final String dPag;
+    private String CNPJ;
+    private String xOrgao;
+    private String matr;
+    private String xAgente;
+    private String fone;
+    private String UF;
+    private String nDAR;
+    private String dEmi;
+    private String vDAR;
+    private String repEmi;
+    private String dPag;
 
     public Avulsa(String CNPJ, String xOrgao, String matr, String xAgente, String fone, String UF, String nDAR, String dEmi, String vDAR, String repEmi, String dPag) {
         this.CNPJ = CNPJ;
@@ -35,6 +35,10 @@ public class Avulsa {
         this.vDAR = vDAR;
         this.repEmi = repEmi;
         this.dPag = dPag;
+    }
+
+    public Avulsa() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getCNPJ() {
@@ -79,6 +83,50 @@ public class Avulsa {
 
     public String getdPag() {
         return dPag;
+    }
+
+    public void setCNPJ(String CNPJ) {
+        this.CNPJ = CNPJ;
+    }
+
+    public void setxOrgao(String xOrgao) {
+        this.xOrgao = xOrgao;
+    }
+
+    public void setMatr(String matr) {
+        this.matr = matr;
+    }
+
+    public void setxAgente(String xAgente) {
+        this.xAgente = xAgente;
+    }
+
+    public void setFone(String fone) {
+        this.fone = fone;
+    }
+
+    public void setUF(String UF) {
+        this.UF = UF;
+    }
+
+    public void setnDAR(String nDAR) {
+        this.nDAR = nDAR;
+    }
+
+    public void setdEmi(String dEmi) {
+        this.dEmi = dEmi;
+    }
+
+    public void setvDAR(String vDAR) {
+        this.vDAR = vDAR;
+    }
+
+    public void setRepEmi(String repEmi) {
+        this.repEmi = repEmi;
+    }
+
+    public void setdPag(String dPag) {
+        this.dPag = dPag;
     }
 
     @Override

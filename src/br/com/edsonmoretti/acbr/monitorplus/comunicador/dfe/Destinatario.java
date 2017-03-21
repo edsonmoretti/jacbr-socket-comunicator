@@ -5,32 +5,34 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe;
 
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.enun.indIEDest;
+
 /**
  *
  * @author DANIEL
  */
 public class Destinatario {
 
-    private final String idEstrangeiro;
-    private final String CNPJCPF;
-    private final String xNome;
-    private final String indIEDest;
-    private final String IE;
-    private final String ISUF;
-    private final String Email;
-    private final String xLgr;
-    private final String nro;
-    private final String xCpl;
-    private final String xBairro;
-    private final String cMun;
-    private final String xMun;
-    private final String UF;
-    private final String CEP;
-    private final String cPais;
-    private final String xPais;
-    private final String Fone;
+    private String idEstrangeiro;
+    private String CNPJCPF;
+    private String xNome;
+    private indIEDest indIEDest;
+    private String IE;
+    private String ISUF;
+    private String Email;
+    private String xLgr;
+    private String nro;
+    private String xCpl;
+    private String xBairro;
+    private String cMun;
+    private String xMun;
+    private String UF;
+    private String CEP;
+    private String cPais;
+    private String xPais;
+    private String Fone;
 
-    public Destinatario(String idEstrangeiro, String CNPJCPF, String xNome, String indIEDest, String IE, String ISUF, String Email, String xLgr, String nro, String xCpl, String xBairro, String cMun, String xMun, String UF, String CEP, String cPais, String xPais, String Fone) {
+    public Destinatario(String idEstrangeiro, String CNPJCPF, String xNome, indIEDest indIEDest, String IE, String ISUF, String Email, String xLgr, String nro, String xCpl, String xBairro, String cMun, String xMun, String UF, String CEP, String cPais, String xPais, String Fone) {
         this.idEstrangeiro = idEstrangeiro;
         this.CNPJCPF = CNPJCPF;
         this.xNome = xNome;
@@ -51,76 +53,151 @@ public class Destinatario {
         this.Fone = Fone;
     }
 
+    public Destinatario() {
+    }
+
     public String getIdEstrangeiro() {
         return idEstrangeiro;
+    }
+
+    public void setIdEstrangeiro(String idEstrangeiro) {
+        this.idEstrangeiro = idEstrangeiro;
     }
 
     public String getCNPJCPF() {
         return CNPJCPF;
     }
 
+    public void setCNPJCPF(String CNPJCPF) {
+        this.CNPJCPF = CNPJCPF;
+    }
+
     public String getxNome() {
         return xNome;
     }
 
-    public String getIndIEDest() {
+    public void setxNome(String xNome) {
+        this.xNome = xNome;
+    }
+
+    public indIEDest getIndIEDest() {
         return indIEDest;
+    }
+
+    public void setIndIEDest(indIEDest indIEDest) {
+        this.indIEDest = indIEDest;
     }
 
     public String getIE() {
         return IE;
     }
 
+    public void setIE(String IE) {
+        this.IE = IE;
+    }
+
     public String getISUF() {
         return ISUF;
+    }
+
+    public void setISUF(String ISUF) {
+        this.ISUF = ISUF;
     }
 
     public String getEmail() {
         return Email;
     }
 
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
+
     public String getxLgr() {
         return xLgr;
+    }
+
+    public void setxLgr(String xLgr) {
+        this.xLgr = xLgr;
     }
 
     public String getNro() {
         return nro;
     }
 
+    public void setNro(String nro) {
+        this.nro = nro;
+    }
+
     public String getxCpl() {
         return xCpl;
+    }
+
+    public void setxCpl(String xCpl) {
+        this.xCpl = xCpl;
     }
 
     public String getxBairro() {
         return xBairro;
     }
 
+    public void setxBairro(String xBairro) {
+        this.xBairro = xBairro;
+    }
+
     public String getcMun() {
         return cMun;
+    }
+
+    public void setcMun(String cMun) {
+        this.cMun = cMun;
     }
 
     public String getxMun() {
         return xMun;
     }
 
+    public void setxMun(String xMun) {
+        this.xMun = xMun;
+    }
+
     public String getUF() {
         return UF;
+    }
+
+    public void setUF(String UF) {
+        this.UF = UF;
     }
 
     public String getCEP() {
         return CEP;
     }
 
+    public void setCEP(String CEP) {
+        this.CEP = CEP;
+    }
+
     public String getcPais() {
         return cPais;
+    }
+
+    public void setcPais(String cPais) {
+        this.cPais = cPais;
     }
 
     public String getxPais() {
         return xPais;
     }
 
+    public void setxPais(String xPais) {
+        this.xPais = xPais;
+    }
+
     public String getFone() {
         return Fone;
+    }
+
+    public void setFone(String Fone) {
+        this.Fone = Fone;
     }
 
     @Override

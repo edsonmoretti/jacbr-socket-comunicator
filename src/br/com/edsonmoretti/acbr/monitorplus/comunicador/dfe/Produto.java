@@ -5,8 +5,10 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe;
 
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.enun.indTot;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.produto.DI;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.produto.NVE;
+import java.math.BigDecimal;
 
 /**
  *
@@ -14,37 +16,37 @@ import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.produto.NVE;
  */
 public class Produto extends MembroList {
 
-    private final String cProd;
-    private final String cEAN;
-    private final String xProd;
-    private final String NCM;
-    private final String EXTIPI;
-    private final String CFOP;
-    private final String uCom;
-    private final String qCom;
-    private final String vUnCom;
-    private final String vProd;
-    private final String cEANTrib;
-    private final String uTrib;
-    private final String qTrib;
-    private final String vUnTrib;
-    private final String vFrete;
-    private final String vSeg;
-    private final String vDesc;
-    private final String vOutro;
-    private final String indTot;
-    private final String xPed;
-    private final String nItemPed;
-    private final String nFCI;
-    private final String nRECOPI;
-    private final String pDevol;
-    private final String vIPIDevol;
-    private final String vTotTrib;
-    private final String infAdProd;
-    private final ListVO<NVE> list_NVE;
-    private final ListVO<DI> list_DI;
+    private String cProd;
+    private String cEAN;
+    private String xProd;
+    private String NCM;
+    private String EXTIPI;
+    private String CFOP;
+    private String uCom;
+    private BigDecimal qCom;
+    private BigDecimal vUnCom;
+    private BigDecimal vProd;
+    private String cEANTrib;
+    private String uTrib;
+    private BigDecimal qTrib;
+    private BigDecimal vUnTrib;
+    private BigDecimal vFrete;
+    private BigDecimal vSeg;
+    private BigDecimal vDesc;
+    private BigDecimal vOutro;
+    private indTot indTot;
+    private String xPed;
+    private String nItemPed;
+    private String nFCI;
+    private String nRECOPI;
+    private BigDecimal pDevol;
+    private BigDecimal vIPIDevol;
+    private BigDecimal vTotTrib;
+    private String infAdProd;
+    private ListVO<NVE> list_NVE;
+    private ListVO<DI> list_DI;
 
-    public Produto(String cProd, String cEAN, String xProd, String NCM, String EXTIPI, String CFOP, String uCom, String qCom, String vUnCom, String vProd, String cEANTrib, String uTrib, String qTrib, String vUnTrib, String vFrete, String vSeg, String vDesc, String vOutro, String indTot, String xPed, String nItemPed, String nFCI, String nRECOPI, String pDevol, String vIPIDevol, String vTotTrib, String infAdProd) {
+    public Produto(String cProd, String cEAN, String xProd, String NCM, String EXTIPI, String CFOP, String uCom, BigDecimal qCom, BigDecimal vUnCom, BigDecimal vProd, String cEANTrib, String uTrib, BigDecimal qTrib, BigDecimal vUnTrib, BigDecimal vFrete, BigDecimal vSeg, BigDecimal vDesc, BigDecimal vOutro, indTot indTot, String xPed, String nItemPed, String nFCI, String nRECOPI, BigDecimal pDevol, BigDecimal vIPIDevol, BigDecimal vTotTrib, String infAdProd, ListVO<NVE> list_NVE, ListVO<DI> list_DI) {
         this.cProd = cProd;
         this.cEAN = cEAN;
         this.xProd = xProd;
@@ -72,148 +74,243 @@ public class Produto extends MembroList {
         this.vIPIDevol = vIPIDevol;
         this.vTotTrib = vTotTrib;
         this.infAdProd = infAdProd;
-        this.list_NVE = new ListVO<>();
-        this.list_DI = new ListVO<>();
+        this.list_NVE = list_NVE;
+        this.list_DI = list_DI;
+    }
+
+    public Produto() {
     }
 
     public String getcProd() {
         return cProd;
     }
 
+    public void setcProd(String cProd) {
+        this.cProd = cProd;
+    }
+
     public String getcEAN() {
         return cEAN;
+    }
+
+    public void setcEAN(String cEAN) {
+        this.cEAN = cEAN;
     }
 
     public String getxProd() {
         return xProd;
     }
 
+    public void setxProd(String xProd) {
+        this.xProd = xProd;
+    }
+
     public String getNCM() {
         return NCM;
+    }
+
+    public void setNCM(String NCM) {
+        this.NCM = NCM;
     }
 
     public String getEXTIPI() {
         return EXTIPI;
     }
 
+    public void setEXTIPI(String EXTIPI) {
+        this.EXTIPI = EXTIPI;
+    }
+
     public String getCFOP() {
         return CFOP;
+    }
+
+    public void setCFOP(String CFOP) {
+        this.CFOP = CFOP;
     }
 
     public String getuCom() {
         return uCom;
     }
 
-    public String getqCom() {
+    public void setuCom(String uCom) {
+        this.uCom = uCom;
+    }
+
+    public BigDecimal getqCom() {
         return qCom;
     }
 
-    public String getvUnCom() {
+    public void setqCom(BigDecimal qCom) {
+        this.qCom = qCom;
+    }
+
+    public BigDecimal getvUnCom() {
         return vUnCom;
     }
 
-    public String getvProd() {
+    public void setvUnCom(BigDecimal vUnCom) {
+        this.vUnCom = vUnCom;
+    }
+
+    public BigDecimal getvProd() {
         return vProd;
+    }
+
+    public void setvProd(BigDecimal vProd) {
+        this.vProd = vProd;
     }
 
     public String getcEANTrib() {
         return cEANTrib;
     }
 
+    public void setcEANTrib(String cEANTrib) {
+        this.cEANTrib = cEANTrib;
+    }
+
     public String getuTrib() {
         return uTrib;
     }
 
-    public String getqTrib() {
+    public void setuTrib(String uTrib) {
+        this.uTrib = uTrib;
+    }
+
+    public BigDecimal getqTrib() {
         return qTrib;
     }
 
-    public String getvUnTrib() {
+    public void setqTrib(BigDecimal qTrib) {
+        this.qTrib = qTrib;
+    }
+
+    public BigDecimal getvUnTrib() {
         return vUnTrib;
     }
 
-    public String getvFrete() {
+    public void setvUnTrib(BigDecimal vUnTrib) {
+        this.vUnTrib = vUnTrib;
+    }
+
+    public BigDecimal getvFrete() {
         return vFrete;
     }
 
-    public String getvSeg() {
+    public void setvFrete(BigDecimal vFrete) {
+        this.vFrete = vFrete;
+    }
+
+    public BigDecimal getvSeg() {
         return vSeg;
     }
 
-    public String getvDesc() {
+    public void setvSeg(BigDecimal vSeg) {
+        this.vSeg = vSeg;
+    }
+
+    public BigDecimal getvDesc() {
         return vDesc;
     }
 
-    public String getvOutro() {
+    public void setvDesc(BigDecimal vDesc) {
+        this.vDesc = vDesc;
+    }
+
+    public BigDecimal getvOutro() {
         return vOutro;
     }
 
-    public String getIndTot() {
+    public void setvOutro(BigDecimal vOutro) {
+        this.vOutro = vOutro;
+    }
+
+    public indTot getIndTot() {
         return indTot;
+    }
+
+    public void setIndTot(indTot indTot) {
+        this.indTot = indTot;
     }
 
     public String getxPed() {
         return xPed;
     }
 
+    public void setxPed(String xPed) {
+        this.xPed = xPed;
+    }
+
     public String getnItemPed() {
         return nItemPed;
+    }
+
+    public void setnItemPed(String nItemPed) {
+        this.nItemPed = nItemPed;
     }
 
     public String getnFCI() {
         return nFCI;
     }
 
+    public void setnFCI(String nFCI) {
+        this.nFCI = nFCI;
+    }
+
     public String getnRECOPI() {
         return nRECOPI;
     }
 
-    public String getpDevol() {
+    public void setnRECOPI(String nRECOPI) {
+        this.nRECOPI = nRECOPI;
+    }
+
+    public BigDecimal getpDevol() {
         return pDevol;
     }
 
-    public String getvIPIDevol() {
+    public void setpDevol(BigDecimal pDevol) {
+        this.pDevol = pDevol;
+    }
+
+    public BigDecimal getvIPIDevol() {
         return vIPIDevol;
     }
 
-    public String getvTotTrib() {
+    public void setvIPIDevol(BigDecimal vIPIDevol) {
+        this.vIPIDevol = vIPIDevol;
+    }
+
+    public BigDecimal getvTotTrib() {
         return vTotTrib;
+    }
+
+    public void setvTotTrib(BigDecimal vTotTrib) {
+        this.vTotTrib = vTotTrib;
     }
 
     public String getInfAdProd() {
         return infAdProd;
     }
 
-    /**
-     * NOMENCLATURA DE VALOR ADUANEIRO E ESTATÍSTICA - NVE
-     *
-     * @param indice
-     * @return NVE
-     */
-    public NVE getNVE(int indice) {
-        return list_NVE.get(indice);
+    public void setInfAdProd(String infAdProd) {
+        this.infAdProd = infAdProd;
     }
 
-    public Produto addNVE(NVE NVE) {
-        NVE.setInd_PAI(this.getInd());
-        list_NVE.add(NVE);
-        return this;
+    public ListVO<NVE> getList_NVE() {
+        return list_NVE;
     }
 
-    /**
-     * Declaração de importação - DI
-     *
-     * @param indice
-     * @return DI
-     */
-    public DI getDI(int indice) {
-        return list_DI.get(indice);
+    public void setList_NVE(ListVO<NVE> list_NVE) {
+        this.list_NVE = list_NVE;
     }
 
-    public Produto addDI(DI DI) {
-        DI.setInd_PAI(this.getInd());
-        list_DI.add(DI);
-        return this;
+    public ListVO<DI> getList_DI() {
+        return list_DI;
+    }
+
+    public void setList_DI(ListVO<DI> list_DI) {
+        this.list_DI = list_DI;
     }
 
     @Override
@@ -246,8 +343,8 @@ public class Produto extends MembroList {
                 + "vIPIDevol=" + vIPIDevol + "\n"
                 + "vTotTrib=" + vTotTrib + "\n"
                 + "infAdProd=" + infAdProd + "\n"
-                + list_NVE.toString()
-                + list_DI.toString();
+                + (list_NVE == null || list_NVE.isEmpty() ? "" : list_NVE).toString()
+                + (list_DI == null || list_DI.isEmpty() ? "" : list_DI).toString();
     }
 
 }

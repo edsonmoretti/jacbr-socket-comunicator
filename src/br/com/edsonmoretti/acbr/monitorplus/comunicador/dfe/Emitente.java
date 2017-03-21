@@ -5,35 +5,38 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe;
 
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.enun.CRT;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.enun.cUF;
+
 /**
  *
  * @author DANIEL
  */
 public class Emitente {
 
-    private final String CNPJCPF;
-    private final String xNome;
-    private final String xFant;
-    private final String IE;
-    private final String IEST;
-    private final String IM;
-    private final String CNAE;
-    private final String CRT;
-    private final String xLgr;
-    private final String nro;
-    private final String xCpl;
-    private final String xBairro;
-    private final String cMun;
-    private final String xMun;
-    private final String UF;
-    private final String CEP;
-    private final String cPais;
-    private final String xPais;
-    private final String Fone;
-    private final String cUF;
-    private final String cMunFG;
+    private String CNPJCPF;
+    private String xNome;
+    private String xFant;
+    private String IE;
+    private String IEST = "";
+    private String IM = "";
+    private String CNAE = "";
+    private CRT CRT;
+    private String xLgr;
+    private String nro;
+    private String xCpl;
+    private String xBairro;
+    private String cMun;
+    private String xMun;
+    private String UF;
+    private String CEP;
+    private String cPais = "1058";
+    private String xPais;
+    private String Fone;
+    private cUF cUF;
+    private String cMunFG;
 
-    public Emitente(String CNPJCPF, String xNome, String xFant, String IE, String IEST, String IM, String CNAE, String CRT, String xLgr, String nro, String xCpl, String xBairro, String cMun, String xMun, String UF, String CEP, String cPais, String xPais, String Fone, String cUF, String cMunFG) {
+    public Emitente(String CNPJCPF, String xNome, String xFant, String IE, String IEST, String IM, String CNAE, CRT CRT, String xLgr, String nro, String xCpl, String xBairro, String cMun, String xMun, String UF, String CEP, String cPais, String xPais, String Fone, cUF cUF, String cMunFG) {
         this.CNPJCPF = CNPJCPF;
         this.xNome = xNome;
         this.xFant = xFant;
@@ -57,88 +60,179 @@ public class Emitente {
         this.cMunFG = cMunFG;
     }
 
+    public Emitente() {
+    }
+
     public String getCNPJCPF() {
         return CNPJCPF;
+    }
+
+    public void setCNPJCPF(String CNPJCPF) {
+        this.CNPJCPF = CNPJCPF;
     }
 
     public String getxNome() {
         return xNome;
     }
 
+    public void setxNome(String xNome) {
+        this.xNome = xNome;
+    }
+
     public String getxFant() {
         return xFant;
+    }
+
+    public void setxFant(String xFant) {
+        this.xFant = xFant;
     }
 
     public String getIE() {
         return IE;
     }
 
+    public void setIE(String IE) {
+        this.IE = IE;
+    }
+
     public String getIEST() {
         return IEST;
+    }
+
+    public void setIEST(String IEST) {
+        this.IEST = IEST;
     }
 
     public String getIM() {
         return IM;
     }
 
+    public void setIM(String IM) {
+        this.IM = IM;
+    }
+
     public String getCNAE() {
         return CNAE;
     }
 
-    public String getCRT() {
+    public void setCNAE(String CNAE) {
+        this.CNAE = CNAE;
+    }
+
+    public CRT getCRT() {
         return CRT;
+    }
+
+    public void setCRT(CRT CRT) {
+        this.CRT = CRT;
     }
 
     public String getxLgr() {
         return xLgr;
     }
 
+    public void setxLgr(String xLgr) {
+        this.xLgr = xLgr;
+    }
+
     public String getNro() {
         return nro;
+    }
+
+    public void setNro(String nro) {
+        this.nro = nro;
     }
 
     public String getxCpl() {
         return xCpl;
     }
 
+    public void setxCpl(String xCpl) {
+        this.xCpl = xCpl;
+    }
+
     public String getxBairro() {
         return xBairro;
+    }
+
+    public void setxBairro(String xBairro) {
+        this.xBairro = xBairro;
     }
 
     public String getcMun() {
         return cMun;
     }
 
+    public void setcMun(String cMun) {
+        this.cMun = cMun;
+    }
+
     public String getxMun() {
         return xMun;
+    }
+
+    public void setxMun(String xMun) {
+        this.xMun = xMun;
     }
 
     public String getUF() {
         return UF;
     }
 
+    public void setUF(String UF) {
+        this.UF = UF;
+    }
+
+    public void setUF(cUF UF) {
+        setUF(UF.getUf());
+    }
+
     public String getCEP() {
         return CEP;
+    }
+
+    public void setCEP(String CEP) {
+        this.CEP = CEP;
     }
 
     public String getcPais() {
         return cPais;
     }
 
+    public void setcPais(String cPais) {
+        this.cPais = cPais;
+    }
+
     public String getxPais() {
         return xPais;
+    }
+
+    public void setxPais(String xPais) {
+        this.xPais = xPais;
     }
 
     public String getFone() {
         return Fone;
     }
 
-    public String getcUF() {
+    public void setFone(String Fone) {
+        this.Fone = Fone;
+    }
+
+    public cUF getcUF() {
         return cUF;
+    }
+
+    public void setcUF(cUF cUF) {
+        this.cUF = cUF;
     }
 
     public String getcMunFG() {
         return cMunFG;
+    }
+
+    public void setcMunFG(String cMunFG) {
+        this.cMunFG = cMunFG;
     }
 
     @Override

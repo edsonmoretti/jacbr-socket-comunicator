@@ -31,6 +31,10 @@ public class XMotivoConsulta extends XMotivo {
         this.ChNFe = ChNFe;
     }
 
+    public void setChCTe(String ChNFe) {
+        setChNFe(ChNFe);
+    }
+
     public String getNProt() {
         return NProt;
     }

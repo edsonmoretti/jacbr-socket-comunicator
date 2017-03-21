@@ -11,27 +11,27 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe;
  */
 public class Emitente {
 
-    private final String CNPJCPF;
-    private final String xNome;
-    private final String xFant;
-    private final String IE;
-    private final String IEST;
-    private final String IM;
-    private final String CNAE;
-    private final String CRT;
-    private final String xLgr;
-    private final String nro;
-    private final String xCpl;
-    private final String xBairro;
-    private final String cMun;
-    private final String xMun;
-    private final String UF;
-    private final String CEP;
-    private final String cPais;
-    private final String xPais;
-    private final String Fone;
-    private final String cUF;
-    private final String cMunFG;
+    private String CNPJCPF;
+    private String xNome;
+    private String xFant;
+    private String IE;
+    private String IEST;
+    private String IM;
+    private String CNAE;
+    private String CRT;
+    private String xLgr;
+    private String nro;
+    private String xCpl;
+    private String xBairro;
+    private String cMun;
+    private String xMun;
+    private String UF;
+    private String CEP;
+    private String cPais;
+    private String xPais;
+    private String Fone;
+    private String cUF;
+    private String cMunFG;
 
     public Emitente(String CNPJCPF, String xNome, String xFant, String IE, String IEST, String IM, String CNAE, String CRT, String xLgr, String nro, String xCpl, String xBairro, String cMun, String xMun, String UF, String CEP, String cPais, String xPais, String Fone, String cUF, String cMunFG) {
         this.CNPJCPF = CNPJCPF;
@@ -55,6 +55,10 @@ public class Emitente {
         this.Fone = Fone;
         this.cUF = cUF;
         this.cMunFG = cMunFG;
+    }
+
+    public Emitente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public String getCNPJCPF() {
@@ -139,6 +143,90 @@ public class Emitente {
 
     public String getcMunFG() {
         return cMunFG;
+    }
+
+    public void setCNPJCPF(String CNPJCPF) {
+        this.CNPJCPF = CNPJCPF;
+    }
+
+    public void setxNome(String xNome) {
+        this.xNome = xNome;
+    }
+
+    public void setxFant(String xFant) {
+        this.xFant = xFant;
+    }
+
+    public void setIE(String IE) {
+        this.IE = IE;
+    }
+
+    public void setIEST(String IEST) {
+        this.IEST = IEST;
+    }
+
+    public void setIM(String IM) {
+        this.IM = IM;
+    }
+
+    public void setCNAE(String CNAE) {
+        this.CNAE = CNAE;
+    }
+
+    public void setCRT(String CRT) {
+        this.CRT = CRT;
+    }
+
+    public void setxLgr(String xLgr) {
+        this.xLgr = xLgr;
+    }
+
+    public void setNro(String nro) {
+        this.nro = nro;
+    }
+
+    public void setxCpl(String xCpl) {
+        this.xCpl = xCpl;
+    }
+
+    public void setxBairro(String xBairro) {
+        this.xBairro = xBairro;
+    }
+
+    public void setcMun(String cMun) {
+        this.cMun = cMun;
+    }
+
+    public void setxMun(String xMun) {
+        this.xMun = xMun;
+    }
+
+    public void setUF(String UF) {
+        this.UF = UF;
+    }
+
+    public void setCEP(String CEP) {
+        this.CEP = CEP;
+    }
+
+    public void setcPais(String cPais) {
+        this.cPais = cPais;
+    }
+
+    public void setxPais(String xPais) {
+        this.xPais = xPais;
+    }
+
+    public void setFone(String Fone) {
+        this.Fone = Fone;
+    }
+
+    public void setcUF(String cUF) {
+        this.cUF = cUF;
+    }
+
+    public void setcMunFG(String cMunFG) {
+        this.cMunFG = cMunFG;
     }
 
     @Override

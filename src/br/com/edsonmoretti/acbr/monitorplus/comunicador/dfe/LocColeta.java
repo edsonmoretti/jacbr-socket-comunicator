@@ -7,11 +7,12 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe;
 
 /**
  *
- * @author DANIEL
+ * @author Edson
  */
-public class Retirada {
+public class LocColeta {
 
     private String CNPJCPF;
+    private String xNome;
     private String xLgr;
     private String nro;
     private String xCpl;
@@ -20,27 +21,20 @@ public class Retirada {
     private String xMun;
     private String UF;
 
-    public Retirada(String CNPJCPF, String xLgr, String nro, String xCpl, String xBairro, String cMun, String xMun, String UF) {
-        this.CNPJCPF = CNPJCPF;
-        this.xLgr = xLgr;
-        this.nro = nro;
-        this.xCpl = xCpl;
-        this.xBairro = xBairro;
-        this.cMun = cMun;
-        this.xMun = xMun;
-        this.UF = UF;
-    }
-
-    public Retirada() {
-
-    }
-
     public String getCNPJCPF() {
         return CNPJCPF;
     }
 
     public void setCNPJCPF(String CNPJCPF) {
         this.CNPJCPF = CNPJCPF;
+    }
+
+    public String getxNome() {
+        return xNome;
+    }
+
+    public void setxNome(String xNome) {
+        this.xNome = xNome;
     }
 
     public String getxLgr() {
@@ -97,19 +91,6 @@ public class Retirada {
 
     public void setUF(String UF) {
         this.UF = UF;
-    }
-
-    @Override
-    public String toString() {
-        return "[Retirada]\n"
-                + "CNPJCPF=" + CNPJCPF + "\n"
-                + "xLgr=" + xLgr + "\n"
-                + "nro=" + nro + "\n"
-                + "xCpl=" + xCpl + "\n"
-                + "xBairro=" + xBairro + "\n"
-                + "cMun=" + cMun + "\n"
-                + "xMun=" + xMun + "\n"
-                + "UF=" + UF + "\n";
     }
 
 }

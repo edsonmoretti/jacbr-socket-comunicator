@@ -5,15 +5,16 @@
  */
 package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.Cadastro;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.NFCe;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.XMotivoCancelamento;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.XMotivoConsulta;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.XMotivoEvento;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.XMotivoInutilizar;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.XMotivoStatusDoServico;
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.enun.ModeloDFe;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrNFeException;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.Cadastro;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoCancelamento;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoConsulta;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoEvento;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoInutilizar;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoStatusDoServico;
-import br.com.edsonmoretti.acbr.monitorplus.comunicador.nfe.NFeVO;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.utils.TextUtils;
 import java.io.File;
 import java.util.Date;
@@ -1274,6 +1275,36 @@ public class ACBrNFe {
         return c;
     }
 
+    public XMotivoEvento enviarEvento(String descricEvt, String idLote, String chNFe, String ccOrgao,
+            String cCNPJ, String cdhEvento, String cCodEvento, String cnSeqEvento, String cxCorrecao) throws ACBrNFeException {
+        String evt = "[EVENTO]\n"
+                + "idLote=" + idLote + "\n"
+                + "[EVENTO001]\n"
+                + "chNFe=" + chNFe + "\n"
+                + "cOrgao=" + 91 + "\n"
+                + "CNPJ=" + cCNPJ + "\n"
+                + "dhEvento=" + cdhEvento + "\n"
+                + "tpEvento=" + cCodEvento + "\n"
+                + "nSeqEvento=" + cnSeqEvento + "\n"
+                + "descEvento=" + descricEvt + "\n"
+                + (cxCorrecao.isEmpty() ? "" : "xJust=" + cxCorrecao + "\n");
+
+        String re = enviarEvento(evt);
+        XMotivoEvento c = new XMotivoEvento(re);
+        c.setXMotivo(TextUtils.lerTagIni("xMotivo", re, "[EVENTO001]"));
+        c.setCStat(TextUtils.lerTagIni("cStat", re, "[EVENTO001]"));
+        c.setChNFe(TextUtils.lerTagIni("ChNFe", re, "[EVENTO001]"));
+        c.setNProt(TextUtils.lerTagIni("NProt", re));
+        c.setTpEvento(TextUtils.lerTagIni("TpEvento", re));
+        c.setDhRecbto(TextUtils.lerTagIni("dhRegEvento", re));
+        c.setxEvento(TextUtils.lerTagIni("xEvento", re));
+        c.setnSeqEvento(TextUtils.lerTagIni("nSeqEvento", re));
+        c.setCNPJDest(TextUtils.lerTagIni("CNPJDest", re));
+        c.setEmailDest(TextUtils.lerTagIni("EmailDest", re));
+
+        return c;
+    }
+
     /**
      * Retorna a data de vencimento do certificado configurado no
      * ACBrNFeMonitor(funciona apenas na versão CAPICOM).
@@ -1306,7 +1337,7 @@ public class ACBrNFe {
      * @param modelo
      * @throws ACBrNFeException
      */
-    public void setModeloDF(NFeVO.Modelo modelo) throws ACBrNFeException {
+    public void setModeloDF(ModeloDFe modelo) throws ACBrNFeException {
         comandoNFe("SetModeloDF(\"" + modelo + "\")");
     }
 
@@ -1320,7 +1351,11 @@ public class ACBrNFe {
      * @param modelo
      * @throws ACBrNFeException
      */
-    public void setVersaoDF(NFeVO.Modelo modelo) throws ACBrNFeException {
+    public void setVersaoDF(ModeloDFe modelo) throws ACBrNFeException {
         comandoNFe("SetVersaoDF(\"" + modelo + "\")");
+    }
+
+    public String criarNFCeXML(NFCe n) throws ACBrNFeException {
+        return comandoNFe("CriarNFe(\"" + n + "\")");
     }
 }

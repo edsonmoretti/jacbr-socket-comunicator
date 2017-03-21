@@ -1,5 +1,6 @@
 package br.com.edsonmoretti.acbr.monitorplus.comunicador;
 
+import br.com.edsonmoretti.acbr.monitorplus.comunicador.acbr.DadosDeConexaoSocket;
 import br.com.edsonmoretti.acbr.monitorplus.comunicador.exceptions.ACBrException;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -9,7 +10,6 @@ import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -29,7 +29,7 @@ public class ACBr {
     private static BufferedReader recebeComando;
     private static PrintWriter enviaComando;
     private static Socket acbrSocket;
-    public Config configuracaoAcbr;
+    private DadosDeConexaoSocket configuracaoAcbr;
     private static InetAddress hostName;
 
     public ACBr() {
@@ -313,7 +313,7 @@ public class ACBr {
 //                Logger.getLogger(ACBrBAL.class.getName()).log(Level.SEVERE, null, ex);
 //            }
             if (primeiraInstancia) {
-                //loop para limpar o cabeÃ§alho da conexao com o acbr  
+                //loop para limpar o cabeÃ§alho da conexao com o acbr
                 short byteLido = -1;
                 String leitura = "";
                 while (byteLido != 3) {
@@ -335,7 +335,7 @@ public class ACBr {
                 acbrSocket.close();
                 return "FIM";
             }
-            //faz a leitura do retorno do acbr  
+            //faz a leitura do retorno do acbr
             short b = -1;
             String retorno = "";
             while (b != 3) {
@@ -369,13 +369,13 @@ public class ACBr {
      * setada Aqui.
      *
      * @param configuracaoAcbr Configuração nova para Conexão,
-     * @param resetarConexão Se true, reseta a conexão, se false continua com a
+     * @param resetarConexao Se true, reseta a conexão, se false continua com a
      * nova até o reset ser realizado manualmente, através do
      * ACBr.getInstance().resetarConexao()
      */
-    public void setConfiguracaoACBr(Config configuracaoAcbr, boolean resetarConexão) {
+    public void setConfiguracaoACBr(DadosDeConexaoSocket configuracaoAcbr, boolean resetarConexao) {
         this.configuracaoAcbr = configuracaoAcbr;
-        if (resetarConexão) {
+        if (resetarConexao) {
             resetarConexao();
         }
     }
@@ -389,7 +389,7 @@ public class ACBr {
      *
      * @param configuracaoAcbr Configuração nova para Conexão,
      */
-    public void setConfiguracaoACBr(Config configuracaoAcbr) {
+    public void setConfiguracaoACBr(DadosDeConexaoSocket configuracaoAcbr) {
         setConfiguracaoACBr(configuracaoAcbr, true);
     }
 
@@ -398,26 +398,24 @@ public class ACBr {
      *
      * @return
      */
-    public Config getConfiguracaoACBr() {
+    public DadosDeConexaoSocket getConfiguracaoACBr() {
         return configuracaoAcbr;
     }
 
-    private static Config getConfig() {
+    private DadosDeConexaoSocket getConfig() {
         String c = "config.acbr";
         try {
             FileInputStream fis = new FileInputStream(c);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            return (Config) ois.readObject();
+            return (DadosDeConexaoSocket) ois.readObject();
         } catch (Exception e) {
-            Config config = new Config();
             JLabel l1 = new JLabel("Nome/IP do AcbrMonitorPlus");
             JTextField jtfNameHost = new JTextField();
             JLabel l2 = new JLabel("Porta do AcbrMonitorPlus");
             JTextField jtfPorta = new JTextField();
             Object[] msg = {l1, jtfNameHost, l2, jtfPorta};
             JOptionPane.showMessageDialog(null, msg, "Configuração ACBr Não Encontrada!", JOptionPane.OK_OPTION);
-            config.setNameHost(jtfNameHost.getText());
-            config.setPorta(Integer.parseInt(jtfPorta.getText()));
+            DadosDeConexaoSocket config = new DadosDeConexaoSocket(jtfNameHost.getText(), Integer.parseInt(jtfPorta.getText()));
             try (FileOutputStream fout = new FileOutputStream(c); ObjectOutputStream oos = new ObjectOutputStream(fout)) {
                 oos.writeObject(config);
             } catch (IOException ex) {
@@ -431,40 +429,9 @@ public class ACBr {
         return ACBrHolder.INSTANCE;
     }
 
-    private static class ACBrHolder {
+    public static class ACBrHolder {
 
-        private static final ACBr INSTANCE = new ACBr();
-    }
-
-    public static class Config implements Serializable {
-
-        private String nameHost;
-        private int porta;
-
-        public Config() {
-
-        }
-
-        public Config(String nameHost, int porta) {
-            this.nameHost = nameHost;
-            this.porta = porta;
-        }
-
-        public String getNameHost() {
-            return nameHost;
-        }
-
-        public void setNameHost(String nameHost) {
-            this.nameHost = nameHost;
-        }
-
-        public int getPorta() {
-            return porta;
-        }
-
-        public void setPorta(int porta) {
-            this.porta = porta;
-        }
+        public static final ACBr INSTANCE = new ACBr();
     }
 
     public static void main(String[] args) throws ACBrException {
@@ -481,4 +448,5 @@ public class ACBr {
         System.out.println("Rodando comando: " + (comando = comando.trim().replace("  ", " ")));
         System.out.println(ACBr.getInstance().comandoAcbr(comando));
     }
+
 }

@@ -9,7 +9,7 @@ package br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe;
  *
  * @author Edson
  */
-public class XMotivoCancelamento extends br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.nfe.XMotivoEvento {
+public class XMotivoCancelamento extends br.com.edsonmoretti.acbr.monitorplus.comunicador.dfe.XMotivoEvento {
 
     private String XML;
 

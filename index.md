@@ -1,5 +1,4 @@
-### Bem vindo(a) ao projeto ACBr Monitor Plus Comunicador.
-Confesso, soa melhor ACBr Monitor Plus Comunicator, mas chega da mania de não usar português nos nomes de nossos projetos, rsrs.
+### Bem vindo(a) ao projeto JConn ACBr Monitor Plus.
 
 O Java tem uma grande vantagem frente a outras plataformas de desenvolvimento que é a possibilidade de um mesmo software ser executa em diversas plataformas sob uma mesma compilação, não é necessário reescrever ou nem mesmo recompilar o software para que este esteja disponível em outras plataformas (sejam elas Windows, Linux, Mac ou até mesmo PDA´s de gama alta).
 
@@ -12,4 +11,4 @@ Autor - Edson Moretti
 ### Suporte / Contato
 E-mail: contato@edsonmoretti.co.br 
 Página do projeto: http://www.edsonmoretti.com.br (ainda será desenvolvida)
-Fórum do Projeto ACBr: http://www.projetoacbr.com.br
+Site do Projeto ACBr: http://www.projetoacbr.com.br
